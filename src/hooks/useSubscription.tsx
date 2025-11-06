@@ -19,9 +19,10 @@ export const useSubscription = () => {
 
   const checkSubscription = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session }, error: sessionError } = await supabase.auth.getSession();
       
-      if (!session) {
+      // If there's an error getting the session or no session exists, set to unsubscribed
+      if (sessionError || !session) {
         setStatus({
           subscribed: false,
           product_id: null,
@@ -37,9 +38,16 @@ export const useSubscription = () => {
         },
       });
 
+      // Silently handle errors by setting to unsubscribed state
       if (error) {
         console.error("Error checking subscription:", error);
-        throw error;
+        setStatus({
+          subscribed: false,
+          product_id: null,
+          subscription_end: null,
+          loading: false,
+        });
+        return;
       }
 
       setStatus({
