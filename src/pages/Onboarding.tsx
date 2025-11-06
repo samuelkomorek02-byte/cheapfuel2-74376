@@ -95,7 +95,7 @@ const Onboarding = () => {
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-12 md:py-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-black text-center">Warum Cheapfuel ?</h2>
+          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-black text-center">Warum Cheapfuel🧐?</h2>
           
         </div>
 
