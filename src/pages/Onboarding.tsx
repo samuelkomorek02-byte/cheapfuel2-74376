@@ -177,13 +177,7 @@ const Onboarding = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button 
-                onClick={handleStart} 
-                size="lg" 
-                className="text-lg px-10 py-6 bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
-              >
-                Jetzt kostenlos starten
-              </Button>
+              <Button onClick={handleStart} size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 bg-slate-900 hover:bg-slate-800 text-slate-50">Jetzt loslegen </Button>
             </div>
             
             <p className="text-sm text-white/70 pt-2">
@@ -200,7 +194,7 @@ const Onboarding = () => {
             <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-6 w-6" />
             <span className="font-semibold">Cheapfuel</span>
           </div>
-          <p>© 2024 CheapFuel. Alle Rechte vorbehalten.</p>
+          <p>© 2024 Cheapfuel. Alle Rechte vorbehalten.</p>
           <nav className="flex justify-center gap-6">
             <a href="/impressum" className="hover:text-foreground transition-colors">
               Impressum
