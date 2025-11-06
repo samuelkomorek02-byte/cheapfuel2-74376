@@ -39,8 +39,10 @@ const Auth = () => {
         
         // Redirect authenticated users
         if (session?.user) {
+          // Check if user is new (just signed up)
+          const isNewUser = event === 'SIGNED_IN' && isSignUp;
           setTimeout(() => {
-            navigate("/");
+            navigate(isNewUser ? "/paywall" : "/");
           }, 0);
         }
       }
@@ -57,7 +59,7 @@ const Auth = () => {
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, isSignUp]);
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
