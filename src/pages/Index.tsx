@@ -5,12 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import CheapfuelMap, { type Station } from "@/components/CheapfuelMap";
 import LanguageMenu from "@/components/LanguageMenu";
 import RouteSearchDialog from "@/components/RouteSearchDialog";
 import NavigationDialog from "@/components/NavigationDialog";
 import { toast } from "@/hooks/use-toast";
-import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X } from "lucide-react";
+import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X, User, LogOut, Languages } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { analytics } from "@/lib/analytics";
@@ -50,6 +58,7 @@ const Index = () => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [userLoc, setUserLoc] = useState<{
     lat: number;
     lng: number;
@@ -90,12 +99,14 @@ const Index = () => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setIsAuthenticated(!!session?.user);
+        setUserEmail(session?.user?.email || null);
       }
     );
 
     // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setIsAuthenticated(!!session?.user);
+      setUserEmail(session?.user?.email || null);
       setCheckingAuth(false);
       
       // Check onboarding only after auth check
@@ -792,7 +803,33 @@ const Index = () => {
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-10 w-10" />
             Cheapfuel
           </a>
-          <LanguageMenu />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full">
+                <User className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">Profil</p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    {userEmail}
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <div className="px-2 py-2">
+                <p className="text-sm font-medium mb-2">{t('language')}</p>
+                <LanguageMenu />
+              </div>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => navigate("/auth")}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
       </header>
