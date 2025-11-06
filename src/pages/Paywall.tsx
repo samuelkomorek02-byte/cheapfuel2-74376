@@ -2,12 +2,22 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, Loader2 } from "lucide-react";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
+import { useSubscription } from "@/hooks/useSubscription";
+import { useEffect } from "react";
 
 const Paywall = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { subscribed, loading, initiateCheckout } = useSubscription();
+
+  // Check if user already has a subscription and redirect
+  useEffect(() => {
+    if (subscribed) {
+      navigate("/");
+    }
+  }, [subscribed, navigate]);
 
   const features = [
     "Unbegrenzte Tankstellensuche",
@@ -64,12 +74,14 @@ const Paywall = () => {
               <Button 
                 size="lg" 
                 className="w-full text-lg font-semibold h-14 shadow-lg hover:shadow-xl transition-all"
-                onClick={() => navigate("/")}
+                onClick={initiateCheckout}
+                disabled={loading}
               >
+                {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
                 Jetzt starten
               </Button>
               <p className="text-center text-xs text-muted-foreground">
-                nur 27,00€ pro Jahr (2,25€/mo)
+                nur 27,99€ pro Jahr (2,33€/mo)
               </p>
             </div>
 
