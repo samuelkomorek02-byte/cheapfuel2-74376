@@ -18,10 +18,11 @@ import LanguageMenu from "@/components/LanguageMenu";
 import RouteSearchDialog from "@/components/RouteSearchDialog";
 import NavigationDialog from "@/components/NavigationDialog";
 import { toast } from "@/hooks/use-toast";
-import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X, User, LogOut, Languages } from "lucide-react";
+import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X, User, LogOut, Languages, Settings } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { analytics } from "@/lib/analytics";
+import { useSubscription } from "@/hooks/useSubscription";
 import { validateCoordinates } from "@/lib/validation";
 const DEFAULT_RADIUS_KM = 25; // Fixed search radius to avoid rate limiting
 const FUEL_TYPE = "e5"; // e5 | e10 | diesel
@@ -59,6 +60,7 @@ const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const { subscribed, manageSubscription } = useSubscription();
   const [userLoc, setUserLoc] = useState<{
     lat: number;
     lng: number;
@@ -824,6 +826,15 @@ const Index = () => {
                 <LanguageMenu />
               </div>
               <DropdownMenuSeparator />
+              {subscribed && (
+                <>
+                  <DropdownMenuItem onClick={manageSubscription}>
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Abo verwalten</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                </>
+              )}
               <DropdownMenuItem onClick={async () => {
                 await supabase.auth.signOut();
                 navigate("/auth");

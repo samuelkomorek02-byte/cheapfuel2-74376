@@ -128,9 +128,44 @@ export const useSubscription = () => {
     }
   };
 
+  const manageSubscription = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        toast({
+          title: "Authentifizierung erforderlich",
+          description: "Bitte melden Sie sich an, um fortzufahren.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke("customer-portal", {
+        headers: {
+          Authorization: `Bearer ${session.access_token}`,
+        },
+      });
+
+      if (error) throw error;
+
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Portal error:", error);
+      toast({
+        title: "Fehler",
+        description: "Customer Portal konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return {
     ...status,
     checkSubscription,
     initiateCheckout,
+    manageSubscription,
   };
 };
