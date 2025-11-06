@@ -22,6 +22,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -145,6 +146,44 @@ const Auth = () => {
     }
   };
 
+  const handlePasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const validatedEmail = emailSchema.parse(email);
+
+      const { error } = await supabase.auth.resetPasswordForEmail(validatedEmail, {
+        redirectTo: `${window.location.origin}/auth`
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: t("auth_reset_link_sent"),
+        description: t("auth_reset_link_sent_desc")
+      });
+
+      setIsForgotPassword(false);
+      setEmail("");
+    } catch (error: any) {
+      if (error instanceof z.ZodError) {
+        toast({
+          title: t("auth_error_title"),
+          description: t("auth_error_invalid_email"),
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: t("auth_error_title"),
+          description: error.message,
+          variant: "destructive"
+        });
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -164,15 +203,48 @@ const Auth = () => {
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
-              {t("auth_title")}
+              {isForgotPassword ? t("auth_reset_password_title") : t("auth_title")}
             </CardTitle>
             <CardDescription className="text-center">
-              {t("auth_subtitle")}
+              {isForgotPassword ? t("auth_reset_password_subtitle") : t("auth_subtitle")}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {/* Email/Password Form */}
-            <form onSubmit={handleEmailAuth} className="space-y-4">
+            {isForgotPassword ? (
+              /* Password Reset Form */
+              <form onSubmit={handlePasswordReset} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="reset-email">{t("auth_email_placeholder")}</Label>
+                  <Input
+                    id="reset-email"
+                    type="email"
+                    placeholder={t("auth_email_placeholder")}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    disabled={loading}
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {t("auth_send_reset_link")}
+                </Button>
+                <Button
+                  type="button"
+                  variant="link"
+                  className="w-full"
+                  onClick={() => {
+                    setIsForgotPassword(false);
+                    setEmail("");
+                  }}
+                  disabled={loading}
+                >
+                  {t("auth_back_to_login")}
+                </Button>
+              </form>
+            ) : (
+              /* Email/Password Form */
+              <form onSubmit={handleEmailAuth} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">{t("auth_email_placeholder")}</Label>
                 <Input
@@ -197,26 +269,45 @@ const Auth = () => {
                   disabled={loading}
                 />
               </div>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {isSignUp ? t("auth_sign_up") : t("auth_sign_in")}
-              </Button>
-            </form>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {isSignUp ? t("auth_sign_up") : t("auth_sign_in")}
+                </Button>
+              </form>
+            )}
 
-            {/* Toggle Sign In/Up */}
-            <div className="text-center text-sm">
-              <span className="text-muted-foreground">
-                {isSignUp ? t("auth_have_account") : t("auth_no_account")}
-              </span>{" "}
-              <Button
-                variant="link"
-                className="p-0 h-auto font-semibold"
-                onClick={() => setIsSignUp(!isSignUp)}
-                disabled={loading}
-              >
-                {isSignUp ? t("auth_switch_to_login") : t("auth_switch_to_signup")}
-              </Button>
-            </div>
+            {!isForgotPassword && (
+              <>
+                {/* Forgot Password Link */}
+                {!isSignUp && (
+                  <div className="text-center">
+                    <Button
+                      variant="link"
+                      className="p-0 h-auto text-sm"
+                      onClick={() => setIsForgotPassword(true)}
+                      disabled={loading}
+                    >
+                      {t("auth_forgot_password")}
+                    </Button>
+                  </div>
+                )}
+
+                {/* Toggle Sign In/Up */}
+                <div className="text-center text-sm">
+                  <span className="text-muted-foreground">
+                    {isSignUp ? t("auth_have_account") : t("auth_no_account")}
+                  </span>{" "}
+                  <Button
+                    variant="link"
+                    className="p-0 h-auto font-semibold"
+                    onClick={() => setIsSignUp(!isSignUp)}
+                    disabled={loading}
+                  >
+                    {isSignUp ? t("auth_switch_to_login") : t("auth_switch_to_signup")}
+                  </Button>
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </main>
