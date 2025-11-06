@@ -79,9 +79,7 @@ const Onboarding = () => {
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Finde die günstigste Tankstelle⛽️ in Sekunden⚡️und spare jedes Jahr bis zu 240€💰!</h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Schnell. Einfach. Genau. Mit CheapFuel findest du immer die besten Spritpreise und sparst bei jeder Tankfüllung.
-          </p>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">Schnell. Einfach. Genau. </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90">
