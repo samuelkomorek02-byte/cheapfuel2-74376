@@ -87,7 +87,7 @@ const Onboarding = () => {
             <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90">
               Jetzt kostenlos starten
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6" onClick={() => document.getElementById('features')?.scrollIntoView({
+            <Button variant="default" size="lg" className="text-lg px-8 py-6 bg-foreground text-background hover:bg-foreground/90" onClick={() => document.getElementById('features')?.scrollIntoView({
             behavior: 'smooth'
           })}>
               Mehr erfahren
