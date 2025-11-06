@@ -80,8 +80,22 @@ serve(async (req) => {
 
     if (hasActiveSub) {
       const subscription = subscriptions.data[0];
-      subscriptionEnd = new Date(subscription.current_period_end * 1000).toISOString();
-      productId = subscription.items.data[0].price.product;
+      
+      // Safely convert timestamp to ISO string
+      if (subscription.current_period_end) {
+        try {
+          subscriptionEnd = new Date(subscription.current_period_end * 1000).toISOString();
+        } catch (e) {
+          logStep("Error converting subscription end date", { error: e });
+          subscriptionEnd = null;
+        }
+      }
+      
+      // Safely get product ID
+      if (subscription.items?.data?.[0]?.price?.product) {
+        productId = subscription.items.data[0].price.product as string;
+      }
+      
       logStep("Active subscription found", { 
         subscriptionId: subscription.id, 
         endDate: subscriptionEnd,
