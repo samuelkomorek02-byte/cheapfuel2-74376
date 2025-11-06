@@ -82,9 +82,7 @@ const Onboarding = () => {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">Schnell. Einfach. Genau. </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90">
-              Jetzt kostenlos starten
-            </Button>
+            <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90">Jetzt loslegen</Button>
             <Button variant="default" size="lg" className="text-lg px-8 py-6 bg-black text-white hover:bg-black/90 dark:bg-black dark:text-white" onClick={() => document.getElementById('features')?.scrollIntoView({
             behavior: 'smooth'
           })}>
@@ -97,12 +95,8 @@ const Onboarding = () => {
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-12 md:py-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Warum CheapFuel?
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Die intelligente Art, beim Tanken zu sparen
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Schnell ⚡️</h2>
+          
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -113,10 +107,8 @@ const Onboarding = () => {
                   <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
                 </div>
                 <CardContent className="p-6 text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-4">
-                    <Icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">{feature.title}</h3>
+                  
+                  
                   <p className="text-muted-foreground">{feature.description}</p>
                 </CardContent>
               </Card>;
