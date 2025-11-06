@@ -75,14 +75,9 @@ const Onboarding = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-12 md:py-20 text-center">
         <div className="max-w-3xl mx-auto space-y-6">
-          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-            <Fuel className="h-4 w-4" />
-            <span>Spare bis zu 300€ pro Jahr</span>
-          </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            Finde den günstigsten Kraftstoff in deiner Nähe
-          </h1>
+          
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Finde die günstigste Tankstelle in Sekunden und spare jedes Jahr bis zu 240€!</h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Schnell. Einfach. Genau. Mit CheapFuel findest du immer die besten Spritpreise und sparst bei jeder Tankfüllung.
