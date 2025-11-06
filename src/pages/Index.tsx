@@ -18,7 +18,7 @@ import LanguageMenu from "@/components/LanguageMenu";
 import RouteSearchDialog from "@/components/RouteSearchDialog";
 import NavigationDialog from "@/components/NavigationDialog";
 import { toast } from "@/hooks/use-toast";
-import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X, User, LogOut, Languages, Settings } from "lucide-react";
+import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X, Menu, LogOut, Languages, Settings } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { analytics } from "@/lib/analytics";
@@ -808,7 +808,7 @@ const Index = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
-                <User className="h-5 w-5" />
+                <Menu className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
