@@ -70,6 +70,19 @@ const Index = () => {
   } | null>(null);
   const [routePath, setRoutePath] = useState<Array<[number, number]> | null>(null);
   const [routeLength, setRouteLength] = useState<number>(0);
+  const [navigationStation, setNavigationStation] = useState<Station | null>(null);
+  
+  const radius = DEFAULT_RADIUS_KM;
+  const canUseGeo = useMemo(() => isHttpsOrLocalhost(), []);
+  const SUPPORTED_FUEL_TYPES = new Set(["e5", "e10", "diesel"]);
+
+  // Request deduplication and throttling
+  const pendingRequests = useRef<Map<string, {
+    promise: Promise<Station[]>;
+    timestamp: number;
+  }>>(new Map());
+  const lastFetchTime = useRef<number>(0);
+  const MIN_FETCH_INTERVAL = 1000; // 1 second between fetches for better UX
   
   // Check authentication and onboarding
   useEffect(() => {
@@ -96,22 +109,6 @@ const Index = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
-
-  // Show loading while checking auth
-  if (checkingAuth) {
-    return null;
-  }
-  const radius = DEFAULT_RADIUS_KM;
-  const canUseGeo = useMemo(() => isHttpsOrLocalhost(), []);
-  const SUPPORTED_FUEL_TYPES = new Set(["e5", "e10", "diesel"]);
-
-  // Request deduplication and throttling
-  const pendingRequests = useRef<Map<string, {
-    promise: Promise<Station[]>;
-    timestamp: number;
-  }>>(new Map());
-  const lastFetchTime = useRef<number>(0);
-  const MIN_FETCH_INTERVAL = 1000; // 1 second between fetches for better UX
 
   // Cleanup pending requests on unmount and periodically
   useEffect(() => {
@@ -228,7 +225,7 @@ const Index = () => {
     lastFetchTime.current = Date.now();
     return fetchStations(lat, lng);
   }, [fetchStations]);
-  const [navigationStation, setNavigationStation] = useState<Station | null>(null);
+  
   const handleStationClick = useCallback((station: Station) => {
     analytics.trackStationClick(station.id, station.price || 0, station.dist || 0);
     setNavigationStation(station);
@@ -408,6 +405,11 @@ const Index = () => {
       setLoading(false);
     }
   }, [canUseGeo, fetchStations, fuelType, t]);
+
+  // Show loading while checking auth
+  if (checkingAuth) {
+    return null;
+  }
 
   // Calculate route using OSRM
   const calculateRoute = async (start: {
