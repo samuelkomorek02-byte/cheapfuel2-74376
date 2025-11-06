@@ -12,7 +12,7 @@ const Onboarding = () => {
 
   const handleStart = () => {
     localStorage.setItem("onboarding_completed", "true");
-    navigate("/");
+    navigate("/auth");
   };
 
   return (

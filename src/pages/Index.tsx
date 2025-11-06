@@ -48,14 +48,39 @@ const Index = () => {
     t
   } = useTranslation();
   const navigate = useNavigate();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [checkingAuth, setCheckingAuth] = useState(true);
   
-  // Check if onboarding has been completed
+  // Check authentication and onboarding
   useEffect(() => {
-    const onboardingCompleted = localStorage.getItem("onboarding_completed");
-    if (!onboardingCompleted) {
-      navigate("/onboarding");
-    }
+    // Set up auth state listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setIsAuthenticated(!!session?.user);
+      }
+    );
+
+    // THEN check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsAuthenticated(!!session?.user);
+      setCheckingAuth(false);
+      
+      // Check onboarding only after auth check
+      const onboardingCompleted = localStorage.getItem("onboarding_completed");
+      if (!onboardingCompleted) {
+        navigate("/onboarding");
+      } else if (!session?.user) {
+        navigate("/auth");
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Show loading while checking auth
+  if (checkingAuth) {
+    return null;
+  }
 
   const [userLoc, setUserLoc] = useState<{
     lat: number;
