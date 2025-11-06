@@ -61,6 +61,9 @@ const translations = {
     impressum: "Legal Notice",
     datenschutz: "Privacy Policy",
     back_to_home: "Back to Home",
+    onboarding_hero_text: "Find the cheapest gas station in seconds ⚡️",
+    onboarding_cta_text: "Explore the fastest fuel price app!",
+    onboarding_cta_button: "Let's go",
   },
   de: {
     hero_title: "Finde den günstigsten Kraftstoff in deiner Nähe",
@@ -121,6 +124,9 @@ const translations = {
     impressum: "Impressum",
     datenschutz: "Datenschutz",
     back_to_home: "Zurück zur Startseite",
+    onboarding_hero_text: "Finde die günstigste Tankstelle in Sekunden ⚡️",
+    onboarding_cta_text: "Erkunde die schnellste Spritpreis App!",
+    onboarding_cta_button: "Los geht's",
   },
   es: {
     hero_title: "Encuentra el combustible más barato en tu área",
@@ -181,6 +187,9 @@ const translations = {
     impressum: "Legal Notice",
     datenschutz: "Privacy Policy",
     back_to_home: "Back to Home",
+    onboarding_hero_text: "Encuentra la gasolinera más barata en segundos ⚡️",
+    onboarding_cta_text: "¡Explora la app de precios de combustible más rápida!",
+    onboarding_cta_button: "¡Vamos!",
   },
   it: {
     hero_title: "Trova il carburante più economico nella tua zona",
@@ -241,6 +250,9 @@ const translations = {
     impressum: "Legal Notice",
     datenschutz: "Privacy Policy",
     back_to_home: "Back to Home",
+    onboarding_hero_text: "Trova la stazione di servizio più economica in pochi secondi ⚡️",
+    onboarding_cta_text: "Esplora l'app per prezzi carburante più veloce!",
+    onboarding_cta_button: "Iniziamo!",
   },
   pl: {
     hero_title: "Znajdź najtańsze paliwo w Twojej okolicy",
@@ -301,6 +313,9 @@ const translations = {
     impressum: "Legal Notice",
     datenschutz: "Privacy Policy",
     back_to_home: "Back to Home",
+    onboarding_hero_text: "Znajdź najtańszą stację paliw w sekundach ⚡️",
+    onboarding_cta_text: "Poznaj najszybszą aplikację do cen paliw!",
+    onboarding_cta_button: "Zaczynamy!",
   },
   ru: {
     hero_title: "Найдите самое дешевое топливо в вашем районе",
@@ -361,6 +376,9 @@ const translations = {
     impressum: "Legal Notice",
     datenschutz: "Privacy Policy",
     back_to_home: "Back to Home",
+    onboarding_hero_text: "Найдите самую дешевую заправку за секунды ⚡️",
+    onboarding_cta_text: "Изучите самое быстрое приложение для цен на топливо!",
+    onboarding_cta_button: "Поехали!",
   },
   fr: {
     hero_title: "Trouvez le carburant le moins cher dans votre région",
@@ -421,6 +439,9 @@ const translations = {
     impressum: "Legal Notice",
     datenschutz: "Privacy Policy",
     back_to_home: "Back to Home",
+    onboarding_hero_text: "Trouvez la station-service la moins chère en quelques secondes ⚡️",
+    onboarding_cta_text: "Explorez l'app de prix de carburant la plus rapide!",
+    onboarding_cta_button: "C'est parti!",
   },
 } as const;
 
