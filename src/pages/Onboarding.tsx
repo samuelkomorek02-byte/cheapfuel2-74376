@@ -160,10 +160,10 @@ const Onboarding = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-primary/80 overflow-hidden">
+      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-accent to-primary/90 overflow-hidden">
         {/* Decorative background elements */}
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/10 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-accent/10 to-transparent" />
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="max-w-3xl mx-auto space-y-8">
@@ -177,7 +177,7 @@ const Onboarding = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button onClick={handleStart} size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 bg-slate-900 hover:bg-slate-800 text-slate-50">Jetzt loslegen </Button>
+              <Button onClick={handleStart} size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 bg-primary text-primary-foreground hover:bg-primary/90">Jetzt loslegen </Button>
             </div>
             
             <p className="text-sm text-white/70 pt-2">
