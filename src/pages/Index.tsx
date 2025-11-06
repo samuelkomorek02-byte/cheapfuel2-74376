@@ -1034,7 +1034,15 @@ const Index = () => {
                 <span className="sr-only">Instagram</span>
               </a>
             </nav>
-            <nav aria-label="Legal" className="flex items-center gap-4 text-sm">
+          </div>
+          <div className="space-y-3">
+            <div className="flex items-start gap-2 text-sm text-muted-foreground">
+              <MapPin className="h-5 w-5 flex-shrink-0 text-primary -translate-y-0.5" />
+              <p>
+                {t('germany_only_notice')}
+              </p>
+            </div>
+            <nav aria-label="Legal" className="flex items-center gap-4 text-xs font-normal">
               <a href="/impressum" className="hover:text-primary transition-colors underline">
                 {t('impressum')}
               </a>
@@ -1043,16 +1051,6 @@ const Index = () => {
                 {t('datenschutz')}
               </a>
             </nav>
-          </div>
-          <div className="space-y-3">
-            
-            
-            <div className="flex items-start gap-2 text-sm text-muted-foreground">
-              <MapPin className="h-5 w-5 flex-shrink-0 text-primary -translate-y-0.5" />
-              <p>
-                {t('germany_only_notice')}
-              </p>
-            </div>
           </div>
         </div>
       </footer>
