@@ -77,7 +77,7 @@ const Onboarding = () => {
         <div className="max-w-3xl mx-auto space-y-6">
           
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Finde die günstigste Tankstelle in Sekunden und spare jedes Jahr bis zu 240€!</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Finde die günstigste Tankstelle⛽️ in Sekunden⚡️und spare jedes Jahr bis zu 240€💰!</h1>
           
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Schnell. Einfach. Genau. Mit CheapFuel findest du immer die besten Spritpreise und sparst bei jeder Tankfüllung.
