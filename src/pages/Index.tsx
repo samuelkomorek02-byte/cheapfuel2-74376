@@ -824,7 +824,10 @@ const Index = () => {
                 <LanguageMenu />
               </div>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => navigate("/auth")}>
+              <DropdownMenuItem onClick={async () => {
+                await supabase.auth.signOut();
+                navigate("/auth");
+              }}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>Log out</span>
               </DropdownMenuItem>
