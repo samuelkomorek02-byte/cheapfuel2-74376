@@ -160,16 +160,35 @@ const Onboarding = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="text-primary-foreground py-12 md:py-20 bg-sky-600">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-black">
-              Bereit, Geld zu sparen?
-            </h2>
-            <p className="text-lg opacity-90">
-              Schließe dich tausenden zufriedenen Nutzern an und finde noch heute die günstigsten Tankstellen in deiner Nähe.
+      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-primary/80 overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/10 to-transparent" />
+        
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="max-w-3xl mx-auto space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                Bereit, Geld zu sparen?
+              </h2>
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+                Schließe dich tausenden zufriedenen Nutzern an und finde noch heute die günstigsten Tankstellen in deiner Nähe.
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button 
+                onClick={handleStart} 
+                size="lg" 
+                className="text-lg px-10 py-6 bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              >
+                Jetzt kostenlos starten
+              </Button>
+            </div>
+            
+            <p className="text-sm text-white/70 pt-2">
+              ✓ Keine Kreditkarte erforderlich · ✓ In Sekunden einsatzbereit
             </p>
-            <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 text-foreground bg-slate-50">Jetzt loslegen </Button>
           </div>
         </div>
       </section>
