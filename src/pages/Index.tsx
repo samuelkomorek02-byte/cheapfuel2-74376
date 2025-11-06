@@ -1042,11 +1042,11 @@ const Index = () => {
                 {t('germany_only_notice')}
               </p>
             </div>
-            <nav aria-label="Legal" className="flex items-center gap-4 text-xs font-normal">
+            <nav aria-label="Legal" className="flex items-center gap-4 text-xs font-normal text-muted-foreground">
               <a href="/impressum" className="hover:text-primary transition-colors underline">
                 {t('impressum')}
               </a>
-              <span className="text-muted-foreground">|</span>
+              <span>|</span>
               <a href="/datenschutz" className="hover:text-primary transition-colors underline">
                 {t('datenschutz')}
               </a>
