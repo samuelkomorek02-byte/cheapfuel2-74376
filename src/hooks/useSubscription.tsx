@@ -115,7 +115,8 @@ export const useSubscription = () => {
       if (error) throw error;
 
       if (data.url) {
-        window.open(data.url, "_blank");
+        // Direkte Navigation statt window.open um Popup-Blocker zu vermeiden
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error("Checkout error:", error);
