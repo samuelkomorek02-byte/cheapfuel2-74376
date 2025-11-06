@@ -814,7 +814,7 @@ const Index = () => {
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">Profil</p>
+                  <p className="text-sm font-medium leading-none">{t('profile')}</p>
                   <p className="text-xs leading-none text-muted-foreground">
                     {userEmail}
                   </p>
@@ -822,15 +822,17 @@ const Index = () => {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <div className="px-2 py-2">
-                <p className="text-sm font-medium mb-2">{t('language')}</p>
-                <LanguageMenu />
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-sm font-medium">{t('language')}</p>
+                  <LanguageMenu />
+                </div>
               </div>
               <DropdownMenuSeparator />
               {subscribed && (
                 <>
                   <DropdownMenuItem onClick={manageSubscription}>
                     <Settings className="mr-2 h-4 w-4" />
-                    <span>Abo verwalten</span>
+                    <span>{t('manage_subscription')}</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                 </>
@@ -840,7 +842,7 @@ const Index = () => {
                 navigate("/auth");
               }}>
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
+                <span>{t('logout')}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

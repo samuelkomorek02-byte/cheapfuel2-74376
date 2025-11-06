@@ -93,6 +93,10 @@ const translations = {
     auth_success_signup_desc: "Welcome to CheapFuel",
     auth_success_login_title: "Welcome back!",
     auth_success_login_desc: "Successfully signed in",
+    profile: "Profile",
+    language: "Language",
+    manage_subscription: "Manage Subscription",
+    logout: "Log out",
   },
   de: {
     hero_title: "Finde den günstigsten Kraftstoff in deiner Nähe",
@@ -185,6 +189,10 @@ const translations = {
     auth_success_signup_desc: "Willkommen bei CheapFuel",
     auth_success_login_title: "Willkommen zurück!",
     auth_success_login_desc: "Erfolgreich angemeldet",
+    profile: "Profil",
+    language: "Sprache",
+    manage_subscription: "Abo verwalten",
+    logout: "Abmelden",
   },
   es: {
     hero_title: "Encuentra el combustible más barato en tu área",
@@ -277,6 +285,10 @@ const translations = {
     auth_success_signup_desc: "Bienvenido a CheapFuel",
     auth_success_login_title: "¡Bienvenido de nuevo!",
     auth_success_login_desc: "Sesión iniciada correctamente",
+    profile: "Perfil",
+    language: "Idioma",
+    manage_subscription: "Gestionar Suscripción",
+    logout: "Cerrar sesión",
   },
   it: {
     hero_title: "Trova il carburante più economico nella tua zona",
@@ -369,6 +381,10 @@ const translations = {
     auth_success_signup_desc: "Benvenuto su CheapFuel",
     auth_success_login_title: "Bentornato!",
     auth_success_login_desc: "Accesso effettuato con successo",
+    profile: "Profilo",
+    language: "Lingua",
+    manage_subscription: "Gestisci Abbonamento",
+    logout: "Esci",
   },
   pl: {
     hero_title: "Znajdź najtańsze paliwo w Twojej okolicy",
@@ -461,6 +477,10 @@ const translations = {
     auth_success_signup_desc: "Witamy w CheapFuel",
     auth_success_login_title: "Witamy ponownie!",
     auth_success_login_desc: "Zalogowano pomyślnie",
+    profile: "Profil",
+    language: "Język",
+    manage_subscription: "Zarządzaj Subskrypcją",
+    logout: "Wyloguj",
   },
   ru: {
     hero_title: "Найдите самое дешевое топливо в вашем районе",
@@ -553,6 +573,10 @@ const translations = {
     auth_success_signup_desc: "Добро пожаловать в CheapFuel",
     auth_success_login_title: "С возвращением!",
     auth_success_login_desc: "Вход выполнен успешно",
+    profile: "Профиль",
+    language: "Язык",
+    manage_subscription: "Управление подпиской",
+    logout: "Выйти",
   },
   fr: {
     hero_title: "Trouvez le carburant le moins cher dans votre région",
@@ -645,6 +669,10 @@ const translations = {
     auth_success_signup_desc: "Bienvenue sur CheapFuel",
     auth_success_login_title: "Bon retour!",
     auth_success_login_desc: "Connexion réussie",
+    profile: "Profil",
+    language: "Langue",
+    manage_subscription: "Gérer l'Abonnement",
+    logout: "Se déconnecter",
   },
 } as const;
 
