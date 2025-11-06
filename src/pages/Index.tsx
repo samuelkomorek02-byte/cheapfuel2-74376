@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -46,6 +47,16 @@ const Index = () => {
   const {
     t
   } = useTranslation();
+  const navigate = useNavigate();
+  
+  // Check if onboarding has been completed
+  useEffect(() => {
+    const onboardingCompleted = localStorage.getItem("onboarding_completed");
+    if (!onboardingCompleted) {
+      navigate("/onboarding");
+    }
+  }, [navigate]);
+
   const [userLoc, setUserLoc] = useState<{
     lat: number;
     lng: number;

@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import NotFound from "./pages/NotFound";
+import Onboarding from "./pages/Onboarding";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { trackPageView } from "@/lib/analytics";
 
@@ -33,6 +34,7 @@ const App = () => (
           <AnalyticsTracker />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/impressum" element={<Impressum />} />
             <Route path="/datenschutz" element={<Datenschutz />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
