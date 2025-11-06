@@ -160,18 +160,16 @@ const Onboarding = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="bg-primary text-primary-foreground py-12 md:py-20">
+      <section className="text-primary-foreground py-12 md:py-20 bg-sky-600">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">
+            <h2 className="text-3xl md:text-4xl font-bold text-black">
               Bereit, Geld zu sparen?
             </h2>
             <p className="text-lg opacity-90">
               Schließe dich tausenden zufriedenen Nutzern an und finde noch heute die günstigsten Tankstellen in deiner Nähe.
             </p>
-            <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-background text-foreground hover:bg-background/90">
-              Jetzt kostenlos starten
-            </Button>
+            <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 text-foreground bg-slate-50">Jetzt loslegen </Button>
           </div>
         </div>
       </section>
@@ -181,7 +179,7 @@ const Onboarding = () => {
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground space-y-4">
           <div className="flex items-center justify-center gap-2">
             <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-6 w-6" />
-            <span className="font-semibold">CheapFuel</span>
+            <span className="font-semibold">Cheapfuel</span>
           </div>
           <p>© 2024 CheapFuel. Alle Rechte vorbehalten.</p>
           <nav className="flex justify-center gap-6">
