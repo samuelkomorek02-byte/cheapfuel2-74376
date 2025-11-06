@@ -50,6 +50,26 @@ const Index = () => {
   const navigate = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [userLoc, setUserLoc] = useState<{
+    lat: number;
+    lng: number;
+    heading?: number;
+  } | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [stations, setStations] = useState<Station[]>([]);
+  const [fuelType, setFuelType] = useState<"e5" | "e10" | "diesel" | "superplus" | "lpg">(FUEL_TYPE as any);
+  const [stationLimit, setStationLimit] = useState<number>(10);
+  const [locationError, setLocationError] = useState<'denied' | 'instagram' | 'unavailable' | 'timeout' | null>(null);
+  const [outsideGermany, setOutsideGermany] = useState(false);
+  const [routeMode, setRouteMode] = useState(false);
+  const [routeDialogOpen, setRouteDialogOpen] = useState(false);
+  const [destination, setDestination] = useState<{
+    lat: number;
+    lng: number;
+    address: string;
+  } | null>(null);
+  const [routePath, setRoutePath] = useState<Array<[number, number]> | null>(null);
+  const [routeLength, setRouteLength] = useState<number>(0);
   
   // Check authentication and onboarding
   useEffect(() => {
@@ -81,27 +101,6 @@ const Index = () => {
   if (checkingAuth) {
     return null;
   }
-
-  const [userLoc, setUserLoc] = useState<{
-    lat: number;
-    lng: number;
-    heading?: number;
-  } | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [stations, setStations] = useState<Station[]>([]);
-  const [fuelType, setFuelType] = useState<"e5" | "e10" | "diesel" | "superplus" | "lpg">(FUEL_TYPE as any);
-  const [stationLimit, setStationLimit] = useState<number>(10);
-  const [locationError, setLocationError] = useState<'denied' | 'instagram' | 'unavailable' | 'timeout' | null>(null);
-  const [outsideGermany, setOutsideGermany] = useState(false);
-  const [routeMode, setRouteMode] = useState(false);
-  const [routeDialogOpen, setRouteDialogOpen] = useState(false);
-  const [destination, setDestination] = useState<{
-    lat: number;
-    lng: number;
-    address: string;
-  } | null>(null);
-  const [routePath, setRoutePath] = useState<Array<[number, number]> | null>(null);
-  const [routeLength, setRouteLength] = useState<number>(0);
   const radius = DEFAULT_RADIUS_KM;
   const canUseGeo = useMemo(() => isHttpsOrLocalhost(), []);
   const SUPPORTED_FUEL_TYPES = new Set(["e5", "e10", "diesel"]);
