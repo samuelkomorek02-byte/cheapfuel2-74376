@@ -32,8 +32,11 @@ const Paywall = () => {
           {/* Logo and Title */}
           <div className="text-center space-y-4">
             <div className="flex justify-center">
-              <div className="bg-white rounded-full p-4 shadow-2xl">
-                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-20 w-20" />
+              <div className="relative">
+                <div className="absolute inset-0 bg-white/30 rounded-full blur-xl animate-pulse"></div>
+                <div className="relative bg-white rounded-full p-4 shadow-2xl animate-[pulse_3s_ease-in-out_infinite]">
+                  <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-20 w-20" />
+                </div>
               </div>
             </div>
             <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
