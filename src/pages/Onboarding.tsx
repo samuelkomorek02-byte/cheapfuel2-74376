@@ -70,7 +70,12 @@ const Onboarding = () => {
           </div>
           <div className="flex items-center gap-3">
             <LanguageMenu />
-            <Button variant="default" size="sm" onClick={() => navigate("/auth")} className="bg-black text-white hover:bg-black/90 dark:bg-black dark:text-white">
+            <Button 
+              variant="default"
+              size="sm"
+              onClick={() => navigate("/auth")}
+              className="bg-black text-white hover:bg-black/90 dark:bg-black dark:text-white"
+            >
               Anmelden
             </Button>
           </div>
@@ -102,7 +107,7 @@ und spare jedes Jahr über 240€💰!
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-12 md:py-20">
         <div className="text-center mb-12">
-          <h2 className="md:text-4xl mb-4 font-bold text-4xl">Warum Cheapfuel🧐?</h2>
+          <h2 className="text-3xl md:text-4xl mb-4 font-bold">Warum Cheapfuel🧐?</h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
