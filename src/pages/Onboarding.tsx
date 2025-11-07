@@ -55,7 +55,7 @@ const Onboarding = () => {
     answer: "Um dir stets aktuelle Preisdaten und eine zuverlässige App zu bieten, entstehen uns laufende Betriebskosten für Server, Datenquellen und Wartung. Deshalb bieten wir Cheapfuel zu einem fairen Preis an, mit dem du bereits nach wenigen Tankfüllungen deutlich mehr sparst, als du für die App bezahlst."
   }, {
     question: "Welche Regionen werden unterstützt?",
-    answer: "Cheapfuel deckt ganz Deutschland ab mit tausenden Tankstellen in allen Bundesländern."
+    answer: "Cheapfuel deckt aktuell mit tausenden Tankstellen in allen Bundesländern ganz Deutschland ab und plant im laufe der Zeit sich in ganz Europa auszubreiten."
   }, {
     question: "Brauche ich eine Internetverbindung?",
     answer: "Ja, für die Suche nach aktuellen Preisen benötigst du eine Internetverbindung. Die App funktioniert mit mobilen Daten und WLAN."
