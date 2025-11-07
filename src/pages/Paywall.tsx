@@ -27,7 +27,7 @@ const Paywall = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary via-primary/80 to-accent flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-primary via-primary/80 to-accent">
       {/* Back Button */}
       <Button
         variant="ghost"
@@ -39,14 +39,17 @@ const Paywall = () => {
       </Button>
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center p-4 pb-8">
         <div className="w-full max-w-md space-y-8 animate-fade-in">
           {/* Logo and Title */}
           <div className="text-center space-y-4">
             <div className="flex justify-center">
-              <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-32 w-32 drop-shadow-2xl" />
+              <div className="bg-white rounded-full p-4 shadow-2xl">
+                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-20 w-20" />
+              </div>
             </div>
-            <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">CheapFuel</h1>
+            <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
+            <p className="text-white/90 text-lg">Finde die günstigsten Tankstellen in deiner Nähe</p>
           </div>
 
           {/* Features List */}
@@ -63,9 +66,12 @@ const Paywall = () => {
 
           {/* CTA Section */}
           <div className="space-y-4">
-            <p className="text-center text-sm text-white/90 font-medium">
-              Jederzeit kündbar
-            </p>
+            <div className="flex items-center justify-center gap-2">
+              <Check className="h-5 w-5 text-white" />
+              <p className="text-center text-base text-white/90 font-medium">
+                Jederzeit kündbar
+              </p>
+            </div>
             <Button 
               size="lg" 
               className="w-full text-lg font-semibold h-14 bg-black text-white hover:bg-black/90 shadow-2xl hover:shadow-black/50 transition-all rounded-xl"
