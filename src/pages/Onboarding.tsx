@@ -195,21 +195,19 @@ und spare jedes Jahr über 240€💰!
       {/* Footer */}
       <footer className="border-t border-border py-8">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-start mb-6">
-            <a 
-              href="https://www.instagram.com/cheapfuel" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Cheapfuel auf Instagram"
-            >
-              <Instagram className="h-6 w-6" />
-            </a>
-          </div>
           <div className="text-center text-sm text-muted-foreground space-y-4">
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-3">
               <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-6 w-6" />
               <span className="font-semibold">Cheapfuel</span>
+              <a 
+                href="https://www.instagram.com/cheapfuel" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Cheapfuel auf Instagram"
+              >
+                <Instagram className="h-6 w-6" />
+              </a>
             </div>
             <p>© 2025 Cheapfuel. Alle Rechte vorbehalten.</p>
             <nav className="flex justify-center gap-6">
