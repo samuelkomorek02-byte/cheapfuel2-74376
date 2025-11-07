@@ -52,7 +52,7 @@ const Onboarding = () => {
     answer: "Unsere Preisdaten werden in Echtzeit aktualisiert und stammen direkt von den Tankstellen. Du siehst immer die aktuellsten Preise."
   }, {
     question: "Was kostet CheapFuel?",
-    answer: "CheapFuel bietet flexible Preismodelle. Nach der kostenlosen Testphase kannst du zwischen verschiedenen Abo-Optionen wählen, die zu deinen Bedürfnissen passen."
+    answer: "Um dir stets aktuelle Preisdaten und eine zuverlässige App zu bieten, entstehen uns laufende Betriebskosten für Server, Datenquellen und Wartung. Deshalb bieten wir CheapFuel zu einem fairen Preis an, mit dem du bereits nach wenigen Tankfüllungen deutlich mehr sparst, als du für die App bezahlst."
   }, {
     question: "Welche Regionen werden unterstützt?",
     answer: "CheapFuel deckt ganz Deutschland ab mit tausenden Tankstellen in allen Bundesländern."
