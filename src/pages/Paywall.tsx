@@ -20,7 +20,7 @@ const Paywall = () => {
     }
   }, [subscribed, navigate]);
   const features = ["Unbegrenzte Tankstellensuche", "Echtzeit-Preisvergleiche", "Routenintegration", "Tankstelle in ganz Deutschland (später europaweit)", "Integrierte Navigation mit Apple oder Google Maps"];
-  return <div className="min-h-screen bg-gradient-to-br from-primary via-primary/80 to-accent">
+  return <div className="min-h-screen bg-primary">
       {/* Back Button */}
       <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/auth")}>
         <ArrowLeft className="h-5 w-5" />
