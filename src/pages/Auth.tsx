@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
 import { Loader2 } from "lucide-react";
@@ -20,15 +19,22 @@ import { isPreviewMode } from "@/lib/utils";
 // Validation schemas
 const emailSchema = z.string().trim().email();
 const passwordSchema = z.string().min(6);
-
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation();
-  const { subscribed, loading: subLoading, checkSubscription } = useSubscription();
+  const {
+    t
+  } = useTranslation();
+  const {
+    subscribed,
+    loading: subLoading,
+    checkSubscription
+  } = useSubscription();
   const [isSignUp, setIsSignUp] = useState(() => {
     // Check if we came from onboarding with signup mode
-    const state = location.state as { mode?: string } | null;
+    const state = location.state as {
+      mode?: string;
+    } | null;
     return state?.mode === 'signup';
   });
   const [isForgotPassword, setIsForgotPassword] = useState(false);
@@ -44,92 +50,96 @@ const Auth = () => {
     let redirectTimeout: NodeJS.Timeout;
 
     // Set up auth state listener FIRST
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        // Only handle SIGNED_IN event (actual login/signup action)
-        if (event === 'SIGNED_IN' && session?.user) {
-          setRedirecting(true);
-          
-          // Safety timeout - reset redirecting state after 8 seconds
-          redirectTimeout = setTimeout(() => {
-            setRedirecting(false);
-            toast({
-              title: "Navigation verzögert",
-              description: "Bitte versuchen Sie es erneut.",
-              variant: "destructive"
-            });
-          }, 8000);
-          
-          if (isSignUp) {
-            // New user registration → always redirect to paywall
-            navigate("/paywall");
-          } else {
-            // Existing user login → check subscription status
-            try {
-              const { data } = await supabase.functions.invoke("check-subscription", {
-                headers: {
-                  Authorization: `Bearer ${session.access_token}`,
-                },
-              });
-              
-              if (data?.subscribed) {
-                navigate("/", { 
-                  state: { 
-                    subscribed: true,
-                    checkedAt: Date.now() 
-                  } 
-                });
-              } else {
-                navigate("/paywall");
+    const {
+      data: {
+        subscription
+      }
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+
+      // Only handle SIGNED_IN event (actual login/signup action)
+      if (event === 'SIGNED_IN' && session?.user) {
+        setRedirecting(true);
+
+        // Safety timeout - reset redirecting state after 8 seconds
+        redirectTimeout = setTimeout(() => {
+          setRedirecting(false);
+          toast({
+            title: "Navigation verzögert",
+            description: "Bitte versuchen Sie es erneut.",
+            variant: "destructive"
+          });
+        }, 8000);
+        if (isSignUp) {
+          // New user registration → always redirect to paywall
+          navigate("/paywall");
+        } else {
+          // Existing user login → check subscription status
+          try {
+            const {
+              data
+            } = await supabase.functions.invoke("check-subscription", {
+              headers: {
+                Authorization: `Bearer ${session.access_token}`
               }
-            } catch (error) {
-              console.error("Subscription check error:", error);
+            });
+            if (data?.subscribed) {
+              navigate("/", {
+                state: {
+                  subscribed: true,
+                  checkedAt: Date.now()
+                }
+              });
+            } else {
               navigate("/paywall");
             }
+          } catch (error) {
+            console.error("Subscription check error:", error);
+            navigate("/paywall");
           }
         }
       }
-    );
-
-    // Check for existing session - immediate redirect without loading state
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      // Im Preview-Modus keine Redirects
-      if (isPreviewMode()) return;
-      
-      if (session?.user) {
-        // User already logged in → redirect to index (will handle subscription check there)
-        navigate("/", { replace: true });
-      }
     });
 
+    // Check for existing session - immediate redirect without loading state
+    supabase.auth.getSession().then(({
+      data: {
+        session
+      }
+    }) => {
+      // Im Preview-Modus keine Redirects
+      if (isPreviewMode()) return;
+      if (session?.user) {
+        // User already logged in → redirect to index (will handle subscription check there)
+        navigate("/", {
+          replace: true
+        });
+      }
+    });
     return () => {
       subscription.unsubscribe();
       if (redirectTimeout) clearTimeout(redirectTimeout);
     };
   }, [navigate, isSignUp]);
-
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       // Validate input
       const validatedEmail = emailSchema.parse(email);
       const validatedPassword = passwordSchema.parse(password);
-
       if (isSignUp) {
         // Sign up
-        const { error } = await supabase.auth.signUp({
+        const {
+          error
+        } = await supabase.auth.signUp({
           email: validatedEmail,
           password: validatedPassword,
           options: {
             emailRedirectTo: `${window.location.origin}/`
           }
         });
-
         if (error) {
           if (error.message.includes("already registered")) {
             toast({
@@ -148,11 +158,12 @@ const Auth = () => {
         }
       } else {
         // Sign in
-        const { error } = await supabase.auth.signInWithPassword({
+        const {
+          error
+        } = await supabase.auth.signInWithPassword({
           email: validatedEmail,
           password: validatedPassword
         });
-
         if (error) {
           if (error.message.includes("Invalid login credentials")) {
             toast({
@@ -197,25 +208,21 @@ const Auth = () => {
       setLoading(false);
     }
   };
-
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const validatedEmail = emailSchema.parse(email);
-
-      const { error } = await supabase.auth.resetPasswordForEmail(validatedEmail, {
+      const {
+        error
+      } = await supabase.auth.resetPasswordForEmail(validatedEmail, {
         redirectTo: `${window.location.origin}/auth`
       });
-
       if (error) throw error;
-
       toast({
         title: t("auth_reset_link_sent"),
         description: t("auth_reset_link_sent_desc")
       });
-
       setIsForgotPassword(false);
       setEmail("");
     } catch (error: any) {
@@ -236,27 +243,23 @@ const Auth = () => {
       setLoading(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-background flex flex-col">
+  return <div className="min-h-screen bg-background flex flex-col">
       {/* Loading Overlay während Subscription-Check */}
-      {redirecting && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
+      {redirecting && <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
             <Loader2 className="h-8 w-8 animate-spin text-primary" />
             <p className="text-sm text-muted-foreground">
               Anmeldung wird verarbeitet...
             </p>
           </div>
-        </div>
-      )}
+        </div>}
       
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-8 w-8" />
-            <h1 className="text-xl font-bold">CheapFuel</h1>
+            <h1 className="text-xl font-bold">Cheapfuel</h1>
           </div>
           <LanguageMenu />
         </div>
@@ -274,110 +277,60 @@ const Auth = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {isForgotPassword ? (
-              /* Password Reset Form */
-              <form onSubmit={handlePasswordReset} className="space-y-4">
+            {isForgotPassword ? (/* Password Reset Form */
+          <form onSubmit={handlePasswordReset} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="reset-email">{t("auth_email_placeholder")}</Label>
-                  <Input
-                    id="reset-email"
-                    type="email"
-                    placeholder={t("auth_email_placeholder")}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={loading}
-                  />
+                  <Input id="reset-email" type="email" placeholder={t("auth_email_placeholder")} value={email} onChange={e => setEmail(e.target.value)} required disabled={loading} />
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {t("auth_send_reset_link")}
                 </Button>
-                <Button
-                  type="button"
-                  variant="link"
-                  className="w-full"
-                  onClick={() => {
-                    setIsForgotPassword(false);
-                    setEmail("");
-                  }}
-                  disabled={loading}
-                >
+                <Button type="button" variant="link" className="w-full" onClick={() => {
+              setIsForgotPassword(false);
+              setEmail("");
+            }} disabled={loading}>
                   {t("auth_back_to_login")}
                 </Button>
-              </form>
-            ) : (
-              /* Email/Password Form */
-              <form onSubmit={handleEmailAuth} className="space-y-4">
+              </form>) : (/* Email/Password Form */
+          <form onSubmit={handleEmailAuth} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">{t("auth_email_placeholder")}</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder={t("auth_email_placeholder")}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  disabled={loading}
-                />
+                <Input id="email" type="email" placeholder={t("auth_email_placeholder")} value={email} onChange={e => setEmail(e.target.value)} required disabled={loading} />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">{t("auth_password_placeholder")}</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder={t("auth_password_placeholder")}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  disabled={loading}
-                />
+                <Input id="password" type="password" placeholder={t("auth_password_placeholder")} value={password} onChange={e => setPassword(e.target.value)} required disabled={loading} />
               </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {isSignUp ? t("auth_sign_up") : t("auth_sign_in")}
                 </Button>
-              </form>
-            )}
+              </form>)}
 
-            {!isForgotPassword && (
-              <>
+            {!isForgotPassword && <>
                 {/* Forgot Password Link */}
-                {!isSignUp && (
-                  <div className="text-center">
-                    <Button
-                      variant="link"
-                      className="p-0 h-auto text-sm"
-                      onClick={() => setIsForgotPassword(true)}
-                      disabled={loading}
-                    >
+                {!isSignUp && <div className="text-center">
+                    <Button variant="link" className="p-0 h-auto text-sm" onClick={() => setIsForgotPassword(true)} disabled={loading}>
                       {t("auth_forgot_password")}
                     </Button>
-                  </div>
-                )}
+                  </div>}
 
                 {/* Toggle Sign In/Up */}
                 <div className="text-center text-sm">
                   <span className="text-muted-foreground">
                     {isSignUp ? t("auth_have_account") : t("auth_no_account")}
                   </span>{" "}
-                  <Button
-                    variant="link"
-                    className="p-0 h-auto font-semibold"
-                    onClick={() => setIsSignUp(!isSignUp)}
-                    disabled={loading}
-                  >
+                  <Button variant="link" className="p-0 h-auto font-semibold" onClick={() => setIsSignUp(!isSignUp)} disabled={loading}>
                     {isSignUp ? t("auth_switch_to_login") : t("auth_switch_to_signup")}
                   </Button>
                 </div>
-              </>
-            )}
+              </>}
           </CardContent>
         </Card>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Auth;
