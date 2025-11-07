@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, ArrowLeft } from "lucide-react";
 import LanguageMenu from "@/components/LanguageMenu";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { Session, User } from "@supabase/supabase-js";
@@ -257,10 +257,23 @@ const Auth = () => {
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-8 w-8" />
+          {/* Back Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/")}
+            className="shrink-0"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          
+          {/* Centered Logo and Text */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-2">
+            <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-8 w-8" />
             <h1 className="text-xl font-bold">Cheapfuel</h1>
           </div>
+          
+          {/* Language Menu */}
           <LanguageMenu />
         </div>
       </header>
