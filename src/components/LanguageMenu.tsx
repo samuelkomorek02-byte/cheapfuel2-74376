@@ -26,6 +26,7 @@ const LANGUAGES: { code: LangCode; label: string; flag: string }[] = [
 export default function LanguageMenu() {
   const { i18n, t } = useTranslation();
   const [lang, setLang] = useState<LangCode>("de");
+  const [open, setOpen] = useState(false);
 
   const current = useMemo(
     () => LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[1],
@@ -45,7 +46,7 @@ export default function LanguageMenu() {
   }, [i18n]);
 
   return (
-    <DropdownMenu>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger asChild>
         <Button
           aria-label={t('select_language')}
@@ -72,6 +73,7 @@ export default function LanguageMenu() {
               }
               setLang(l.code);
               i18n.changeLanguage(l.code);
+              setOpen(false);
             }}
             className={`flex items-center justify-between rounded-lg data-[highlighted]:bg-foreground data-[highlighted]:text-background focus:bg-foreground focus:text-background ${
               l.code === lang ? "bg-foreground text-background" : ""

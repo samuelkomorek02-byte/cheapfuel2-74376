@@ -1,7 +1,10 @@
 import { Instagram } from "lucide-react";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+  
   return (
     <footer className="border-t border-border py-8">
       <div className="container mx-auto px-4">
@@ -19,16 +22,16 @@ const Footer = () => {
               <Instagram className="h-6 w-6" />
             </a>
           </div>
-          <p>© 2025 Cheapfuel. Alle Rechte vorbehalten.</p>
+          <p>© 2025 Cheapfuel. All rights reserved.</p>
           <nav className="flex justify-center gap-6">
             <a href="/impressum" className="hover:text-foreground transition-colors">
-              Impressum
+              {t('impressum')}
             </a>
             <a href="/datenschutz" className="hover:text-foreground transition-colors">
-              Datenschutz
+              {t('datenschutz')}
             </a>
             <a href="/agb" className="hover:text-foreground transition-colors">
-              AGB
+              {t('agb')}
             </a>
           </nav>
         </div>
