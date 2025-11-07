@@ -200,11 +200,11 @@ und spare jedes Jahr über 240€💰!
               <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-6 w-6" />
               <span className="font-semibold">Cheapfuel</span>
               <a 
-                href="https://www.instagram.com/cheapfuel" 
+                href="https://cheapfuel.app" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Cheapfuel auf Instagram"
+                aria-label="Cheapfuel App"
               >
                 <Instagram className="h-6 w-6" />
               </a>
