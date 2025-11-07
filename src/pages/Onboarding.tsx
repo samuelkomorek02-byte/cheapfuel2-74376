@@ -58,7 +58,7 @@ const Onboarding = () => {
     answer: "Cheapfuel deckt aktuell mit tausenden Tankstellen in allen Bundesländern ganz Deutschland ab und plant im laufe der Zeit sich in ganz Europa auszubreiten."
   }, {
     question: "Brauche ich eine Internetverbindung?",
-    answer: "Ja, für die Suche nach aktuellen Preisen benötigst du eine Internetverbindung. Die App funktioniert mit mobilen Daten und WLAN."
+    answer: "Ja, für die Suche nach den aktuellsten Preisen benötigst du eine Internetverbindung. Die App funktioniert mit mobilen Daten und WLAN."
   }];
   return <div className="min-h-screen bg-background">
       {/* Header */}
