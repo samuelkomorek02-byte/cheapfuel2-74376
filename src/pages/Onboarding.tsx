@@ -8,7 +8,7 @@ import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import featureSchnell from "@/assets/feature-schnell.jpg";
 import featureEinfach from "@/assets/feature-einfach.jpg";
 import featureGenau from "@/assets/feature-genau.jpg";
-import { Fuel, Star, Zap, Target, MapPin } from "lucide-react";
+import { Fuel, Star, Zap, Target, MapPin, Instagram } from "lucide-react";
 const Onboarding = () => {
   const navigate = useNavigate();
   const {
@@ -194,23 +194,36 @@ und spare jedes Jahr über 240€💰!
 
       {/* Footer */}
       <footer className="border-t border-border py-8">
-        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground space-y-4">
-          <div className="flex items-center justify-center gap-2">
-            <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-6 w-6" />
-            <span className="font-semibold">Cheapfuel</span>
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-start mb-6">
+            <a 
+              href="https://www.instagram.com/cheapfuel" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Cheapfuel auf Instagram"
+            >
+              <Instagram className="h-6 w-6" />
+            </a>
           </div>
-          <p>© 2025 Cheapfuel. Alle Rechte vorbehalten.</p>
-          <nav className="flex justify-center gap-6">
-            <a href="/impressum" className="hover:text-foreground transition-colors">
-              Impressum
-            </a>
-            <a href="/datenschutz" className="hover:text-foreground transition-colors">
-              Datenschutz
-            </a>
-            <a href="/agb" className="hover:text-foreground transition-colors">
-              AGB
-            </a>
-          </nav>
+          <div className="text-center text-sm text-muted-foreground space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-6 w-6" />
+              <span className="font-semibold">Cheapfuel</span>
+            </div>
+            <p>© 2025 Cheapfuel. Alle Rechte vorbehalten.</p>
+            <nav className="flex justify-center gap-6">
+              <a href="/impressum" className="hover:text-foreground transition-colors">
+                Impressum
+              </a>
+              <a href="/datenschutz" className="hover:text-foreground transition-colors">
+                Datenschutz
+              </a>
+              <a href="/agb" className="hover:text-foreground transition-colors">
+                AGB
+              </a>
+            </nav>
+          </div>
         </div>
       </footer>
     </div>;
