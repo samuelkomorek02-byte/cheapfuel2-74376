@@ -40,9 +40,10 @@ export default function LanguageMenu() {
   }, [lang]);
 
   useEffect(() => {
-    // Always start with German on page load
-    setLang("de");
-    i18n.changeLanguage("de");
+    // Load saved language from localStorage or default to German
+    const savedLang = localStorage.getItem("cheapfuel-language") as LangCode || "de";
+    setLang(savedLang);
+    i18n.changeLanguage(savedLang);
   }, [i18n]);
 
   return (
@@ -73,6 +74,7 @@ export default function LanguageMenu() {
               }
               setLang(l.code);
               i18n.changeLanguage(l.code);
+              localStorage.setItem("cheapfuel-language", l.code);
               setOpen(false);
             }}
             className={`flex items-center justify-between rounded-lg data-[highlighted]:bg-foreground data-[highlighted]:text-background focus:bg-foreground focus:text-background ${
