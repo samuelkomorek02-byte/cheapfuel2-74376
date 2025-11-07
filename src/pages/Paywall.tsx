@@ -19,7 +19,7 @@ const Paywall = () => {
       navigate("/");
     }
   }, [subscribed, navigate]);
-  const features = ["Unbegrenzte Tankstellensuche", "Echtzeit-Preisvergleiche", "Routenintegration", "Alle Tankstellen in ganz Deutschland (bald in ganz Europa)", "Integrierte Navigation mit Apple oder Google Maps"];
+  const features = ["Unbegrenzte Tankstellensuche", "Echtzeit-Preisvergleiche", "Routenintegration", "Deutschlandweites Tankstellennetzwerk", "Integrierte Navigation mit Apple oder Google Maps"];
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
       <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/auth")}>
