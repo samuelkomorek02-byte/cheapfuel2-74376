@@ -63,7 +63,7 @@ const Paywall = () => {
               Los geht's
             </Button>
             <p className="text-center text-sm text-white/90">nur 27,00€ pro Jahr (2,25€/mo)<span className="text-white">27,00€</span> pro Jahr{" "}
-              <span className="text-sm">(2,25€/mo)</span>
+              <span className="text-sm"></span>
             </p>
           </div>
         </div>
