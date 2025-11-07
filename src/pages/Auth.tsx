@@ -46,8 +46,8 @@ const Auth = () => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Redirect authenticated users
-        if (session?.user && event === 'SIGNED_IN') {
+        // Only handle SIGNED_IN event
+        if (event === 'SIGNED_IN' && session?.user) {
           setRedirecting(true);
           
           if (isSignUp) {
@@ -74,7 +74,6 @@ const Auth = () => {
               }
             } catch (error) {
               console.error("Subscription check error:", error);
-              // Bei Fehler → zur Paywall (sicherer)
               navigate("/paywall");
             }
           }
@@ -82,40 +81,16 @@ const Auth = () => {
       }
     );
 
-    // THEN check for existing session
-    supabase.auth.getSession().then(async ({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
+    // Check for existing session (nur für initial redirect, kein subscription check)
+    supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        setRedirecting(true);
-        // Check subscription for existing session
-        try {
-          const { data } = await supabase.functions.invoke("check-subscription", {
-            headers: {
-              Authorization: `Bearer ${session.access_token}`,
-            },
-          });
-          
-          if (data?.subscribed) {
-            navigate("/", { 
-              state: { 
-                subscribed: true,
-                checkedAt: Date.now() 
-              } 
-            });
-          } else {
-            navigate("/paywall");
-          }
-        } catch (error) {
-          console.error("Subscription check error:", error);
-          navigate("/paywall");
-        }
+        // User ist bereits eingeloggt → zur Paywall, sie müssen sich neu anmelden für check
+        navigate("/paywall");
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate, isSignUp, checkSubscription]);
+  }, [navigate, isSignUp]);
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();

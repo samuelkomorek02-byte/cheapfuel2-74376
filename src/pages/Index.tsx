@@ -63,7 +63,13 @@ const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const { subscribed, loading: subLoading, manageSubscription } = useSubscription();
+  
+  // Skip initial subscription check wenn von Auth navigiert mit frischem Status
+  const skipCheck = navigationState?.subscribed && 
+                    navigationState?.checkedAt && 
+                    Date.now() - navigationState.checkedAt < 10000;
+  
+  const { subscribed, loading: subLoading, manageSubscription } = useSubscription(skipCheck);
   const [userLoc, setUserLoc] = useState<{
     lat: number;
     lng: number;
@@ -125,6 +131,16 @@ const Index = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Clear navigation state after use
+  useEffect(() => {
+    if (navigationState?.subscribed) {
+      // Clear state nach kurzer Verzögerung
+      setTimeout(() => {
+        window.history.replaceState({}, document.title);
+      }, 100);
+    }
+  }, [navigationState]);
 
   // Check subscription status after authentication
   useEffect(() => {

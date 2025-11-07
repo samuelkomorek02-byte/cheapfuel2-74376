@@ -9,12 +9,12 @@ interface SubscriptionStatus {
   loading: boolean;
 }
 
-export const useSubscription = () => {
+export const useSubscription = (skipInitialCheck = false) => {
   const [status, setStatus] = useState<SubscriptionStatus>({
     subscribed: false,
     product_id: null,
     subscription_end: null,
-    loading: true,
+    loading: skipInitialCheck ? false : true,
   });
 
   const checkSubscription = async () => {
@@ -68,7 +68,10 @@ export const useSubscription = () => {
   };
 
   useEffect(() => {
-    checkSubscription();
+    // Skip initial check wenn von Auth navigiert
+    if (!skipInitialCheck) {
+      checkSubscription();
+    }
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
@@ -91,7 +94,7 @@ export const useSubscription = () => {
       subscription.unsubscribe();
       clearInterval(interval);
     };
-  }, []);
+  }, [skipInitialCheck]);
 
   const initiateCheckout = async () => {
     try {

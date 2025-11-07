@@ -25,17 +25,43 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
+    // Validate Stripe key first
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!stripeKey) {
+      logStep("ERROR: STRIPE_SECRET_KEY not configured");
+      return new Response(
+        JSON.stringify({ error: "Stripe ist nicht konfiguriert. Bitte kontaktiere den Support." }),
+        { 
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 500 
+        }
+      );
+    }
+    logStep("Stripe key found");
+
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("No authorization header provided");
+    if (!authHeader) {
+      logStep("ERROR: No authorization header");
+      throw new Error("Authentifizierung erforderlich");
+    }
     
     const token = authHeader.replace("Bearer ", "");
-    const { data } = await supabaseClient.auth.getUser(token);
+    const { data, error: authError } = await supabaseClient.auth.getUser(token);
+    
+    if (authError || !data.user) {
+      logStep("ERROR: Authentication failed", { error: authError?.message });
+      throw new Error("Authentifizierung fehlgeschlagen");
+    }
+    
     const user = data.user;
-    if (!user?.email) throw new Error("User not authenticated or email not available");
+    if (!user?.email) {
+      logStep("ERROR: No email found");
+      throw new Error("Benutzer-Email nicht verfügbar");
+    }
     
     logStep("User authenticated", { userId: user.id, email: user.email });
 
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { 
+    const stripe = new Stripe(stripeKey, { 
       apiVersion: "2025-08-27.basil" 
     });
 
