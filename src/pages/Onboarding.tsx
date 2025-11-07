@@ -207,6 +207,9 @@ und spare jedes Jahr über 240€💰!
             <a href="/datenschutz" className="hover:text-foreground transition-colors">
               Datenschutz
             </a>
+            <a href="/agb" className="hover:text-foreground transition-colors">
+              AGB
+            </a>
           </nav>
         </div>
       </footer>

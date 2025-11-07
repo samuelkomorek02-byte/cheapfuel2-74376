@@ -1050,6 +1050,10 @@ const Index = () => {
               <a href="/datenschutz" className="hover:text-primary transition-colors underline">
                 {t('datenschutz')}
               </a>
+              <span>|</span>
+              <a href="/agb" className="hover:text-primary transition-colors underline">
+                AGB
+              </a>
             </nav>
           </div>
         </div>
