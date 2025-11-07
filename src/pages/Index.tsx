@@ -95,6 +95,7 @@ const Index = () => {
   const [routePath, setRoutePath] = useState<Array<[number, number]> | null>(null);
   const [routeLength, setRouteLength] = useState<number>(0);
   const [navigationStation, setNavigationStation] = useState<Station | null>(null);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
   
   const radius = DEFAULT_RADIUS_KM;
   const canUseGeo = useMemo(() => isHttpsOrLocalhost(), []);
@@ -854,7 +855,7 @@ const Index = () => {
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-10 w-10" />
             Cheapfuel
           </a>
-          <DropdownMenu>
+          <DropdownMenu open={userMenuOpen} onOpenChange={setUserMenuOpen}>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="icon" className="rounded-full">
                 <Menu className="h-5 w-5" />
@@ -873,7 +874,7 @@ const Index = () => {
               <div className="px-2 py-2">
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-sm font-medium">{t('language')}</p>
-                  <LanguageMenu />
+                  <LanguageMenu onLanguageChange={() => setUserMenuOpen(false)} />
                 </div>
               </div>
               <DropdownMenuSeparator />

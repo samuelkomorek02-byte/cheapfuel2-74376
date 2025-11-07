@@ -23,7 +23,11 @@ const LANGUAGES: { code: LangCode; label: string; flag: string }[] = [
   { code: "fr", label: "Français", flag: "🇫🇷" },
 ];
 
-export default function LanguageMenu() {
+interface LanguageMenuProps {
+  onLanguageChange?: () => void;
+}
+
+export default function LanguageMenu({ onLanguageChange }: LanguageMenuProps = {}) {
   const { i18n, t } = useTranslation();
   const [lang, setLang] = useState<LangCode>("de");
   const [open, setOpen] = useState(false);
@@ -76,6 +80,7 @@ export default function LanguageMenu() {
               i18n.changeLanguage(l.code);
               localStorage.setItem("cheapfuel-language", l.code);
               setOpen(false);
+              onLanguageChange?.();
             }}
             className={`flex items-center justify-between rounded-lg data-[highlighted]:bg-foreground data-[highlighted]:text-background focus:bg-foreground focus:text-background ${
               l.code === lang ? "bg-foreground text-background" : ""
