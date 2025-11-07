@@ -68,7 +68,16 @@ const Onboarding = () => {
             <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-8 w-8" />
             <h1 className="text-xl font-bold">Cheapfuel</h1>
           </div>
-          <LanguageMenu />
+          <div className="flex items-center gap-3">
+            <Button 
+              variant="outline" 
+              onClick={() => navigate("/auth")}
+              className="text-sm"
+            >
+              Anmelden
+            </Button>
+            <LanguageMenu />
+          </div>
         </div>
       </header>
 
