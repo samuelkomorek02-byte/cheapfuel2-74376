@@ -70,9 +70,9 @@ const Onboarding = () => {
           </div>
           <div className="flex items-center gap-3">
             <Button 
-              variant="outline" 
+              variant="outline"
+              size="sm"
               onClick={() => navigate("/auth")}
-              className="text-sm"
             >
               Anmelden
             </Button>
