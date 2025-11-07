@@ -15,6 +15,7 @@ import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { Session, User } from "@supabase/supabase-js";
 import { useSubscription } from "@/hooks/useSubscription";
 import Footer from "@/components/Footer";
+import { isPreviewMode } from "@/lib/utils";
 
 // Validation schemas
 const emailSchema = z.string().trim().email();
@@ -95,6 +96,9 @@ const Auth = () => {
 
     // Check for existing session - immediate redirect without loading state
     supabase.auth.getSession().then(({ data: { session } }) => {
+      // Im Preview-Modus keine Redirects
+      if (isPreviewMode()) return;
+      
       if (session?.user) {
         // User already logged in → redirect to index (will handle subscription check there)
         navigate("/", { replace: true });

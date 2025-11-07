@@ -25,6 +25,7 @@ import { analytics } from "@/lib/analytics";
 import { useSubscription } from "@/hooks/useSubscription";
 import { validateCoordinates } from "@/lib/validation";
 import Footer from "@/components/Footer";
+import { isPreviewMode } from "@/lib/utils";
 const DEFAULT_RADIUS_KM = 25; // Fixed search radius to avoid rate limiting
 const FUEL_TYPE = "e5"; // e5 | e10 | diesel
 function isHttpsOrLocalhost() {
@@ -147,6 +148,9 @@ const Index = () => {
 
   // Check subscription status after authentication
   useEffect(() => {
+    // Im Preview-Modus keine Redirects
+    if (isPreviewMode()) return;
+    
     // Wenn wir von Auth.tsx mit subscribed state kommen, nicht nochmal checken
     if (navigationState?.subscribed && navigationState?.checkedAt) {
       const timeSinceCheck = Date.now() - navigationState.checkedAt;

@@ -14,6 +14,7 @@ import Auth from "./pages/Auth";
 import Paywall from "./pages/Paywall";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { trackPageView } from "@/lib/analytics";
+import { DevNavigation } from "@/components/DevNavigation";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <AnalyticsTracker />
+          <DevNavigation />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/onboarding" element={<Onboarding />} />

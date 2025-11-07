@@ -7,6 +7,7 @@ import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useEffect } from "react";
 import Footer from "@/components/Footer";
+import { isPreviewMode } from "@/lib/utils";
 
 const Paywall = () => {
   const navigate = useNavigate();
@@ -15,6 +16,9 @@ const Paywall = () => {
 
   // Check if user already has a subscription and redirect
   useEffect(() => {
+    // Im Preview-Modus keine Redirects
+    if (isPreviewMode()) return;
+    
     if (subscribed) {
       navigate("/");
     }
