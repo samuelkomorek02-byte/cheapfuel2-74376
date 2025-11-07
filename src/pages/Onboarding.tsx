@@ -49,7 +49,7 @@ const Onboarding = () => {
   }];
   const faqs = [{
     question: "Wie aktuell sind die Spritpreise?",
-    answer: "Die Preisdaten stammen direkt von der offiziellen Markttransparenzstelle für Kraftstoffe (MTS-K) und sind nahezu in Echtzeit verfügbar – so kannst du immer die besten Angebote finden."
+    answer: "Die Preisdaten kommen direkt von der offiziellen Markttransparenzstelle für Kraftstoffe (MTS-K) und werden in Echtzeit an unsere App weitergeleitet."
   }, {
     question: "Was kostet Cheapfuel?",
     answer: "Um dir stets aktuelle Preisdaten und eine zuverlässige App zu bieten, entstehen uns laufende Betriebskosten für Server, Datenquellen und Wartung. Deshalb bieten wir Cheapfuel zu einem fairen Preis an, mit dem du bereits nach wenigen Tankfüllungen deutlich mehr sparst, als du für die App bezahlst."
