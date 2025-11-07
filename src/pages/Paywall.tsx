@@ -50,6 +50,30 @@ const Paywall = () => {
               </div>)}
           </div>
 
+          {/* Savings Comparison Table */}
+          <div className="backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
+            <h2 className="text-xl font-bold text-white mb-4 text-center">Deine jährliche Ersparnis</h2>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg">
+                <span className="text-white/80">Ohne Cheapfuel</span>
+                <span className="text-white font-semibold">~2.400€/Jahr</span>
+              </div>
+              <div className="flex justify-between items-center p-3 bg-white/5 rounded-lg border-2 border-white/30">
+                <span className="text-white/80">Mit Cheapfuel</span>
+                <span className="text-white font-semibold">~2.100€/Jahr</span>
+              </div>
+              <div className="mt-4 pt-4 border-t border-white/20">
+                <div className="flex justify-between items-center">
+                  <span className="text-white font-bold text-lg">Deine Ersparnis</span>
+                  <span className="text-white font-bold text-2xl">~300€/Jahr</span>
+                </div>
+                <p className="text-white/70 text-sm mt-2 text-center">
+                  Bei durchschnittlich 15.000 km/Jahr und 7,5L/100km
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* CTA Section */}
           <div className="space-y-4">
             <div className="flex items-center justify-center gap-2">
