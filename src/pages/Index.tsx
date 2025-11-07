@@ -18,7 +18,7 @@ import LanguageMenu from "@/components/LanguageMenu";
 import RouteSearchDialog from "@/components/RouteSearchDialog";
 import NavigationDialog from "@/components/NavigationDialog";
 import { toast } from "@/hooks/use-toast";
-import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X, Menu, LogOut, Languages, Settings } from "lucide-react";
+import { MapPin, Fuel, ShieldCheck, ExternalLink, Instagram, Clock, AlertTriangle, Globe, Route, X, Menu, LogOut, Languages, Settings, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { analytics } from "@/lib/analytics";
@@ -60,7 +60,7 @@ const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const { subscribed, manageSubscription } = useSubscription();
+  const { subscribed, loading: subLoading, manageSubscription } = useSubscription();
   const [userLoc, setUserLoc] = useState<{
     lat: number;
     lng: number;
@@ -122,6 +122,15 @@ const Index = () => {
 
     return () => subscription.unsubscribe();
   }, [navigate]);
+
+  // Check subscription status after authentication
+  useEffect(() => {
+    if (isAuthenticated && !checkingAuth && !subLoading) {
+      if (!subscribed) {
+        navigate("/paywall");
+      }
+    }
+  }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate]);
 
   // Cleanup pending requests on unmount and periodically
   useEffect(() => {
@@ -419,9 +428,13 @@ const Index = () => {
     }
   }, [canUseGeo, fetchStations, fuelType, t]);
 
-  // Show loading while checking auth
-  if (checkingAuth) {
-    return null;
+  // Show loading while checking auth or subscription
+  if (checkingAuth || subLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    );
   }
 
   // Calculate route using OSRM

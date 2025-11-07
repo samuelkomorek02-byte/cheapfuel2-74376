@@ -13,6 +13,7 @@ import { Loader2 } from "lucide-react";
 import LanguageMenu from "@/components/LanguageMenu";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { Session, User } from "@supabase/supabase-js";
+import { useSubscription } from "@/hooks/useSubscription";
 
 // Validation schemas
 const emailSchema = z.string().trim().email();
@@ -21,6 +22,7 @@ const passwordSchema = z.string().min(6);
 const Auth = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { subscribed, loading: subLoading, checkSubscription } = useSubscription();
   const [isSignUp, setIsSignUp] = useState(false);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,33 +35,62 @@ const Auth = () => {
   useEffect(() => {
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      async (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
         
         // Redirect authenticated users
-        if (session?.user) {
-          // Check if user is new (just signed up)
-          const isNewUser = event === 'SIGNED_IN' && isSignUp;
-          setTimeout(() => {
-            navigate(isNewUser ? "/paywall" : "/");
-          }, 0);
+        if (session?.user && event === 'SIGNED_IN') {
+          if (isSignUp) {
+            // New user registration → always redirect to paywall
+            setTimeout(() => {
+              navigate("/paywall");
+            }, 0);
+          } else {
+            // Existing user login → check subscription status
+            await checkSubscription();
+            // Wait briefly for subscription status to load
+            setTimeout(async () => {
+              const { data } = await supabase.functions.invoke("check-subscription", {
+                headers: {
+                  Authorization: `Bearer ${session.access_token}`,
+                },
+              });
+              
+              if (data?.subscribed) {
+                navigate("/");
+              } else {
+                navigate("/paywall");
+              }
+            }, 500);
+          }
         }
       }
     );
 
     // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
       
       if (session?.user) {
-        navigate("/");
+        // Check subscription for existing session
+        const { data } = await supabase.functions.invoke("check-subscription", {
+          headers: {
+            Authorization: `Bearer ${session.access_token}`,
+          },
+        });
+        
+        if (data?.subscribed) {
+          navigate("/");
+        } else {
+          navigate("/paywall");
+        }
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate, isSignUp]);
+  }, [navigate, isSignUp, checkSubscription]);
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
