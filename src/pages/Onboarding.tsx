@@ -105,18 +105,11 @@ und spare jedes Jahr über 240€💰!
           const Icon = feature.icon;
           return <Card key={index} className="overflow-hidden border-2">
                 <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50">
-                  <img 
-                    src={feature.image} 
-                    alt={feature.title} 
-                    className="w-full h-full object-cover" 
-                  />
+                  <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
                 </div>
                 <CardContent className="p-4 md:p-6 text-center space-y-3">
-                  <div className="flex items-center justify-center gap-2">
-                    <Icon className="h-5 w-5 text-primary" />
-                    <h3 className="text-xl font-bold">{feature.title}</h3>
-                  </div>
-                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{feature.description}</p>
+                  
+                  <p className="md:text-base text-muted-foreground leading-relaxed text-base font-thin">{feature.description}</p>
                 </CardContent>
               </Card>;
         })}
