@@ -69,14 +69,15 @@ const Onboarding = () => {
             <h1 className="text-xl font-bold">Cheapfuel</h1>
           </div>
           <div className="flex items-center gap-3">
+            <LanguageMenu />
             <Button 
-              variant="outline"
+              variant="default"
               size="sm"
               onClick={() => navigate("/auth")}
+              className="bg-black text-white hover:bg-black/90 dark:bg-black dark:text-white"
             >
               Anmelden
             </Button>
-            <LanguageMenu />
           </div>
         </div>
       </header>
