@@ -43,19 +43,19 @@ const Onboarding = () => {
     rating: 5,
     text: "Endlich eine App die wirklich funktioniert. Preise sind immer aktuell und die Route-Funktion ist genial."
   }, {
-    name: "Thomas B.",
+     name: "Thomas B.",
     rating: 5,
-    text: "Nutze CheapFuel seit 6 Monaten. Habe schon über 150€ gespart!"
+    text: "Nutze Cheapfuel seit 6 Monaten. Habe schon über 150€ gespart!"
   }];
   const faqs = [{
     question: "Wie aktuell sind die Spritpreise?",
     answer: "Unsere Preisdaten werden in Echtzeit aktualisiert und stammen direkt von den Tankstellen. Du siehst immer die aktuellsten Preise."
   }, {
-    question: "Was kostet CheapFuel?",
-    answer: "Um dir stets aktuelle Preisdaten und eine zuverlässige App zu bieten, entstehen uns laufende Betriebskosten für Server, Datenquellen und Wartung. Deshalb bieten wir CheapFuel zu einem fairen Preis an, mit dem du bereits nach wenigen Tankfüllungen deutlich mehr sparst, als du für die App bezahlst."
+    question: "Was kostet Cheapfuel?",
+    answer: "Um dir stets aktuelle Preisdaten und eine zuverlässige App zu bieten, entstehen uns laufende Betriebskosten für Server, Datenquellen und Wartung. Deshalb bieten wir Cheapfuel zu einem fairen Preis an, mit dem du bereits nach wenigen Tankfüllungen deutlich mehr sparst, als du für die App bezahlst."
   }, {
     question: "Welche Regionen werden unterstützt?",
-    answer: "CheapFuel deckt ganz Deutschland ab mit tausenden Tankstellen in allen Bundesländern."
+    answer: "Cheapfuel deckt ganz Deutschland ab mit tausenden Tankstellen in allen Bundesländern."
   }, {
     question: "Brauche ich eine Internetverbindung?",
     answer: "Ja, für die Suche nach aktuellen Preisen benötigst du eine Internetverbindung. Die App funktioniert mit mobilen Daten und WLAN."
@@ -65,7 +65,7 @@ const Onboarding = () => {
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-8 w-8" />
+            <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-8 w-8" />
             <h1 className="text-xl font-bold">Cheapfuel</h1>
           </div>
           <div className="flex items-center gap-3">
@@ -201,7 +201,7 @@ und spare jedes Jahr über 240€💰!
       <footer className="border-t border-border py-8">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground space-y-4">
           <div className="flex items-center justify-center gap-2">
-            <img src={cheapfuelLogo} alt="CheapFuel Logo" className="h-6 w-6" />
+            <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-6 w-6" />
             <span className="font-semibold">Cheapfuel</span>
           </div>
           <p>© 2024 Cheapfuel. Alle Rechte vorbehalten.</p>
