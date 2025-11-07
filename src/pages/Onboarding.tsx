@@ -51,8 +51,8 @@ const Onboarding = () => {
     question: "Wie aktuell sind die Spritpreise?",
     answer: "Unsere Preisdaten werden in Echtzeit aktualisiert und stammen direkt von den Tankstellen. Du siehst immer die aktuellsten Preise."
   }, {
-    question: "Ist CheapFuel kostenlos?",
-    answer: "Ja, die Grundfunktionen von CheapFuel sind komplett kostenlos. Du kannst unbegrenzt nach günstigen Tankstellen suchen."
+    question: "Was kostet CheapFuel?",
+    answer: "CheapFuel bietet flexible Preismodelle. Nach der kostenlosen Testphase kannst du zwischen verschiedenen Abo-Optionen wählen, die zu deinen Bedürfnissen passen."
   }, {
     question: "Welche Regionen werden unterstützt?",
     answer: "CheapFuel deckt ganz Deutschland ab mit tausenden Tankstellen in allen Bundesländern."
