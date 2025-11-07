@@ -37,7 +37,7 @@ const Paywall = () => {
               </div>
             </div>
             <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
-            <p className="text-white/90 text-lg">Finde die günstigsten Tankstellen in deiner Nähe</p>
+            <p className="text-white/90 text-lg">Finde deine günstigste Tankstelle in Sekunden⚡️und tanke mehr für weniger Geld 🎉! </p>
           </div>
 
           {/* Features List */}
