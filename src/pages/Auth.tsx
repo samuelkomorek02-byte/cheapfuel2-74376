@@ -36,6 +36,7 @@ const Auth = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
+  const [redirecting, setRedirecting] = useState(false);
 
   // Check authentication state
   useEffect(() => {
@@ -47,16 +48,14 @@ const Auth = () => {
         
         // Redirect authenticated users
         if (session?.user && event === 'SIGNED_IN') {
+          setRedirecting(true);
+          
           if (isSignUp) {
             // New user registration → always redirect to paywall
-            setTimeout(() => {
-              navigate("/paywall");
-            }, 0);
+            navigate("/paywall");
           } else {
             // Existing user login → check subscription status
-            await checkSubscription();
-            // Wait briefly for subscription status to load
-            setTimeout(async () => {
+            try {
               const { data } = await supabase.functions.invoke("check-subscription", {
                 headers: {
                   Authorization: `Bearer ${session.access_token}`,
@@ -68,7 +67,11 @@ const Auth = () => {
               } else {
                 navigate("/paywall");
               }
-            }, 500);
+            } catch (error) {
+              console.error("Subscription check error:", error);
+              // Bei Fehler → zur Paywall (sicherer)
+              navigate("/paywall");
+            }
           }
         }
       }
@@ -80,16 +83,22 @@ const Auth = () => {
       setUser(session?.user ?? null);
       
       if (session?.user) {
+        setRedirecting(true);
         // Check subscription for existing session
-        const { data } = await supabase.functions.invoke("check-subscription", {
-          headers: {
-            Authorization: `Bearer ${session.access_token}`,
-          },
-        });
-        
-        if (data?.subscribed) {
-          navigate("/");
-        } else {
+        try {
+          const { data } = await supabase.functions.invoke("check-subscription", {
+            headers: {
+              Authorization: `Bearer ${session.access_token}`,
+            },
+          });
+          
+          if (data?.subscribed) {
+            navigate("/");
+          } else {
+            navigate("/paywall");
+          }
+        } catch (error) {
+          console.error("Subscription check error:", error);
           navigate("/paywall");
         }
       }
@@ -226,6 +235,18 @@ const Auth = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {/* Loading Overlay während Subscription-Check */}
+      {redirecting && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-4">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <p className="text-sm text-muted-foreground">
+              Anmeldung wird verarbeitet...
+            </p>
+          </div>
+        </div>
+      )}
+      
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
