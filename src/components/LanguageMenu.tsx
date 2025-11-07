@@ -63,7 +63,7 @@ export default function LanguageMenu({
   }, [i18n]);
   return <Popover open={open} onOpenChange={setOpen}>
     <PopoverTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-1.5 font-medium bg-muted/50 hover:bg-muted">
+        <Button variant="ghost" size="sm" className="gap-1.5 font-medium bg-muted/50 hover:bg-muted border border-border text-foreground hover:text-foreground">
           <span className="text-lg" aria-hidden>{current.flag}</span>
           <span className="sm:hidden">{current.code.toUpperCase()}</span>
           <span className="hidden sm:inline">{current.label}</span>
