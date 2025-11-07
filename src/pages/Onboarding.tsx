@@ -103,8 +103,8 @@ und spare jedes Jahr über 240€💰!
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => {
           const Icon = feature.icon;
-          return <Card key={index} className="group overflow-hidden border-2 hover:border-primary transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+          return <Card key={index} className="overflow-hidden border-2 hover:border-primary/50 transition-colors">
+                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50">
                   <img 
                     src={feature.image} 
                     alt={feature.title} 
