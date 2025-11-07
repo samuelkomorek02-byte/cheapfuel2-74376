@@ -40,15 +40,27 @@ const Auth = () => {
 
   // Check authentication state
   useEffect(() => {
+    let redirectTimeout: NodeJS.Timeout;
+
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Only handle SIGNED_IN event
+        // Only handle SIGNED_IN event (actual login/signup action)
         if (event === 'SIGNED_IN' && session?.user) {
           setRedirecting(true);
+          
+          // Safety timeout - reset redirecting state after 8 seconds
+          redirectTimeout = setTimeout(() => {
+            setRedirecting(false);
+            toast({
+              title: "Navigation verzögert",
+              description: "Bitte versuchen Sie es erneut.",
+              variant: "destructive"
+            });
+          }, 8000);
           
           if (isSignUp) {
             // New user registration → always redirect to paywall
@@ -81,15 +93,18 @@ const Auth = () => {
       }
     );
 
-    // Check for existing session (nur für initial redirect, kein subscription check)
+    // Check for existing session - immediate redirect without loading state
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
-        // User ist bereits eingeloggt → zur Paywall, sie müssen sich neu anmelden für check
-        navigate("/paywall");
+        // User already logged in → redirect to index (will handle subscription check there)
+        navigate("/", { replace: true });
       }
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      if (redirectTimeout) clearTimeout(redirectTimeout);
+    };
   }, [navigate, isSignUp]);
 
   const handleEmailAuth = async (e: React.FormEvent) => {
