@@ -9,9 +9,9 @@ interface SubscriptionStatus {
   loading: boolean;
 }
 
-export const useSubscription = (skipInitialCheck = false) => {
+export const useSubscription = (skipInitialCheck = false, initialSubscribed = false) => {
   const [status, setStatus] = useState<SubscriptionStatus>({
-    subscribed: false,
+    subscribed: initialSubscribed, // Use initial value from navigation state
     product_id: null,
     subscription_end: null,
     loading: skipInitialCheck ? false : true,

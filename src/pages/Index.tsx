@@ -69,7 +69,10 @@ const Index = () => {
                     navigationState?.checkedAt && 
                     Date.now() - navigationState.checkedAt < 10000;
   
-  const { subscribed, loading: subLoading, manageSubscription } = useSubscription(skipCheck);
+  const { subscribed, loading: subLoading, manageSubscription } = useSubscription(
+    skipCheck, 
+    navigationState?.subscribed || false // Pass initial subscribed state
+  );
   const [userLoc, setUserLoc] = useState<{
     lat: number;
     lng: number;
