@@ -97,21 +97,27 @@ und spare jedes Jahr über 240€💰!
       {/* Features Section */}
       <section id="features" className="container mx-auto px-4 py-12 md:py-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-black text-center">Warum Cheapfuel🧐?</h2>
-          
+          <h2 className="text-3xl md:text-4xl mb-4 font-bold">Warum Cheapfuel🧐?</h2>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => {
           const Icon = feature.icon;
-          return <Card key={index} className="overflow-hidden border-2 hover:border-primary/50 transition-colors">
-                <div className="aspect-[9/16] relative bg-muted">
-                  <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
+          return <Card key={index} className="group overflow-hidden border-2 hover:border-primary transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 overflow-hidden">
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title} 
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <CardContent className="p-6 text-center">
-                  
-                  
-                  <p className="text-muted-foreground">{feature.description}</p>
+                <CardContent className="p-4 md:p-6 text-center space-y-3">
+                  <div className="flex items-center justify-center gap-2">
+                    <Icon className="h-5 w-5 text-primary" />
+                    <h3 className="text-xl font-bold">{feature.title}</h3>
+                  </div>
+                  <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>;
         })}
