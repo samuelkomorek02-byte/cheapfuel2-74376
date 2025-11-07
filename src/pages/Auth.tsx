@@ -63,7 +63,12 @@ const Auth = () => {
               });
               
               if (data?.subscribed) {
-                navigate("/");
+                navigate("/", { 
+                  state: { 
+                    subscribed: true,
+                    checkedAt: Date.now() 
+                  } 
+                });
               } else {
                 navigate("/paywall");
               }
@@ -93,7 +98,12 @@ const Auth = () => {
           });
           
           if (data?.subscribed) {
-            navigate("/");
+            navigate("/", { 
+              state: { 
+                subscribed: true,
+                checkedAt: Date.now() 
+              } 
+            });
           } else {
             navigate("/paywall");
           }

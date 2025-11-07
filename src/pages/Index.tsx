@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -58,6 +58,8 @@ const Index = () => {
     t
   } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const navigationState = location.state as { subscribed?: boolean; checkedAt?: number } | null;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -126,12 +128,22 @@ const Index = () => {
 
   // Check subscription status after authentication
   useEffect(() => {
+    // Wenn wir von Auth.tsx mit subscribed state kommen, nicht nochmal checken
+    if (navigationState?.subscribed && navigationState?.checkedAt) {
+      const timeSinceCheck = Date.now() - navigationState.checkedAt;
+      // Wenn der Check weniger als 10 Sekunden alt ist, vertraue ihm
+      if (timeSinceCheck < 10000) {
+        return; // Kein Redirect nötig
+      }
+    }
+    
+    // Normale Subscription-Prüfung
     if (isAuthenticated && !checkingAuth && !subLoading) {
       if (!subscribed) {
         navigate("/paywall");
       }
     }
-  }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate]);
+  }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
 
   // Cleanup pending requests on unmount and periodically
   useEffect(() => {
