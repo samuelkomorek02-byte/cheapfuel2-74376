@@ -62,8 +62,8 @@ const Paywall = () => {
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               Los geht's
             </Button>
-            <p className="text-center text-sm text-white/90">nur 27,00€ pro Jahr (2,25€/mo)<span className="text-white">27,00€</span> pro Jahr{" "}
-              <span className="text-sm"></span>
+            <p className="text-center text-sm text-white/90">
+              nur 27,00€ pro Jahr (2,25€/Monat)
             </p>
           </div>
         </div>
