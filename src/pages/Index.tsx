@@ -874,9 +874,7 @@ const Index = () => {
               <div className="px-2 py-2">
                 <div className="flex items-center justify-between gap-2">
                   <p className="text-sm font-medium">{t('language')}</p>
-                  <LanguageMenu onLanguageChange={() => {
-                    setTimeout(() => setUserMenuOpen(false), 100);
-                  }} />
+                  <LanguageMenu onLanguageChange={() => setUserMenuOpen(false)} />
                 </div>
               </div>
               <DropdownMenuSeparator />

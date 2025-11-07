@@ -2,13 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { analytics } from "@/lib/analytics";
 
 type LangCode = "de" | "en" | "es" | "it" | "pl" | "ru" | "fr";
@@ -51,8 +48,8 @@ export default function LanguageMenu({ onLanguageChange }: LanguageMenuProps = {
   }, [i18n]);
 
   return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger asChild>
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
         <Button
           aria-label={t('select_language')}
           variant="outline"
@@ -62,15 +59,15 @@ export default function LanguageMenu({ onLanguageChange }: LanguageMenuProps = {
           <span aria-hidden className="text-base">{current.flag}</span>
           <span className="font-medium uppercase">{current.code}</span>
         </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
+      </PopoverTrigger>
+      <PopoverContent
         align="end"
-        className="z-50 w-56 rounded-xl border bg-popover p-1 text-popover-foreground shadow-lg"
+        className="z-50 w-56 rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg"
       >
-        <DropdownMenuLabel>{t('select_language')}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <div className="mb-2 px-2 py-1.5 text-sm font-semibold">{t('select_language')}</div>
+        <div className="h-px bg-border mb-1" />
         {LANGUAGES.map((l) => (
-          <DropdownMenuItem
+          <div
             key={l.code}
             onClick={() => {
               if (l.code !== lang) {
@@ -82,7 +79,7 @@ export default function LanguageMenu({ onLanguageChange }: LanguageMenuProps = {
               setOpen(false);
               onLanguageChange?.();
             }}
-            className={`flex items-center justify-between rounded-lg data-[highlighted]:bg-foreground data-[highlighted]:text-background focus:bg-foreground focus:text-background ${
+            className={`flex items-center justify-between rounded-lg px-2 py-2 cursor-pointer hover:bg-foreground hover:text-background transition-colors ${
               l.code === lang ? "bg-foreground text-background" : ""
             }`}
           >
@@ -91,9 +88,9 @@ export default function LanguageMenu({ onLanguageChange }: LanguageMenuProps = {
               {l.label}
             </span>
             {l.code === lang && <span className="text-xs">✓</span>}
-          </DropdownMenuItem>
+          </div>
         ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+      </PopoverContent>
+    </Popover>
   );
 }
