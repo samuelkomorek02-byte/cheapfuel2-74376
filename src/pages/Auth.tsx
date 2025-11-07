@@ -273,7 +273,7 @@ const Auth = () => {
               {isForgotPassword ? t("auth_reset_password_title") : t("auth_title")}
             </CardTitle>
             <CardDescription className="text-center">
-              {isForgotPassword ? t("auth_reset_password_subtitle") : t("auth_subtitle")}
+              {isForgotPassword ? t("auth_reset_password_subtitle") : (isSignUp ? t("auth_subtitle_signup") : t("auth_subtitle_login"))}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
