@@ -43,7 +43,7 @@ const Onboarding = () => {
     rating: 5,
     text: "Endlich eine App die wirklich funktioniert. Preise sind immer aktuell und die Route-Funktion ist genial."
   }, {
-     name: "Thomas B.",
+    name: "Thomas B.",
     rating: 5,
     text: "Nutze Cheapfuel seit 6 Monaten. Habe schon über 150€ gespart!"
   }];
@@ -70,12 +70,7 @@ const Onboarding = () => {
           </div>
           <div className="flex items-center gap-3">
             <LanguageMenu />
-            <Button 
-              variant="default"
-              size="sm"
-              onClick={() => navigate("/auth")}
-              className="bg-black text-white hover:bg-black/90 dark:bg-black dark:text-white"
-            >
+            <Button variant="default" size="sm" onClick={() => navigate("/auth")} className="bg-black text-white hover:bg-black/90 dark:bg-black dark:text-white">
               Anmelden
             </Button>
           </div>
@@ -204,7 +199,7 @@ und spare jedes Jahr über 240€💰!
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-6 w-6" />
             <span className="font-semibold">Cheapfuel</span>
           </div>
-          <p>© 2024 Cheapfuel. Alle Rechte vorbehalten.</p>
+          <p>© 2025 Cheapfuel. Alle Rechte vorbehalten.</p>
           <nav className="flex justify-center gap-6">
             <a href="/impressum" className="hover:text-foreground transition-colors">
               Impressum
