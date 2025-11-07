@@ -33,7 +33,7 @@ const Paywall = () => {
           <div className="text-center space-y-4">
             <div className="flex justify-center">
               <div className="bg-white rounded-full p-4 shadow-2xl">
-                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-20 w-20" />
+                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-16 w-16" />
               </div>
             </div>
             <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
