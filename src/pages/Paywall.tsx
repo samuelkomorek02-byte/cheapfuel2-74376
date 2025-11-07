@@ -37,7 +37,7 @@ const Paywall = () => {
               </div>
             </div>
             <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
-            <p className="text-white/90 text-lg">Finde deine günstigste Tankstelle in Sekunden⚡️und tanke mehr für weniger Geld 🎉! </p>
+            <p className="text-white/90 text-lg">Finde deine günstigste Tankstelle in Sekunden⚡️und tanke mehr für weniger 🎉! </p>
           </div>
 
           {/* Features List */}
@@ -62,8 +62,7 @@ const Paywall = () => {
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               Los geht's
             </Button>
-            <p className="text-center text-sm text-white/90">
-              nur <span className="text-white">27,00€</span> pro Jahr{" "}
+            <p className="text-center text-sm text-white/90">nur 27,00€ pro Jahr (2,25€/mo)<span className="text-white">27,00€</span> pro Jahr{" "}
               <span className="text-sm">(2,25€/mo)</span>
             </p>
           </div>
