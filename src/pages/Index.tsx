@@ -24,6 +24,7 @@ import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { analytics } from "@/lib/analytics";
 import { useSubscription } from "@/hooks/useSubscription";
 import { validateCoordinates } from "@/lib/validation";
+import Footer from "@/components/Footer";
 const DEFAULT_RADIUS_KM = 25; // Fixed search radius to avoid rate limiting
 const FUEL_TYPE = "e5"; // e5 | e10 | diesel
 function isHttpsOrLocalhost() {
@@ -852,7 +853,7 @@ const Index = () => {
               )}
               <DropdownMenuItem onClick={async () => {
                 await supabase.auth.signOut();
-                navigate("/auth");
+                navigate("/onboarding");
               }}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>{t('logout')}</span>
@@ -1036,41 +1037,7 @@ const Index = () => {
         </section>
       </main>
 
-      <footer id="contact" className="border-t opacity-0 animate-fade-in" style={{
-      animationDelay: '0.6s'
-    }}>
-        <div className="container py-8 grid gap-4 md:grid-cols-2 bg-foreground text-background">
-          <div className="space-y-4">
-            <nav aria-label="Social media" className="flex items-center gap-4">
-              <a href="https://www.instagram.com/cheapfuel.app?igsh=NDJodTBhdGx3d2pq" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary transition-colors -translate-y-1" title="Instagram">
-                <Instagram className="h-5 w-5" aria-hidden="true" />
-                <span className="sr-only">Instagram</span>
-              </a>
-            </nav>
-          </div>
-          <div className="space-y-3">
-            <div className="flex items-start gap-2 text-sm text-muted-foreground">
-              <MapPin className="h-5 w-5 flex-shrink-0 text-primary -translate-y-0.5" />
-              <p>
-                {t('germany_only_notice')}
-              </p>
-            </div>
-            <nav aria-label="Legal" className="flex items-center gap-4 text-xs font-normal text-muted-foreground">
-              <a href="/impressum" className="hover:text-primary transition-colors underline">
-                {t('impressum')}
-              </a>
-              <span>|</span>
-              <a href="/datenschutz" className="hover:text-primary transition-colors underline">
-                {t('datenschutz')}
-              </a>
-              <span>|</span>
-              <a href="/agb" className="hover:text-primary transition-colors underline">
-                AGB
-              </a>
-            </nav>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Navigation Dialog */}
       <NavigationDialog station={navigationStation} onClose={() => setNavigationStation(null)} routeMode={routeMode} origin={routeMode ? userLoc || undefined : undefined} destination={routeMode ? destination || undefined : undefined} />

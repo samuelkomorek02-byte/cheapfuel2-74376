@@ -6,6 +6,7 @@ import { Check, Sparkles, Loader2 } from "lucide-react";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useEffect } from "react";
+import Footer from "@/components/Footer";
 
 const Paywall = () => {
   const navigate = useNavigate();
@@ -94,6 +95,7 @@ const Paywall = () => {
           </CardContent>
         </Card>
       </main>
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import Footer from "@/components/Footer";
 
 const AGB = () => {
   const navigate = useNavigate();
@@ -190,6 +191,7 @@ const AGB = () => {
           </section>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

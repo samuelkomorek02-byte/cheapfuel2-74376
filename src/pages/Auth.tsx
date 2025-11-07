@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import LanguageMenu from "@/components/LanguageMenu";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { Session, User } from "@supabase/supabase-js";
 import { useSubscription } from "@/hooks/useSubscription";
+import Footer from "@/components/Footer";
 
 // Validation schemas
 const emailSchema = z.string().trim().email();
@@ -21,9 +22,14 @@ const passwordSchema = z.string().min(6);
 
 const Auth = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation();
   const { subscribed, loading: subLoading, checkSubscription } = useSubscription();
-  const [isSignUp, setIsSignUp] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(() => {
+    // Check if we came from onboarding with signup mode
+    const state = location.state as { mode?: string } | null;
+    return state?.mode === 'signup';
+  });
   const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -344,6 +350,7 @@ const Auth = () => {
           </CardContent>
         </Card>
       </main>
+      <Footer />
     </div>
   );
 };
