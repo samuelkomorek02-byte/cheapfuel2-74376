@@ -27,24 +27,26 @@ const Paywall = () => {
       </Button>
 
       {/* Main Content */}
-      <div className="min-h-[100dvh] flex items-center justify-center p-4 pb-8">
-        <div className="w-full max-w-md space-y-6 animate-fade-in">
+      <div className="min-h-screen flex items-center justify-center p-4 pb-8">
+        <div className="w-full max-w-md space-y-8 animate-fade-in">
           {/* Logo and Title */}
-          <div className="text-center space-y-3">
+          <div className="text-center space-y-4">
             <div className="flex justify-center">
-              <div className="bg-white rounded-full p-3 shadow-2xl">
-                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-16 w-16" />
+              <div className="bg-white rounded-full p-4 shadow-2xl">
+                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-20 w-20" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-white via-primary-foreground to-white bg-clip-text text-transparent drop-shadow-lg">Cheapfuel</h1>
-            <p className="text-primary-foreground/95 text-base md:text-lg font-medium">Finde deine günstigste Tankstelle und spare jedes Jahr über 240€ !</p>
+            <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
+            <p className="text-white/90 text-lg">Finde deine günstigste Tankstelle und spare jedes Jahr über 240€ !</p>
           </div>
 
           {/* Features List */}
-          <div className="space-y-3 backdrop-blur-sm bg-white/10 rounded-2xl p-5 border border-white/20">
+          <div className="space-y-4 backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
             {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
-                <Check className="h-5 w-5 text-primary-foreground mt-0.5 flex-shrink-0" />
-                <span className="text-sm md:text-base text-primary-foreground font-medium leading-relaxed">{feature}</span>
+                <div className="mt-0.5 flex-shrink-0 h-6 w-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                  <Check className="h-4 w-4 text-white" />
+                </div>
+                <span className="text-base text-white leading-relaxed">{feature}</span>
               </div>)}
           </div>
 
