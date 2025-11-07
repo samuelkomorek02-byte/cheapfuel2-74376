@@ -62,8 +62,11 @@ export default function LanguageMenu({
     i18n.changeLanguage(savedLang);
   }, [i18n]);
   return <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        
+    <PopoverTrigger asChild>
+        <Button variant="ghost" size="sm" className="gap-1.5 font-medium">
+          <span className="text-lg" aria-hidden>{current.flag}</span>
+          <span className="hidden sm:inline">{current.label}</span>
+        </Button>
       </PopoverTrigger>
       <PopoverContent align="end" className="z-50 w-56 rounded-xl border bg-popover p-2 text-popover-foreground shadow-lg">
         <div className="mb-2 px-2 py-1.5 text-sm font-semibold">{t('select_language')}</div>
