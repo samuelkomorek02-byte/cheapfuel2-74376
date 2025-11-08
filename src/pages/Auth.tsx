@@ -91,9 +91,9 @@ const Auth = () => {
           });
         }, 8000);
         if (isSignUp) {
-          // New user registration → store flag in SessionStorage
+          // New user registration → store flag and redirect to paywall
           sessionStorage.setItem('welcomeNewUser', 'true');
-          navigate("/", { replace: true });
+          navigate("/paywall", { replace: true });
         } else {
           // Existing user login → check subscription status
           try {
