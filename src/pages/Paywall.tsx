@@ -1,18 +1,43 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, Loader2, ArrowLeft } from "lucide-react";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { useSubscription } from "@/hooks/useSubscription";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { isPreviewMode } from "@/lib/utils";
 import Footer from "@/components/Footer";
+import { useTranslation } from "react-i18next";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+
 const Paywall = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { t } = useTranslation();
   const {
     subscribed,
     loading,
     initiateCheckout
   } = useSubscription();
+  
+  const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
+
+  useEffect(() => {
+    const state = location.state as { isNewUser?: boolean } | null;
+    if (state?.isNewUser) {
+      setShowWelcomeDialog(true);
+      // Clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
+
   useEffect(() => {
     if (isPreviewMode()) return;
     if (subscribed) {
@@ -21,6 +46,23 @@ const Paywall = () => {
   }, [subscribed, navigate]);
   const features = ["Unbegrenzte Tankstellensuche", "Echtzeit-Preisvergleiche", "Routenintegration", "Deutschlandweites Tankstellennetzwerk", "Integrierte Navigation mit Apple oder Google Maps"];
   return <div className="min-h-screen bg-primary">
+      {/* Welcome Dialog for New Users */}
+      <AlertDialog open={showWelcomeDialog} onOpenChange={setShowWelcomeDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("welcome_new_user_title")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("welcome_new_user_message")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setShowWelcomeDialog(false)}>
+              Schließen
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       {/* Back Button */}
       <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/auth")}>
         <ArrowLeft className="h-5 w-5" />

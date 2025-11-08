@@ -170,25 +170,6 @@ const Index = () => {
     }
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
 
-  // Show welcome message for first-time users
-  useEffect(() => {
-    if (isAuthenticated && subscribed && !checkingAuth && !subLoading) {
-      const hasSeenWelcome = localStorage.getItem('has_seen_welcome');
-      
-      if (!hasSeenWelcome) {
-        // Delay for better UX (after animation)
-        setTimeout(() => {
-          toast({
-            title: t("welcome_new_user_title"),
-            description: t("welcome_new_user_message"),
-            duration: 8000,
-          });
-          localStorage.setItem('has_seen_welcome', 'true');
-        }, 1000);
-      }
-    }
-  }, [isAuthenticated, subscribed, checkingAuth, subLoading, t]);
-
   // Cleanup pending requests on unmount and periodically
   useEffect(() => {
     const cleanup = setInterval(() => {
@@ -437,12 +418,6 @@ const Index = () => {
       setUserLoc(loc);
       setStations(fetched);
       analytics.trackStationsLoaded(fetched.length, radius);
-      toast({
-        title: t('toast_found_title'),
-        description: t('toast_found_desc', {
-          count: fetched.length
-        })
-      });
 
       // Scroll to results section
       setTimeout(() => {

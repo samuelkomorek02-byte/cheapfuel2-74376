@@ -74,8 +74,8 @@ const Auth = () => {
           });
         }, 8000);
         if (isSignUp) {
-          // New user registration → always redirect to paywall
-          navigate("/paywall");
+          // New user registration → always redirect to paywall with isNewUser flag
+          navigate("/paywall", { state: { isNewUser: true } });
         } else {
           // Existing user login → check subscription status
           try {
@@ -138,7 +138,7 @@ const Auth = () => {
       if (isSignUp) {
         // Validate password length for signup
         if (password.length < 6) {
-          setPasswordError("Passwort zu kurz (mind. 6 Zeichen)");
+          setPasswordError(t("auth_password_too_short_inline"));
           setLoading(false);
           return;
         }
@@ -185,7 +185,7 @@ const Auth = () => {
         });
         if (error) {
           // Supabase returns "Invalid login credentials" for both cases
-          setPasswordError("Ungültige E-Mail oder Passwort. Bitte überprüfe deine Anmeldedaten oder registriere dich, falls du noch kein Konto hast.");
+          setPasswordError(t("auth_error_invalid_credentials_inline"));
           setLoading(false);
           return;
         } else {
@@ -197,7 +197,7 @@ const Auth = () => {
         }
       } catch (zodError) {
         // Password is too short (< 6 characters)
-        setPasswordError("Ungültiges Passwort");
+        setPasswordError(t("auth_error_invalid_password_inline"));
         setLoading(false);
         return;
       }
