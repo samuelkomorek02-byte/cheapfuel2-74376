@@ -11,16 +11,16 @@ const Datenschutz = () => {
   const isGerman = i18n.language === 'de';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
+    <div className="min-h-screen bg-gradient-to-b from-secondary to-background animate-fade-in">
       <div className="container max-w-4xl py-8 px-4">
         <Link to="/">
-          <Button variant="ghost" className="mb-6">
+          <Button variant="ghost" className="mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
             <ArrowLeft className="mr-2 h-4 w-4" />
             {t('back_to_home')}
           </Button>
         </Link>
 
-        <Card>
+        <Card className="opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <CardHeader>
             <CardTitle className="text-3xl font-bold">{t('datenschutz')}</CardTitle>
           </CardHeader>

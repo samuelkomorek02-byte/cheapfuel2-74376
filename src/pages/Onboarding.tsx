@@ -62,7 +62,7 @@ const Onboarding = () => {
   }];
   return <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40 animate-fade-in">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-8 w-8" />
@@ -78,7 +78,7 @@ const Onboarding = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20 text-center">
+      <section className="container mx-auto px-4 py-12 md:py-20 text-center opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <div className="max-w-3xl mx-auto space-y-6">
           
           
@@ -100,7 +100,7 @@ und spare jedes Jahr über 240€💰!
       </section>
 
       {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-12 md:py-20">
+      <section id="features" className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl mb-4 font-bold">Warum Cheapfuel🧐?</h2>
         </div>
@@ -122,7 +122,7 @@ und spare jedes Jahr über 240€💰!
       </section>
 
       {/* Testimonials Section */}
-      <section className="bg-muted/50 py-12 md:py-20">
+      <section className="bg-muted/50 py-12 md:py-20 opacity-0 animate-fade-in" style={{ animationDelay: '0.3s' }}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Was unsere Nutzer sagen💬</h2>
@@ -144,7 +144,7 @@ und spare jedes Jahr über 240€💰!
       </section>
 
       {/* FAQ Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20">
+      <section className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Häufig gestellte Fragen</h2>
@@ -165,7 +165,7 @@ und spare jedes Jahr über 240€💰!
       </section>
 
       {/* Final CTA Section */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-accent to-primary/90 overflow-hidden">
+      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-accent to-primary/90 overflow-hidden opacity-0 animate-fade-in" style={{ animationDelay: '0.5s' }}>
         {/* Decorative background elements */}
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-accent/10 to-transparent" />

@@ -7,8 +7,8 @@ const AGB = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b">
+    <div className="min-h-screen bg-background animate-fade-in">
+      <header className="border-b opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <div className="container mx-auto px-4 py-4">
           <Button
             variant="ghost"
@@ -21,7 +21,7 @@ const AGB = () => {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8 max-w-4xl">
+      <main className="container mx-auto px-4 py-8 max-w-4xl opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <h1 className="text-3xl font-bold mb-8">Allgemeine Geschäftsbedingungen (AGB)</h1>
         
         <div className="prose prose-slate dark:prose-invert max-w-none space-y-6">

@@ -256,7 +256,7 @@ const Auth = () => {
         </div>}
       
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40">
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40 animate-fade-in">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           {/* Back Button */}
           <Button
@@ -280,7 +280,7 @@ const Auth = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center px-6 py-12">
+      <main className="flex-1 flex items-center justify-center px-6 py-12 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
@@ -344,7 +344,9 @@ const Auth = () => {
           </CardContent>
         </Card>
       </main>
-      <Footer />
+      <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <Footer />
+      </div>
     </div>;
 };
 export default Auth;
