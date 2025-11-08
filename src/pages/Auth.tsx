@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { Loader2, ArrowLeft, Eye, EyeOff } from "lucide-react";
 import LanguageMenu from "@/components/LanguageMenu";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { Session, User } from "@supabase/supabase-js";
@@ -41,6 +41,8 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState<string>("");
+  const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [redirecting, setRedirecting] = useState(false);
@@ -123,6 +125,15 @@ const Auth = () => {
       if (redirectTimeout) clearTimeout(redirectTimeout);
     };
   }, [navigate, isSignUp]);
+
+  const validatePassword = (value: string) => {
+    if (value.length > 0 && value.length < 6) {
+      setPasswordError(t("auth_password_too_short"));
+    } else {
+      setPasswordError("");
+    }
+  };
+
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -169,8 +180,17 @@ const Auth = () => {
           if (error.message.includes("Invalid login credentials")) {
             toast({
               title: t("auth_error_title"),
-              description: t("auth_error_invalid_credentials"),
-              variant: "destructive"
+              description: t("auth_error_no_account"),
+              variant: "destructive",
+              action: (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setIsSignUp(true)}
+                >
+                  {t("auth_switch_to_signup")}
+                </Button>
+              )
             });
           } else {
             throw error;
@@ -315,7 +335,37 @@ const Auth = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">{t("auth_password_placeholder")}</Label>
-                <Input id="password" type="password" placeholder={t("auth_password_placeholder")} value={password} onChange={e => setPassword(e.target.value)} required disabled={loading} />
+                <div className="relative">
+                  <Input 
+                    id="password" 
+                    type={showPassword ? "text" : "password"} 
+                    placeholder={t("auth_password_placeholder")} 
+                    value={password} 
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      validatePassword(e.target.value);
+                    }}
+                    required 
+                    disabled={loading}
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    disabled={loading}
+                    tabIndex={-1}
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-4 w-4" />
+                    ) : (
+                      <Eye className="h-4 w-4" />
+                    )}
+                  </button>
+                </div>
+                {passwordError && (
+                  <p className="text-sm text-destructive mt-1">{passwordError}</p>
+                )}
               </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

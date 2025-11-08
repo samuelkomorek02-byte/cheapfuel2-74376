@@ -96,6 +96,7 @@ const Index = () => {
   const [routeLength, setRouteLength] = useState<number>(0);
   const [navigationStation, setNavigationStation] = useState<Station | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
   
   const radius = DEFAULT_RADIUS_KM;
   const canUseGeo = useMemo(() => isHttpsOrLocalhost(), []);
@@ -168,6 +169,25 @@ const Index = () => {
       }
     }
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
+
+  // Show welcome message for first-time users
+  useEffect(() => {
+    if (isAuthenticated && subscribed && !checkingAuth && !subLoading) {
+      const hasSeenWelcome = localStorage.getItem('has_seen_welcome');
+      
+      if (!hasSeenWelcome) {
+        // Delay for better UX (after animation)
+        setTimeout(() => {
+          toast({
+            title: t("welcome_new_user_title"),
+            description: t("welcome_new_user_message"),
+            duration: 8000,
+          });
+          localStorage.setItem('has_seen_welcome', 'true');
+        }, 1000);
+      }
+    }
+  }, [isAuthenticated, subscribed, checkingAuth, subLoading, t]);
 
   // Cleanup pending requests on unmount and periodically
   useEffect(() => {

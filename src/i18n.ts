@@ -100,6 +100,10 @@ const translations = {
     language: "Language",
     manage_subscription: "Manage Subscription",
     logout: "Log out",
+    auth_password_too_short: "Password must be at least 6 characters",
+    auth_error_no_account: "No account found. Please sign up first.",
+    welcome_new_user_title: "Welcome to CheapFuel! 🎉",
+    welcome_new_user_message: "Find the cheapest fuel stations near you in seconds. Let's get started!",
   },
   de: {
     hero_title: "Finde den günstigsten Kraftstoff in deiner Nähe",
@@ -199,6 +203,10 @@ const translations = {
     language: "Sprache",
     manage_subscription: "Abo verwalten",
     logout: "Abmelden",
+    auth_password_too_short: "Passwort muss mindestens 6 Zeichen lang sein",
+    auth_error_no_account: "Kein Konto gefunden. Bitte registriere dich zuerst.",
+    welcome_new_user_title: "Willkommen bei CheapFuel! 🎉",
+    welcome_new_user_message: "Finde die günstigsten Tankstellen in deiner Nähe in Sekunden. Lass uns starten!",
   },
   es: {
     hero_title: "Encuentra el combustible más barato en tu área",
@@ -298,6 +306,10 @@ const translations = {
     language: "Idioma",
     manage_subscription: "Gestionar Suscripción",
     logout: "Cerrar sesión",
+    auth_password_too_short: "La contraseña debe tener al menos 6 caracteres",
+    auth_error_no_account: "No se encontró cuenta. Por favor regístrate primero.",
+    welcome_new_user_title: "¡Bienvenido a CheapFuel! 🎉",
+    welcome_new_user_message: "Encuentra las gasolineras más baratas cerca de ti en segundos. ¡Empecemos!",
   },
   it: {
     hero_title: "Trova il carburante più economico nella tua zona",
@@ -397,6 +409,10 @@ const translations = {
     language: "Lingua",
     manage_subscription: "Gestisci Abbonamento",
     logout: "Esci",
+    auth_password_too_short: "La password deve contenere almeno 6 caratteri",
+    auth_error_no_account: "Nessun account trovato. Per favore registrati prima.",
+    welcome_new_user_title: "Benvenuto su CheapFuel! 🎉",
+    welcome_new_user_message: "Trova le stazioni di servizio più economiche vicino a te in pochi secondi. Iniziamo!",
   },
   pl: {
     hero_title: "Znajdź najtańsze paliwo w Twojej okolicy",
@@ -496,6 +512,10 @@ const translations = {
     language: "Język",
     manage_subscription: "Zarządzaj Subskrypcją",
     logout: "Wyloguj",
+    auth_password_too_short: "Hasło musi mieć co najmniej 6 znaków",
+    auth_error_no_account: "Nie znaleziono konta. Proszę najpierw się zarejestrować.",
+    welcome_new_user_title: "Witamy w CheapFuel! 🎉",
+    welcome_new_user_message: "Znajdź najtańsze stacje paliw w pobliżu w kilka sekund. Zaczynajmy!",
   },
   ru: {
     hero_title: "Найдите самое дешевое топливо в вашем районе",
@@ -595,6 +615,10 @@ const translations = {
     language: "Язык",
     manage_subscription: "Управление подпиской",
     logout: "Выйти",
+    auth_password_too_short: "Пароль должен содержать минимум 6 символов",
+    auth_error_no_account: "Аккаунт не найден. Пожалуйста, сначала зарегистрируйтесь.",
+    welcome_new_user_title: "Добро пожаловать в CheapFuel! 🎉",
+    welcome_new_user_message: "Найдите самые дешёвые заправки рядом с вами за секунды. Начнём!",
   },
   fr: {
     hero_title: "Trouvez le carburant le moins cher dans votre région",
@@ -694,6 +718,10 @@ const translations = {
     language: "Langue",
     manage_subscription: "Gérer l'Abonnement",
     logout: "Se déconnecter",
+    auth_password_too_short: "Le mot de passe doit contenir au moins 6 caractères",
+    auth_error_no_account: "Aucun compte trouvé. Veuillez d'abord vous inscrire.",
+    welcome_new_user_title: "Bienvenue sur CheapFuel! 🎉",
+    welcome_new_user_message: "Trouvez les stations-service les moins chères près de chez vous en quelques secondes. C'est parti!",
   },
 } as const;
 
