@@ -112,32 +112,51 @@ const Index = () => {
   const lastFetchTime = useRef<number>(0);
   const MIN_FETCH_INTERVAL = 1000; // 1 second between fetches for better UX
   
-  // Check authentication and onboarding
+  // Simplified authentication check
   useEffect(() => {
-    // Set up auth state listener FIRST
+    let mounted = true;
+
+    const initAuth = async () => {
+      try {
+        // 1. Get current session
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!mounted) return;
+
+        // 2. Update auth state
+        setIsAuthenticated(!!session?.user);
+        setUserEmail(session?.user?.email || null);
+        setCheckingAuth(false);
+
+        // 3. Handle redirects (skip in preview mode)
+        if (!isPreviewMode() && !session?.user) {
+          navigate("/onboarding", { replace: true });
+        }
+      } catch (error) {
+        console.error('Auth initialization error:', error);
+        if (mounted) {
+          setIsAuthenticated(false);
+          setUserEmail(null);
+          setCheckingAuth(false);
+        }
+      }
+    };
+
+    // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
+        if (!mounted) return;
         setIsAuthenticated(!!session?.user);
         setUserEmail(session?.user?.email || null);
       }
     );
 
-    // THEN check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsAuthenticated(!!session?.user);
-      setUserEmail(session?.user?.email || null);
-      setCheckingAuth(false);
-      
-      // Im Preview-Modus keine Redirects
-      if (isPreviewMode()) return;
-      
-      // NEUE LOGIK: Kein User → immer /onboarding
-      if (!session?.user) {
-        navigate("/onboarding", { replace: true });
-      }
-    });
+    initAuth();
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [navigate]);
 
   // Clear navigation state after use
@@ -172,15 +191,18 @@ const Index = () => {
     }
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
 
-  // Check if user is new and show welcome dialog
+  // Welcome dialog with SessionStorage (more reliable)
   useEffect(() => {
-    const state = location.state as { isNewUser?: boolean } | null;
-    if (state?.isNewUser) {
-      setShowWelcomeDialog(true);
-      // Clear state
-      window.history.replaceState({}, document.title);
+    const isNewUser = sessionStorage.getItem('welcomeNewUser');
+    if (isNewUser === 'true') {
+      // Delay to ensure page is fully loaded
+      const timer = setTimeout(() => {
+        setShowWelcomeDialog(true);
+        sessionStorage.removeItem('welcomeNewUser');
+      }, 300);
+      return () => clearTimeout(timer);
     }
-  }, [location]);
+  }, []);
 
   // Cleanup pending requests on unmount and periodically
   useEffect(() => {

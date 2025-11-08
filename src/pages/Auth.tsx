@@ -16,9 +16,6 @@ import { useSubscription } from "@/hooks/useSubscription";
 import Footer from "@/components/Footer";
 import { isPreviewMode } from "@/lib/utils";
 
-// Validation schemas
-const emailSchema = z.string().trim().email();
-const passwordSchema = z.string().min(6);
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,15 +47,35 @@ const Auth = () => {
   // Check authentication state
   useEffect(() => {
     let redirectTimeout: NodeJS.Timeout;
+    let debounceTimeout: NodeJS.Timeout;
+    let lastAuthEvent = { event: '', timestamp: 0 };
 
-    // Set up auth state listener FIRST
+    // Set up auth state listener FIRST with debouncing
     const {
       data: {
         subscription
       }
     } = supabase.auth.onAuthStateChange(async (event, session) => {
+      // Debounce: Ignore rapid auth changes (max 1x per 500ms)
+      const now = Date.now();
+      if (event === lastAuthEvent.event && now - lastAuthEvent.timestamp < 500) {
+        console.log('Debounced auth event:', event);
+        return;
+      }
+      lastAuthEvent = { event, timestamp: now };
+
       setSession(session);
       setUser(session?.user ?? null);
+
+      // Handle SIGNED_OUT with cleanup
+      if (event === 'SIGNED_OUT') {
+        // Explicit cleanup
+        await supabase.auth.signOut({ scope: 'local' });
+        localStorage.removeItem('supabase.auth.token');
+        setSession(null);
+        setUser(null);
+        return;
+      }
 
       // Only handle SIGNED_IN event (actual login/signup action)
       if (event === 'SIGNED_IN' && session?.user) {
@@ -74,8 +91,9 @@ const Auth = () => {
           });
         }, 8000);
         if (isSignUp) {
-          // New user registration → redirect to main page with isNewUser flag
-          navigate("/", { state: { isNewUser: true } });
+          // New user registration → store flag in SessionStorage
+          sessionStorage.setItem('welcomeNewUser', 'true');
+          navigate("/", { replace: true });
         } else {
           // Existing user login → check subscription status
           try {
@@ -123,8 +141,15 @@ const Auth = () => {
     return () => {
       subscription.unsubscribe();
       if (redirectTimeout) clearTimeout(redirectTimeout);
+      if (debounceTimeout) clearTimeout(debounceTimeout);
     };
   }, [navigate, isSignUp]);
+
+  // Unified validation schema
+  const authSchema = z.object({
+    email: z.string().trim().email(),
+    password: z.string().min(6)
+  });
 
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,23 +157,16 @@ const Auth = () => {
     setPasswordError("");
     
     try {
-      // Validate email
-      const validatedEmail = emailSchema.parse(email);
+      // Unified validation for both flows
+      const validated = authSchema.parse({ email, password });
       
       if (isSignUp) {
-        // Validate password length for signup
-        if (password.length < 6) {
-          setPasswordError(t("auth_password_too_short_inline"));
-          setLoading(false);
-          return;
-        }
-
         // Sign up
         const {
           error
         } = await supabase.auth.signUp({
-          email: validatedEmail,
-          password: password,
+          email: validated.email,
+          password: validated.password,
           options: {
             emailRedirectTo: `${window.location.origin}/`
           }
@@ -172,40 +190,32 @@ const Auth = () => {
             duration: 3000
           });
         }
-    } else {
-      // Sign in - validate password with Zod
-      try {
-        const validatedPassword = passwordSchema.parse(password);
-        
+      } else {
+        // Sign in
         const {
           error
         } = await supabase.auth.signInWithPassword({
-          email: validatedEmail,
-          password: validatedPassword
+          email: validated.email,
+          password: validated.password
         });
         if (error) {
-          // Supabase returns "Invalid login credentials" for both cases
           setPasswordError(t("auth_error_invalid_credentials_inline"));
           setLoading(false);
           return;
         }
-      } catch (zodError) {
-        // Password is too short (< 6 characters)
-        setPasswordError(t("auth_error_invalid_credentials_inline"));
-        setLoading(false);
-        return;
       }
-    }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
-        const issues = error.issues[0];
-        if (issues.path[0] === "email") {
+        const issue = error.issues[0];
+        if (issue.path[0] === "email") {
           toast({
             title: t("auth_error_title"),
             description: t("auth_error_invalid_email"),
             variant: "destructive",
             duration: 5000
           });
+        } else if (issue.path[0] === "password") {
+          setPasswordError(isSignUp ? t("auth_password_too_short_inline") : t("auth_error_invalid_credentials_inline"));
         }
       } else {
         toast({
@@ -223,7 +233,7 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const validatedEmail = emailSchema.parse(email);
+      const validatedEmail = z.string().trim().email().parse(email);
       const {
         error
       } = await supabase.auth.resetPasswordForEmail(validatedEmail, {

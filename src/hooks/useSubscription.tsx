@@ -9,6 +9,13 @@ interface SubscriptionStatus {
   loading: boolean;
 }
 
+// Cache configuration
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+const subscriptionCache = {
+  data: null as { subscribed: boolean; product_id: string | null; subscription_end: string | null } | null,
+  timestamp: 0
+};
+
 export const useSubscription = (skipInitialCheck = false, initialSubscribed = false) => {
   const [status, setStatus] = useState<SubscriptionStatus>({
     subscribed: initialSubscribed, // Use initial value from navigation state
@@ -17,7 +24,16 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
     loading: skipInitialCheck ? false : true,
   });
 
-  const checkSubscription = async () => {
+  const checkSubscription = async (useCache = true) => {
+    // Check cache first
+    if (useCache && subscriptionCache.data && Date.now() - subscriptionCache.timestamp < CACHE_TTL) {
+      console.log('Using cached subscription status');
+      setStatus({
+        ...subscriptionCache.data,
+        loading: false
+      });
+      return;
+    }
     try {
       const { data: { session }, error: sessionError } = await supabase.auth.getSession();
       
@@ -50,10 +66,18 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
         return;
       }
 
-      setStatus({
+      const result = {
         subscribed: data.subscribed || false,
         product_id: data.product_id || null,
         subscription_end: data.subscription_end || null,
+      };
+
+      // Update cache
+      subscriptionCache.data = result;
+      subscriptionCache.timestamp = Date.now();
+
+      setStatus({
+        ...result,
         loading: false,
       });
     } catch (error) {
@@ -76,8 +100,12 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === "SIGNED_IN" || event === "TOKEN_REFRESHED") {
-        checkSubscription();
+        // Force fresh check on auth changes (bypass cache)
+        checkSubscription(false);
       } else if (event === "SIGNED_OUT") {
+        // Clear cache on signout
+        subscriptionCache.data = null;
+        subscriptionCache.timestamp = 0;
         setStatus({
           subscribed: false,
           product_id: null,
@@ -87,8 +115,12 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
       }
     });
 
-    // Refresh subscription status periodically (every minute)
-    const interval = setInterval(checkSubscription, 60000);
+    // Refresh subscription status periodically (every 2 minutes) only when page is visible
+    const interval = setInterval(() => {
+      if (document.visibilityState === 'visible') {
+        checkSubscription(true);
+      }
+    }, 120000);
 
     return () => {
       subscription.unsubscribe();
