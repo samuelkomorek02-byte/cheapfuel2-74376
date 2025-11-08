@@ -138,7 +138,8 @@ const Auth = () => {
           toast({
             title: t("auth_error_title"),
             description: t("auth_password_too_short"),
-            variant: "destructive"
+            variant: "destructive",
+            duration: 5000
           });
           setLoading(false);
           return;
@@ -155,11 +156,12 @@ const Auth = () => {
           }
         });
         if (error) {
-          if (error.message.includes("already registered")) {
+          if (error.message.includes("already registered") || error.message.includes("User already registered")) {
             toast({
               title: t("auth_error_title"),
               description: t("auth_error_user_exists"),
-              variant: "destructive"
+              variant: "destructive",
+              duration: 5000
             });
             setLoading(false);
             return;
@@ -168,11 +170,13 @@ const Auth = () => {
         } else {
           toast({
             title: t("auth_success_signup_title"),
-            description: t("auth_success_signup_desc")
+            description: t("auth_success_signup_desc"),
+            duration: 3000
           });
         }
-      } else {
-        // Sign in - validate password with Zod
+    } else {
+      // Sign in - validate password with Zod
+      try {
         const validatedPassword = passwordSchema.parse(password);
         
         const {
@@ -182,23 +186,34 @@ const Auth = () => {
           password: validatedPassword
         });
         if (error) {
-          if (error.message.includes("Invalid login credentials")) {
-            toast({
-              title: t("auth_error_title"),
-              description: t("auth_error_no_account"),
-              variant: "destructive"
-            });
-            setLoading(false);
-            return;
-          }
-          throw error;
+          // Supabase returns "Invalid login credentials" for both cases
+          toast({
+            title: t("auth_error_title"),
+            description: t("auth_error_invalid_credentials"),
+            variant: "destructive",
+            duration: 6000
+          });
+          setLoading(false);
+          return;
         } else {
           toast({
             title: t("auth_success_login_title"),
-            description: t("auth_success_login_desc")
+            description: t("auth_success_login_desc"),
+            duration: 3000
           });
         }
+      } catch (zodError) {
+        // Password is too short (< 6 characters)
+        toast({
+          title: t("auth_error_title"),
+          description: t("auth_error_invalid_password"),
+          variant: "destructive",
+          duration: 5000
+        });
+        setLoading(false);
+        return;
       }
+    }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
         const issues = error.issues[0];
@@ -206,20 +221,16 @@ const Auth = () => {
           toast({
             title: t("auth_error_title"),
             description: t("auth_error_invalid_email"),
-            variant: "destructive"
-          });
-        } else if (issues.path[0] === "password") {
-          toast({
-            title: t("auth_error_title"),
-            description: t("auth_error_invalid_password"),
-            variant: "destructive"
+            variant: "destructive",
+            duration: 5000
           });
         }
       } else {
         toast({
           title: t("auth_error_title"),
           description: error.message,
-          variant: "destructive"
+          variant: "destructive",
+          duration: 5000
         });
       }
     } finally {
@@ -239,7 +250,8 @@ const Auth = () => {
       if (error) throw error;
       toast({
         title: t("auth_reset_link_sent"),
-        description: t("auth_reset_link_sent_desc")
+        description: t("auth_reset_link_sent_desc"),
+        duration: 5000
       });
       setIsForgotPassword(false);
       setEmail("");
