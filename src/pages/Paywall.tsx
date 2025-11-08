@@ -7,16 +7,16 @@ import { useEffect } from "react";
 import { isPreviewMode } from "@/lib/utils";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
-
 const Paywall = () => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const {
+    t
+  } = useTranslation();
   const {
     subscribed,
     loading,
     initiateCheckout
   } = useSubscription();
-
   useEffect(() => {
     if (isPreviewMode()) return;
     if (subscribed) {
@@ -41,7 +41,7 @@ const Paywall = () => {
               </div>
             </div>
             <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
-            <p className="text-white/90 text-lg">Finde deine günstigste Tankstelle und spare jedes Jahr über 240€ !</p>
+            <p className="text-white/90 text-lg">Finde deine günstigste Tankstelle und spare bei jeder Tankfüllung!</p>
           </div>
 
           {/* Features List */}
