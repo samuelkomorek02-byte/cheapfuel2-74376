@@ -62,7 +62,7 @@ const Paywall = () => {
                 Jederzeit kündbar
               </p>
             </div>
-            <Button size="lg" className="w-full text-lg font-semibold h-14 bg-black text-white hover:bg-black/90 shadow-2xl hover:shadow-black/50 transition-all rounded-xl" onClick={initiateCheckout} disabled={loading}>
+            <Button size="lg" className="w-full text-lg font-semibold h-14 bg-black text-white hover:bg-black/90 shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105" onClick={initiateCheckout} disabled={loading}>
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               Los geht's
             </Button>

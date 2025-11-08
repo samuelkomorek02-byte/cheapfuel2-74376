@@ -78,15 +78,15 @@ const Onboarding = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-12 md:py-20 text-center opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-        <div className="max-w-3xl mx-auto space-y-6">
+      <section className="container mx-auto px-4 py-8 md:py-16 text-center opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
           
           
-          <h1 className="md:text-5xl lg:text-6xl font-bold leading-tight text-5xl">Finde die günstigste Tankstelle⛽️ in Sekunden⚡️
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Finde die günstigste Tankstelle⛽️ in Sekunden⚡️
 und spare jedes Jahr über 240€💰!
         </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">Schnell. Einfach. Genau. </p>
+          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">Schnell. Einfach. Genau. </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90">Jetzt loslegen</Button>
@@ -100,7 +100,7 @@ und spare jedes Jahr über 240€💰!
       </section>
 
       {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+      <section id="features" className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in scroll-mt-20" style={{ animationDelay: '0.2s' }}>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl mb-4 font-bold">Warum Cheapfuel🧐?</h2>
         </div>

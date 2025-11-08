@@ -13,11 +13,11 @@ const Footer = () => {
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-6 w-6" />
             <span className="font-semibold text-gray-900">Cheapfuel</span>
             <a 
-              href="https://cheapfuel.app" 
+              href="https://www.instagram.com/cheapfuel.app/" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-900 transition-colors"
-              aria-label="Cheapfuel App"
+              aria-label="Cheapfuel Instagram"
             >
               <Instagram className="h-6 w-6" />
             </a>

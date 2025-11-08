@@ -188,12 +188,6 @@ const Auth = () => {
           setPasswordError(t("auth_error_invalid_credentials_inline"));
           setLoading(false);
           return;
-        } else {
-          toast({
-            title: t("auth_success_login_title"),
-            description: t("auth_success_login_desc"),
-            duration: 3000
-          });
         }
       } catch (zodError) {
         // Password is too short (< 6 characters)

@@ -829,13 +829,6 @@ const Index = () => {
         toast({
           title: t('route_no_stations')
         });
-      } else {
-        toast({
-          title: t('toast_found_title'),
-          description: t('toast_found_desc', {
-            count: cheapestStations.length
-          })
-        });
       }
 
       // Scroll to results section
