@@ -185,12 +185,7 @@ const Auth = () => {
         });
         if (error) {
           // Supabase returns "Invalid login credentials" for both cases
-          toast({
-            title: t("auth_error_title"),
-            description: t("auth_error_invalid_credentials"),
-            variant: "destructive",
-            duration: 6000
-          });
+          setPasswordError("Ungültige E-Mail oder Passwort. Bitte überprüfe deine Anmeldedaten oder registriere dich, falls du noch kein Konto hast.");
           setLoading(false);
           return;
         } else {
