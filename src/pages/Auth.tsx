@@ -74,8 +74,8 @@ const Auth = () => {
           });
         }, 8000);
         if (isSignUp) {
-          // New user registration → always redirect to paywall with isNewUser flag
-          navigate("/paywall", { state: { isNewUser: true } });
+          // New user registration → redirect to main page with isNewUser flag
+          navigate("/", { state: { isNewUser: true } });
         } else {
           // Existing user login → check subscription status
           try {
@@ -197,7 +197,7 @@ const Auth = () => {
         }
       } catch (zodError) {
         // Password is too short (< 6 characters)
-        setPasswordError(t("auth_error_invalid_password_inline"));
+        setPasswordError(t("auth_error_invalid_credentials_inline"));
         setLoading(false);
         return;
       }

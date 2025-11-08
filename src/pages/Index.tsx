@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -97,6 +98,7 @@ const Index = () => {
   const [navigationStation, setNavigationStation] = useState<Station | null>(null);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
+  const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
   
   const radius = DEFAULT_RADIUS_KM;
   const canUseGeo = useMemo(() => isHttpsOrLocalhost(), []);
@@ -169,6 +171,16 @@ const Index = () => {
       }
     }
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
+
+  // Check if user is new and show welcome dialog
+  useEffect(() => {
+    const state = location.state as { isNewUser?: boolean } | null;
+    if (state?.isNewUser) {
+      setShowWelcomeDialog(true);
+      // Clear state
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
 
   // Cleanup pending requests on unmount and periodically
   useEffect(() => {
@@ -844,6 +856,23 @@ const Index = () => {
     }
   };
   return <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
+      {/* Welcome Dialog for New Users */}
+      <AlertDialog open={showWelcomeDialog} onOpenChange={setShowWelcomeDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("welcome_new_user_title")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("welcome_new_user_message")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={() => setShowWelcomeDialog(false)}>
+              {t("close") || "Schließen"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
       <header className="container py-8 animate-fade-in">
         <nav className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
