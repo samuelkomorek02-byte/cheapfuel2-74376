@@ -41,7 +41,6 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -126,28 +125,31 @@ const Auth = () => {
     };
   }, [navigate, isSignUp]);
 
-  const validatePassword = (value: string) => {
-    if (value.length > 0 && value.length < 6) {
-      setPasswordError(t("auth_password_too_short"));
-    } else {
-      setPasswordError("");
-    }
-  };
-
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      // Validate input
+      // Validate email
       const validatedEmail = emailSchema.parse(email);
-      const validatedPassword = passwordSchema.parse(password);
+      
       if (isSignUp) {
+        // Validate password length for signup
+        if (password.length < 6) {
+          toast({
+            title: t("auth_error_title"),
+            description: t("auth_password_too_short"),
+            variant: "destructive"
+          });
+          setLoading(false);
+          return;
+        }
+
         // Sign up
         const {
           error
         } = await supabase.auth.signUp({
           email: validatedEmail,
-          password: validatedPassword,
+          password: password,
           options: {
             emailRedirectTo: `${window.location.origin}/`
           }
@@ -159,9 +161,10 @@ const Auth = () => {
               description: t("auth_error_user_exists"),
               variant: "destructive"
             });
-          } else {
-            throw error;
+            setLoading(false);
+            return;
           }
+          throw error;
         } else {
           toast({
             title: t("auth_success_signup_title"),
@@ -169,7 +172,9 @@ const Auth = () => {
           });
         }
       } else {
-        // Sign in
+        // Sign in - validate password with Zod
+        const validatedPassword = passwordSchema.parse(password);
+        
         const {
           error
         } = await supabase.auth.signInWithPassword({
@@ -181,20 +186,12 @@ const Auth = () => {
             toast({
               title: t("auth_error_title"),
               description: t("auth_error_no_account"),
-              variant: "destructive",
-              action: (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => setIsSignUp(true)}
-                >
-                  {t("auth_switch_to_signup")}
-                </Button>
-              )
+              variant: "destructive"
             });
-          } else {
-            throw error;
+            setLoading(false);
+            return;
           }
+          throw error;
         } else {
           toast({
             title: t("auth_success_login_title"),
@@ -214,7 +211,7 @@ const Auth = () => {
         } else if (issues.path[0] === "password") {
           toast({
             title: t("auth_error_title"),
-            description: t("auth_error_weak_password"),
+            description: t("auth_error_invalid_password"),
             variant: "destructive"
           });
         }
@@ -340,12 +337,9 @@ const Auth = () => {
                     id="password" 
                     type={showPassword ? "text" : "password"} 
                     placeholder={t("auth_password_placeholder")} 
-                    value={password} 
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      validatePassword(e.target.value);
-                    }}
-                    required 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                     disabled={loading}
                     className="pr-10"
                   />
@@ -363,9 +357,6 @@ const Auth = () => {
                     )}
                   </button>
                 </div>
-                {passwordError && (
-                  <p className="text-sm text-destructive mt-1">{passwordError}</p>
-                )}
               </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
