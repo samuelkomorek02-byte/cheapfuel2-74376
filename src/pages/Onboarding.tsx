@@ -16,7 +16,6 @@ const Onboarding = () => {
     t
   } = useTranslation();
   const handleStart = () => {
-    localStorage.setItem("onboarding_completed", "true");
     navigate("/auth", { state: { mode: 'signup' } });
   };
   const features = [{

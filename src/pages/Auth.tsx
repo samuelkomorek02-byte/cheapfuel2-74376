@@ -102,7 +102,7 @@ const Auth = () => {
       }
     });
 
-    // Check for existing session - only redirect if onboarding is completed
+    // Check for existing session
     supabase.auth.getSession().then(({
       data: {
         session
@@ -111,16 +111,12 @@ const Auth = () => {
       // Im Preview-Modus keine Redirects
       if (isPreviewMode()) return;
       
-      const onboardingCompleted = localStorage.getItem("onboarding_completed");
-      
-      if (session?.user && onboardingCompleted) {
-        // User already logged in AND onboarding completed → redirect to index
+      if (session?.user) {
+        // User already logged in → redirect to index (will handle subscription check there)
         navigate("/", {
           replace: true
         });
       }
-      // If user is logged in but onboarding not completed, stay on auth page
-      // Index page will handle the redirect to onboarding
     });
     return () => {
       subscription.unsubscribe();

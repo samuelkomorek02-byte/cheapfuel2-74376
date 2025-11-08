@@ -125,12 +125,12 @@ const Index = () => {
       setUserEmail(session?.user?.email || null);
       setCheckingAuth(false);
       
-      // Check onboarding only after auth check
-      const onboardingCompleted = localStorage.getItem("onboarding_completed");
-      if (!onboardingCompleted) {
-        navigate("/onboarding");
-      } else if (!session?.user) {
-        navigate("/auth");
+      // Im Preview-Modus keine Redirects
+      if (isPreviewMode()) return;
+      
+      // NEUE LOGIK: Kein User → immer /onboarding
+      if (!session?.user) {
+        navigate("/onboarding", { replace: true });
       }
     });
 
