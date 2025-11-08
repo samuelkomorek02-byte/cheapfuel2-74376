@@ -344,7 +344,7 @@ const Auth = () => {
                     }}
                     required
                     disabled={loading}
-                    className={`pr-10 ${passwordError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
+                    className="pr-10"
                   />
                   <button
                     type="button"
