@@ -42,6 +42,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [passwordError, setPasswordError] = useState("");
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [redirecting, setRedirecting] = useState(false);
@@ -128,6 +129,8 @@ const Auth = () => {
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setPasswordError("");
+    
     try {
       // Validate email
       const validatedEmail = emailSchema.parse(email);
@@ -135,12 +138,7 @@ const Auth = () => {
       if (isSignUp) {
         // Validate password length for signup
         if (password.length < 6) {
-          toast({
-            title: t("auth_error_title"),
-            description: t("auth_password_too_short"),
-            variant: "destructive",
-            duration: 5000
-          });
+          setPasswordError("Passwort zu kurz (mind. 6 Zeichen)");
           setLoading(false);
           return;
         }
@@ -204,12 +202,7 @@ const Auth = () => {
         }
       } catch (zodError) {
         // Password is too short (< 6 characters)
-        toast({
-          title: t("auth_error_title"),
-          description: t("auth_error_invalid_password"),
-          variant: "destructive",
-          duration: 5000
-        });
+        setPasswordError("Ungültiges Passwort");
         setLoading(false);
         return;
       }
@@ -350,10 +343,13 @@ const Auth = () => {
                     type={showPassword ? "text" : "password"} 
                     placeholder={t("auth_password_placeholder")} 
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                      setPasswordError("");
+                    }}
                     required
                     disabled={loading}
-                    className="pr-10"
+                    className={`pr-10 ${passwordError ? "border-red-500 focus-visible:ring-red-500" : ""}`}
                   />
                   <button
                     type="button"
@@ -369,6 +365,9 @@ const Auth = () => {
                     )}
                   </button>
                 </div>
+                {passwordError && (
+                  <p className="text-sm text-red-500 mt-1">{passwordError}</p>
+                )}
               </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
