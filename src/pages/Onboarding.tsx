@@ -88,9 +88,7 @@ const Onboarding = () => {
         <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
           
           
-          <h1 className="md:text-5xl lg:text-6xl font-bold leading-tight text-5xl">Finde die günstigste Tankstelle⛽️ in Sekunden⚡️
-und spare jedes Jahr über 240€💰!
-        </h1>
+          <h1 className="md:text-5xl lg:text-6xl font-bold leading-tight text-5xl">Finde die günstigste Tankstelle⛽️ in Sekunden⚡️ und spare jedes Jahr bis zu über 240€💰!</h1>
           
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">Schnell. Einfach. Genau. </p>
           
