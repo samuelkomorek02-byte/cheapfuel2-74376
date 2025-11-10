@@ -78,7 +78,7 @@ const Onboarding = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-8 md:py-16 text-center opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+      <section className="container mx-auto px-4 py-8 md:py-16 text-center opacity-0 animate-fade-in min-h-[calc(100vh-4rem)] flex items-center justify-center" style={{ animationDelay: '0.1s' }}>
         <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
           
           

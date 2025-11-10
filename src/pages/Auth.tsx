@@ -84,12 +84,8 @@ const Auth = () => {
         // Safety timeout - reset redirecting state after 8 seconds
         redirectTimeout = setTimeout(() => {
           setRedirecting(false);
-          toast({
-            title: "Navigation verzögert",
-            description: "Bitte versuchen Sie es erneut.",
-            variant: "destructive"
-          });
         }, 8000);
+        
         if (isSignUp) {
           // New user registration → store flag and redirect to paywall
           sessionStorage.setItem('welcomeNewUser', 'true');

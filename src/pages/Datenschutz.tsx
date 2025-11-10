@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -9,16 +9,15 @@ import Footer from "@/components/Footer";
 const Datenschutz = () => {
   const { t, i18n } = useTranslation();
   const isGerman = i18n.language === 'de';
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-secondary to-background animate-fade-in">
       <div className="container max-w-4xl py-8 px-4">
-        <Link to="/">
-          <Button variant="ghost" className="mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            {t('back_to_home')}
-          </Button>
-        </Link>
+        <Button variant="ghost" className="mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }} onClick={() => navigate(-1)}>
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Zurück
+        </Button>
 
         <Card className="opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
           <CardHeader>
