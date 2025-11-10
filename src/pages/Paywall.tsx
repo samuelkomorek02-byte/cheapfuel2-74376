@@ -23,7 +23,13 @@ const Paywall = () => {
       navigate("/");
     }
   }, [subscribed, navigate]);
-  const features = ["Unbegrenzte Tankstellensuche", "Echtzeit-Preisvergleiche", "Routenintegration", "Deutschlandweites Tankstellennetzwerk", "Integrierte Navigation mit Apple oder Google Maps"];
+  const features = [
+    t('paywall_feature_1'),
+    t('paywall_feature_2'),
+    t('paywall_feature_3'),
+    t('paywall_feature_4'),
+    t('paywall_feature_5')
+  ];
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
       <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/auth")}>
@@ -40,8 +46,8 @@ const Paywall = () => {
                 <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-16 w-16" />
               </div>
             </div>
-            <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">Cheapfuel</h1>
-            <p className="text-white/90 text-lg">Finde deine günstigste Tankstelle und spare bei jeder Tankfüllung!</p>
+            <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">{t('paywall_title')}</h1>
+            <p className="text-white/90 text-lg">{t('paywall_subtitle')}</p>
           </div>
 
           {/* Features List */}
@@ -59,15 +65,15 @@ const Paywall = () => {
             <div className="flex items-center justify-center gap-2">
               <Check className="h-5 w-5 text-white" />
               <p className="text-center text-base text-white/90 font-medium">
-                Jederzeit kündbar
+                {t('paywall_cancel_anytime')}
               </p>
             </div>
             <Button size="lg" className="w-full text-lg font-semibold h-14 bg-black text-white hover:bg-black/90 shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105" onClick={initiateCheckout} disabled={loading}>
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
-              Los geht's
+              {t('paywall_cta_button')}
             </Button>
             <p className="text-center text-sm text-white/90">
-              nur 27,00€ pro Jahr (2,25€/Monat)
+              {t('paywall_price')}
             </p>
           </div>
         </div>

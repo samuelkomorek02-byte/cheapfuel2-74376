@@ -186,7 +186,7 @@ const Index = () => {
     // Normale Subscription-Prüfung
     if (isAuthenticated && !checkingAuth && !subLoading) {
       if (!subscribed) {
-        navigate("/paywall");
+        navigate("/onboarding");
       }
     }
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
