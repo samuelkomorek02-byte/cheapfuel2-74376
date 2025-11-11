@@ -43,6 +43,25 @@ const Auth = () => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [redirecting, setRedirecting] = useState(false);
+  
+  // Password Reset States
+  const [isPasswordUpdate, setIsPasswordUpdate] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordUpdateError, setPasswordUpdateError] = useState("");
+
+  // Check for password recovery in URL
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get('type');
+    const accessToken = params.get('access_token');
+    
+    if (type === 'recovery' && accessToken) {
+      setIsPasswordUpdate(true);
+      setIsForgotPassword(false);
+      setIsSignUp(false);
+    }
+  }, []);
 
   // Check authentication state
   useEffect(() => {
@@ -179,12 +198,6 @@ const Auth = () => {
             return;
           }
           throw error;
-        } else {
-          toast({
-            title: t("auth_success_signup_title"),
-            description: t("auth_success_signup_desc"),
-            duration: 3000
-          });
         }
       } else {
         // Sign in
@@ -261,6 +274,58 @@ const Auth = () => {
       setLoading(false);
     }
   };
+
+  const handlePasswordUpdate = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setPasswordUpdateError("");
+    
+    try {
+      // Validate passwords
+      if (newPassword.length < 6) {
+        setPasswordUpdateError(t("auth_password_too_short_inline"));
+        setLoading(false);
+        return;
+      }
+      
+      if (newPassword !== confirmPassword) {
+        setPasswordUpdateError(t("auth_passwords_mismatch"));
+        setLoading(false);
+        return;
+      }
+      
+      // Update password
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
+      });
+      
+      if (error) throw error;
+      
+      // Success
+      toast({
+        title: t("auth_password_updated_title"),
+        description: t("auth_password_updated_desc"),
+        duration: 5000
+      });
+      
+      // Cleanup and redirect
+      setIsPasswordUpdate(false);
+      setNewPassword("");
+      setConfirmPassword("");
+      setPasswordUpdateError("");
+      window.history.replaceState({}, document.title, "/auth");
+      
+    } catch (error: any) {
+      toast({
+        title: t("auth_error_title"),
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return <div className="min-h-screen bg-background flex flex-col">
       {/* Loading Overlay während Subscription-Check */}
       {redirecting && <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
@@ -301,14 +366,67 @@ const Auth = () => {
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
-              {isForgotPassword ? t("auth_reset_password_title") : t("auth_title")}
+              {isPasswordUpdate ? t("auth_password_update_title") : (isForgotPassword ? t("auth_reset_password_title") : t("auth_title"))}
             </CardTitle>
             <CardDescription className="text-center">
-              {isForgotPassword ? t("auth_reset_password_subtitle") : (isSignUp ? t("auth_subtitle_signup") : t("auth_subtitle_login"))}
+              {isPasswordUpdate ? t("auth_password_update_subtitle") : (isForgotPassword ? t("auth_reset_password_subtitle") : (isSignUp ? t("auth_subtitle_signup") : t("auth_subtitle_login")))}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            {isForgotPassword ? (/* Password Reset Form */
+            {isPasswordUpdate ? (
+              /* Password Update Form */
+              <form onSubmit={handlePasswordUpdate} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="new-password">{t("auth_new_password_placeholder")}</Label>
+                  <div className="relative">
+                    <Input
+                      id="new-password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder={t("auth_new_password_placeholder")}
+                      value={newPassword}
+                      onChange={(e) => {
+                        setNewPassword(e.target.value);
+                        setPasswordUpdateError("");
+                      }}
+                      required
+                      disabled={loading}
+                      className="pr-10"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                      disabled={loading}
+                      tabIndex={-1}
+                    >
+                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="confirm-password">{t("auth_confirm_password_placeholder")}</Label>
+                  <Input
+                    id="confirm-password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder={t("auth_confirm_password_placeholder")}
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      setPasswordUpdateError("");
+                    }}
+                    required
+                    disabled={loading}
+                  />
+                  {passwordUpdateError && (
+                    <p className="text-sm text-red-500 mt-1">{passwordUpdateError}</p>
+                  )}
+                </div>
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                  {t("auth_update_password_button")}
+                </Button>
+              </form>
+            ) : isForgotPassword ? (/* Password Reset Form */
           <form onSubmit={handlePasswordReset} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="reset-email">{t("auth_email_placeholder")}</Label>
@@ -370,7 +488,7 @@ const Auth = () => {
                 </Button>
               </form>)}
 
-            {!isForgotPassword && <>
+            {!isForgotPassword && !isPasswordUpdate && <>
                 {/* Forgot Password Link */}
                 {!isSignUp && <div className="text-center">
                     <Button variant="link" className="p-0 h-auto text-sm" onClick={() => setIsForgotPassword(true)} disabled={loading}>
