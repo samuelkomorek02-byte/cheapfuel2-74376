@@ -876,9 +876,6 @@ const Index = () => {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>{t("welcome_new_user_title")}</AlertDialogTitle>
-            <AlertDialogDescription>
-              {t("welcome_new_user_message")}
-            </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogAction onClick={() => setShowWelcomeDialog(false)}>
