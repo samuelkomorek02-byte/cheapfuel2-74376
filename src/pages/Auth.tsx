@@ -344,7 +344,7 @@ const Auth = () => {
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => navigate("/onboarding")}
+            onClick={() => navigate("/")}
             className="shrink-0"
           >
             <ArrowLeft className="h-5 w-5" />

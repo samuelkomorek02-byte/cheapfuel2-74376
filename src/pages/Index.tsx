@@ -928,7 +928,7 @@ const Index = () => {
               )}
               <DropdownMenuItem onClick={async () => {
                 await supabase.auth.signOut();
-                navigate("/onboarding");
+                navigate("/");
               }}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>{t('logout')}</span>
