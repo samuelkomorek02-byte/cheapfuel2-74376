@@ -130,7 +130,7 @@ const Index = () => {
 
         // 3. Handle redirects (skip in preview mode)
         if (!isPreviewMode() && !session?.user) {
-          navigate("/onboarding", { replace: true });
+          navigate("/", { replace: true });
         }
       } catch (error) {
         console.error('Auth initialization error:', error);

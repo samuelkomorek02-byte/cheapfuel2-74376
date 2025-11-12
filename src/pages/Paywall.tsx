@@ -20,7 +20,7 @@ const Paywall = () => {
   useEffect(() => {
     if (isPreviewMode()) return;
     if (subscribed) {
-      navigate("/");
+      navigate("/aboseite");
     }
   }, [subscribed, navigate]);
   const features = [
@@ -32,7 +32,7 @@ const Paywall = () => {
   ];
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
-      <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/auth")}>
+      <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/")}>
         <ArrowLeft className="h-5 w-5" />
       </Button>
 

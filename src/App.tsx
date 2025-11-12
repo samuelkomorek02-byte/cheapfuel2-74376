@@ -36,8 +36,8 @@ const App = () => (
         <BrowserRouter>
           <AnalyticsTracker />
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/onboarding" element={<Onboarding />} />
+            <Route path="/" element={<Onboarding />} />
+            <Route path="/aboseite" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/paywall" element={<Paywall />} />
             <Route path="/impressum" element={<Impressum />} />

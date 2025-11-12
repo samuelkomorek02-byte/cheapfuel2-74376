@@ -120,7 +120,7 @@ const Auth = () => {
               }
             });
             if (data?.subscribed) {
-              navigate("/", {
+              navigate("/aboseite", {
                 state: {
                   subscribed: true,
                   checkedAt: Date.now()
@@ -148,7 +148,7 @@ const Auth = () => {
       
       if (session?.user) {
         // User already logged in → redirect to index (will handle subscription check there)
-        navigate("/", {
+        navigate("/aboseite", {
           replace: true
         });
       }
