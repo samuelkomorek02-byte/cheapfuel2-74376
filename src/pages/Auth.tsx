@@ -84,6 +84,7 @@ const Auth = () => {
     let redirectTimeout: NodeJS.Timeout;
     let debounceTimeout: NodeJS.Timeout;
     let lastAuthEvent = { event: '', timestamp: 0 };
+    let hasCheckedInitialSession = false;
 
     // Set up auth state listener FIRST with debouncing
     const {
@@ -109,11 +110,16 @@ const Auth = () => {
         localStorage.removeItem('supabase.auth.token');
         setSession(null);
         setUser(null);
+        setRedirecting(false);
         return;
       }
 
       // Only handle SIGNED_IN event (actual login/signup action)
-      if (event === 'SIGNED_IN' && session?.user) {
+      // Don't redirect if we're in password update mode
+      if (event === 'SIGNED_IN' && session?.user && !isPasswordUpdate) {
+        // Prevent multiple redirects
+        if (redirecting) return;
+        
         setRedirecting(true);
 
         // Safety timeout - reset redirecting state after 8 seconds
@@ -153,28 +159,37 @@ const Auth = () => {
       }
     });
 
-    // Check for existing session
-    supabase.auth.getSession().then(({
-      data: {
-        session
-      }
-    }) => {
-      // Im Preview-Modus keine Redirects
-      if (isPreviewMode()) return;
-      
-      if (session?.user) {
-        // User already logged in → redirect to index (will handle subscription check there)
-        navigate("/aboseite", {
-          replace: true
-        });
-      }
-    });
+    // Check for existing session only once on mount
+    if (!hasCheckedInitialSession) {
+      hasCheckedInitialSession = true;
+      supabase.auth.getSession().then(({
+        data: {
+          session
+        }
+      }) => {
+        // Im Preview-Modus keine Redirects
+        if (isPreviewMode()) return;
+        
+        // Don't redirect if we're in password update mode or if we're in signup mode
+        // (user might be coming back from social links)
+        if (session?.user && !isPasswordUpdate && !isSignUp) {
+          // Only redirect if we haven't just navigated here
+          const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+          if (navigationEntry && navigationEntry.type !== 'back_forward') {
+            navigate("/aboseite", {
+              replace: true
+            });
+          }
+        }
+      });
+    }
+    
     return () => {
       subscription.unsubscribe();
       if (redirectTimeout) clearTimeout(redirectTimeout);
       if (debounceTimeout) clearTimeout(debounceTimeout);
     };
-  }, [navigate, isSignUp]);
+  }, [navigate, isSignUp, isPasswordUpdate, redirecting]);
 
   // Unified validation schema
   const authSchema = z.object({
