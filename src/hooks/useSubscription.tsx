@@ -7,6 +7,7 @@ interface SubscriptionStatus {
   product_id: string | null;
   subscription_end: string | null;
   loading: boolean;
+  checkoutLoading: boolean;
 }
 
 // Cache configuration
@@ -22,6 +23,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
     product_id: null,
     subscription_end: null,
     loading: skipInitialCheck ? false : true,
+    checkoutLoading: false,
   });
 
   const checkSubscription = async (useCache = true) => {
@@ -30,7 +32,8 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
       console.log('Using cached subscription status');
       setStatus({
         ...subscriptionCache.data,
-        loading: false
+        loading: false,
+        checkoutLoading: false
       });
       return;
     }
@@ -44,6 +47,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
           product_id: null,
           subscription_end: null,
           loading: false,
+          checkoutLoading: false,
         });
         return;
       }
@@ -62,6 +66,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
           product_id: null,
           subscription_end: null,
           loading: false,
+          checkoutLoading: false,
         });
         return;
       }
@@ -79,6 +84,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
       setStatus({
         ...result,
         loading: false,
+        checkoutLoading: false,
       });
     } catch (error) {
       console.error("Failed to check subscription:", error);
@@ -87,6 +93,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
         product_id: null,
         subscription_end: null,
         loading: false,
+        checkoutLoading: false,
       });
     }
   };
@@ -111,6 +118,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
           product_id: null,
           subscription_end: null,
           loading: false,
+          checkoutLoading: false,
         });
       }
     });
@@ -129,6 +137,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
   }, [skipInitialCheck]);
 
   const initiateCheckout = async () => {
+    setStatus(prev => ({ ...prev, checkoutLoading: true }));
     try {
       const { data: { session } } = await supabase.auth.getSession();
       
@@ -138,6 +147,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
           description: "Bitte melden Sie sich an, um fortzufahren.",
           variant: "destructive",
         });
+        setStatus(prev => ({ ...prev, checkoutLoading: false }));
         return;
       }
 
@@ -155,6 +165,7 @@ export const useSubscription = (skipInitialCheck = false, initialSubscribed = fa
       }
     } catch (error) {
       console.error("Checkout error:", error);
+      setStatus(prev => ({ ...prev, checkoutLoading: false }));
       toast({
         title: "Fehler",
         description: "Checkout konnte nicht gestartet werden. Bitte versuchen Sie es erneut.",
