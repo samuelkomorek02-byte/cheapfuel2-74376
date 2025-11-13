@@ -114,6 +114,8 @@ const translations = {
     auth_passwords_mismatch: "Passwords do not match",
     auth_password_updated_title: "Password successfully reset!",
     auth_password_updated_desc: "You can now sign in with your new password.",
+    auth_password_reset_ready_title: "Password reset link detected",
+    auth_password_reset_ready_desc: "Please enter your new password below.",
     welcome_new_user_title: "Welcome to CheapFuel! 🎉",
     welcome_new_user_message: "Find the cheapest fuel stations near you in seconds. Let's get started!",
     
@@ -278,6 +280,8 @@ const translations = {
     auth_passwords_mismatch: "Passwörter stimmen nicht überein",
     auth_password_updated_title: "Passwort erfolgreich zurückgesetzt!",
     auth_password_updated_desc: "Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
+    auth_password_reset_ready_title: "Passwort-Reset-Link erkannt",
+    auth_password_reset_ready_desc: "Bitte geben Sie unten Ihr neues Passwort ein.",
     welcome_new_user_title: "Willkommen bei CheapFuel! 🎉",
     welcome_new_user_message: "Finde die günstigsten Tankstellen in deiner Nähe in Sekunden. Lass uns starten!",
     
@@ -442,6 +446,8 @@ const translations = {
     auth_passwords_mismatch: "Las contraseñas no coinciden",
     auth_password_updated_title: "¡Contraseña restablecida con éxito!",
     auth_password_updated_desc: "Ahora puedes iniciar sesión con tu nueva contraseña.",
+    auth_password_reset_ready_title: "Enlace de restablecimiento de contraseña detectado",
+    auth_password_reset_ready_desc: "Por favor, introduce tu nueva contraseña a continuación.",
     welcome_new_user_title: "¡Bienvenido a CheapFuel! 🎉",
     welcome_new_user_message: "Encuentra las gasolineras más baratas cerca de ti en segundos. ¡Empecemos!",
     
@@ -606,6 +612,8 @@ const translations = {
     auth_passwords_mismatch: "Le password non corrispondono",
     auth_password_updated_title: "Password reimpostata con successo!",
     auth_password_updated_desc: "Ora puoi accedere con la tua nuova password.",
+    auth_password_reset_ready_title: "Link di reimpostazione password rilevato",
+    auth_password_reset_ready_desc: "Inserisci la tua nuova password qui sotto.",
     welcome_new_user_title: "Benvenuto su CheapFuel! 🎉",
     welcome_new_user_message: "Trova le stazioni di servizio più economiche vicino a te in pochi secondi. Iniziamo!",
     
@@ -770,6 +778,8 @@ const translations = {
     auth_passwords_mismatch: "Hasła nie pasują do siebie",
     auth_password_updated_title: "Hasło pomyślnie zresetowane!",
     auth_password_updated_desc: "Możesz teraz zalogować się swoim nowym hasłem.",
+    auth_password_reset_ready_title: "Wykryto link do resetowania hasła",
+    auth_password_reset_ready_desc: "Proszę wprowadzić nowe hasło poniżej.",
     welcome_new_user_title: "Witamy w CheapFuel! 🎉",
     welcome_new_user_message: "Znajdź najtańsze stacje paliw w pobliżu w kilka sekund. Zaczynajmy!",
     
@@ -934,6 +944,8 @@ const translations = {
     auth_passwords_mismatch: "Пароли не совпадают",
     auth_password_updated_title: "Пароль успешно сброшен!",
     auth_password_updated_desc: "Теперь вы можете войти с новым паролем.",
+    auth_password_reset_ready_title: "Обнаружена ссылка для сброса пароля",
+    auth_password_reset_ready_desc: "Пожалуйста, введите новый пароль ниже.",
     welcome_new_user_title: "Добро пожаловать в CheapFuel! 🎉",
     welcome_new_user_message: "Найдите самые дешёвые заправки рядом с вами за секунды. Начнём!",
     
@@ -1098,6 +1110,8 @@ const translations = {
     auth_passwords_mismatch: "Les mots de passe ne correspondent pas",
     auth_password_updated_title: "Mot de passe réinitialisé avec succès!",
     auth_password_updated_desc: "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
+    auth_password_reset_ready_title: "Lien de réinitialisation du mot de passe détecté",
+    auth_password_reset_ready_desc: "Veuillez entrer votre nouveau mot de passe ci-dessous.",
     welcome_new_user_title: "Bienvenue sur CheapFuel! 🎉",
     welcome_new_user_message: "Trouvez les stations-service les moins chères près de chez vous en quelques secondes. Commençons!",
     

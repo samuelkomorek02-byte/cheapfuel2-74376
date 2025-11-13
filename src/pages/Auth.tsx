@@ -50,18 +50,34 @@ const Auth = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordUpdateError, setPasswordUpdateError] = useState("");
 
-  // Check for password recovery in URL
+  // Check for password recovery in URL (both query params and hash fragments)
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const type = params.get('type');
-    const accessToken = params.get('access_token');
+    // Check both query params and hash fragments (Supabase uses hash fragments for auth tokens)
+    const searchParams = new URLSearchParams(window.location.search);
+    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+    
+    const type = searchParams.get('type') || hashParams.get('type');
+    const accessToken = searchParams.get('access_token') || hashParams.get('access_token');
+    
+    console.log('Password reset detection:', { 
+      type, 
+      hasToken: !!accessToken,
+      source: searchParams.get('type') ? 'query' : hashParams.get('type') ? 'hash' : 'none'
+    });
     
     if (type === 'recovery' && accessToken) {
+      console.log('Activating password update mode');
       setIsPasswordUpdate(true);
       setIsForgotPassword(false);
       setIsSignUp(false);
+      
+      // Show a toast to inform the user
+      toast({
+        title: t("auth_password_reset_ready_title"),
+        description: t("auth_password_reset_ready_desc"),
+      });
     }
-  }, []);
+  }, [t]);
 
   // Check authentication state
   useEffect(() => {
