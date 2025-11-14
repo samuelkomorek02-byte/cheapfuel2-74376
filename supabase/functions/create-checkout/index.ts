@@ -8,7 +8,7 @@ const corsHeaders = {
 };
 
 const logStep = (step: string, details?: any) => {
-  const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
+  const detailsStr = details ? ` - ${JSON.stringify(details)}` : "";
   console.log(`[CREATE-CHECKOUT] ${step}${detailsStr}`);
 };
 
@@ -17,10 +17,7 @@ serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  const supabaseClient = createClient(
-    Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_ANON_KEY") ?? ""
-  );
+  const supabaseClient = createClient(Deno.env.get("SUPABASE_URL") ?? "", Deno.env.get("SUPABASE_ANON_KEY") ?? "");
 
   try {
     logStep("Function started");
@@ -29,13 +26,10 @@ serve(async (req) => {
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) {
       logStep("ERROR: STRIPE_SECRET_KEY not configured");
-      return new Response(
-        JSON.stringify({ error: "Stripe ist nicht konfiguriert. Bitte kontaktiere den Support." }),
-        { 
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-          status: 500 
-        }
-      );
+      return new Response(JSON.stringify({ error: "Stripe ist nicht konfiguriert. Bitte kontaktiere den Support." }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 500,
+      });
     }
     logStep("Stripe key found");
 
@@ -44,25 +38,25 @@ serve(async (req) => {
       logStep("ERROR: No authorization header");
       throw new Error("Authentifizierung erforderlich");
     }
-    
+
     const token = authHeader.replace("Bearer ", "");
     const { data, error: authError } = await supabaseClient.auth.getUser(token);
-    
+
     if (authError || !data.user) {
       logStep("ERROR: Authentication failed", { error: authError?.message });
       throw new Error("Authentifizierung fehlgeschlagen");
     }
-    
+
     const user = data.user;
     if (!user?.email) {
       logStep("ERROR: No email found");
       throw new Error("Benutzer-Email nicht verfügbar");
     }
-    
+
     logStep("User authenticated", { userId: user.id, email: user.email });
 
-    const stripe = new Stripe(stripeKey, { 
-      apiVersion: "2025-08-27.basil" 
+    const stripe = new Stripe(stripeKey, {
+      apiVersion: "2025-08-27.basil",
     });
 
     // Check if customer exists
@@ -76,13 +70,13 @@ serve(async (req) => {
     }
 
     const origin = req.headers.get("origin") || "http://localhost:8080";
-    
+
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
       line_items: [
         {
-          price: "price_1SQXPUFbXQEN01haLGlHqUiq",
+          price: "price_1STK1wF7yW4klaUdtYHXQIOD",
           quantity: 1,
         },
       ],
