@@ -86,7 +86,7 @@ const translations = {
     auth_send_reset_link: "Send Reset Link",
     auth_back_to_login: "Back to Login",
     auth_reset_link_sent: "Reset link sent",
-    auth_reset_link_sent_desc: "Check your email for the password reset link",
+    auth_reset_link_sent_desc: "Check your email for the password reset link. Please also check your spam folder.",
     auth_error_title: "Authentication Error",
     auth_error_invalid_credentials: "Invalid email or password. Please check your credentials and try again, or sign up if you don't have an account yet.",
     auth_error_weak_password: "Password must be at least 6 characters",
@@ -116,7 +116,7 @@ const translations = {
     auth_password_updated_desc: "You can now sign in with your new password.",
     auth_password_reset_ready_title: "Password reset link detected",
     auth_password_reset_ready_desc: "Please enter your new password below.",
-    welcome_new_user_title: "Welcome to CheapFuel! 🎉",
+    welcome_new_user_title: "Welcome to Cheapfuel! 🎉",
     welcome_new_user_message: "Find the cheapest fuel stations near you in seconds. Let's get started!",
     
     // Onboarding page
@@ -252,7 +252,7 @@ const translations = {
     auth_send_reset_link: "Reset-Link senden",
     auth_back_to_login: "Zurück zum Login",
     auth_reset_link_sent: "Reset-Link versendet",
-    auth_reset_link_sent_desc: "Überprüfe deine E-Mails für den Passwort-Reset-Link",
+    auth_reset_link_sent_desc: "Überprüfe deine E-Mails für den Passwort-Reset-Link. Bitte überprüfe auch deinen Spam-Ordner.",
     auth_error_title: "Authentifizierungsfehler",
     auth_error_invalid_credentials: "Ungültige E-Mail oder Passwort. Bitte überprüfe deine Anmeldedaten oder registriere dich, falls du noch kein Konto hast.",
     auth_error_weak_password: "Passwort muss mindestens 6 Zeichen lang sein",
@@ -282,14 +282,14 @@ const translations = {
     auth_password_updated_desc: "Sie können sich jetzt mit Ihrem neuen Passwort anmelden.",
     auth_password_reset_ready_title: "Passwort-Reset-Link erkannt",
     auth_password_reset_ready_desc: "Bitte geben Sie unten Ihr neues Passwort ein.",
-    welcome_new_user_title: "Willkommen bei CheapFuel! 🎉",
+    welcome_new_user_title: "Willkommen bei Cheapfuel! 🎉",
     welcome_new_user_message: "Finde die günstigsten Tankstellen in deiner Nähe in Sekunden. Lass uns starten!",
     
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Anmelden",
     onboarding_hero_title: "Finde die günstigste Tankstelle⛽️ in Sekunden⚡️ und spare jedes Jahr bis zu über 240€💰!",
-    onboarding_hero_subtitle: "Schnell. Einfach. Genau.",
+    onboarding_hero_subtitle: "Finde die günstigsten Tankstellen in Sekunden und spare jedes Jahr bis zu 240€💰! ",
     onboarding_cta_primary: "Jetzt loslegen",
     onboarding_cta_secondary: "Mehr erfahren",
     onboarding_features_title: "Warum Cheapfuel🧐?",
@@ -448,7 +448,7 @@ const translations = {
     auth_password_updated_desc: "Ahora puedes iniciar sesión con tu nueva contraseña.",
     auth_password_reset_ready_title: "Enlace de restablecimiento de contraseña detectado",
     auth_password_reset_ready_desc: "Por favor, introduce tu nueva contraseña a continuación.",
-    welcome_new_user_title: "¡Bienvenido a CheapFuel! 🎉",
+    welcome_new_user_title: "¡Bienvenido a Cheapfuel! 🎉",
     welcome_new_user_message: "Encuentra las gasolineras más baratas cerca de ti en segundos. ¡Empecemos!",
     
     // Onboarding page
@@ -614,7 +614,7 @@ const translations = {
     auth_password_updated_desc: "Ora puoi accedere con la tua nuova password.",
     auth_password_reset_ready_title: "Link di reimpostazione password rilevato",
     auth_password_reset_ready_desc: "Inserisci la tua nuova password qui sotto.",
-    welcome_new_user_title: "Benvenuto su CheapFuel! 🎉",
+    welcome_new_user_title: "Benvenuto su Cheapfuel! 🎉",
     welcome_new_user_message: "Trova le stazioni di servizio più economiche vicino a te in pochi secondi. Iniziamo!",
     
     // Onboarding page
@@ -780,7 +780,7 @@ const translations = {
     auth_password_updated_desc: "Możesz teraz zalogować się swoim nowym hasłem.",
     auth_password_reset_ready_title: "Wykryto link do resetowania hasła",
     auth_password_reset_ready_desc: "Proszę wprowadzić nowe hasło poniżej.",
-    welcome_new_user_title: "Witamy w CheapFuel! 🎉",
+    welcome_new_user_title: "Witamy w Cheapfuel! 🎉",
     welcome_new_user_message: "Znajdź najtańsze stacje paliw w pobliżu w kilka sekund. Zaczynajmy!",
     
     // Onboarding page
@@ -946,7 +946,7 @@ const translations = {
     auth_password_updated_desc: "Теперь вы можете войти с новым паролем.",
     auth_password_reset_ready_title: "Обнаружена ссылка для сброса пароля",
     auth_password_reset_ready_desc: "Пожалуйста, введите новый пароль ниже.",
-    welcome_new_user_title: "Добро пожаловать в CheapFuel! 🎉",
+    welcome_new_user_title: "Добро пожаловать в Cheapfuel! 🎉",
     welcome_new_user_message: "Найдите самые дешёвые заправки рядом с вами за секунды. Начнём!",
     
     // Onboarding page
@@ -1112,7 +1112,7 @@ const translations = {
     auth_password_updated_desc: "Vous pouvez maintenant vous connecter avec votre nouveau mot de passe.",
     auth_password_reset_ready_title: "Lien de réinitialisation du mot de passe détecté",
     auth_password_reset_ready_desc: "Veuillez entrer votre nouveau mot de passe ci-dessous.",
-    welcome_new_user_title: "Bienvenue sur CheapFuel! 🎉",
+    welcome_new_user_title: "Bienvenue sur Cheapfuel! 🎉",
     welcome_new_user_message: "Trouvez les stations-service les moins chères près de chez vous en quelques secondes. Commençons!",
     
     // Onboarding page
