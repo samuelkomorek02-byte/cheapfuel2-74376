@@ -54,9 +54,7 @@ const Paywall = () => {
           {/* Features List */}
           <div className="space-y-4 backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
             {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
-                <div className="mt-0.5 flex-shrink-0 h-6 w-6 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                  <Check className="h-4 w-4 text-white" />
-                </div>
+                <span className="text-base text-white leading-relaxed font-medium">-</span>
                 <span className="text-base text-white leading-relaxed">{feature}</span>
               </div>)}
           </div>

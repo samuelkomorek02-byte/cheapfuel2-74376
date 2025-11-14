@@ -38,6 +38,7 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   const [user, setUser] = useState<User | null>(null);
@@ -207,6 +208,13 @@ const Auth = () => {
       const validated = authSchema.parse({ email, password });
       
       if (isSignUp) {
+        // Validate password confirmation
+        if (password !== signupConfirmPassword) {
+          setPasswordError(t("auth_passwords_mismatch"));
+          setLoading(false);
+          return;
+        }
+        
         // Sign up
         const {
           error
@@ -513,6 +521,23 @@ const Auth = () => {
                   <p className="text-sm text-red-500 mt-1">{passwordError}</p>
                 )}
               </div>
+              {isSignUp && (
+                <div className="space-y-2">
+                  <Label htmlFor="confirm-password">{t("auth_confirm_password_placeholder")}</Label>
+                  <Input
+                    id="confirm-password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder={t("auth_confirm_password_placeholder")}
+                    value={signupConfirmPassword}
+                    onChange={(e) => {
+                      setSignupConfirmPassword(e.target.value);
+                      setPasswordError("");
+                    }}
+                    required
+                    disabled={loading}
+                  />
+                </div>
+              )}
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   {isSignUp ? t("auth_sign_up") : t("auth_sign_in")}

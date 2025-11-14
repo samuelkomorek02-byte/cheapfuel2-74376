@@ -100,6 +100,11 @@ const Index = () => {
   const [showWelcome, setShowWelcome] = useState(false);
   const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
   
+  // Scroll to top on mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+  
   const radius = DEFAULT_RADIUS_KM;
   const canUseGeo = useMemo(() => isHttpsOrLocalhost(), []);
   const SUPPORTED_FUEL_TYPES = new Set(["e5", "e10", "diesel"]);
