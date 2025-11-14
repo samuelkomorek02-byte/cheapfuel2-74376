@@ -23,9 +23,9 @@ serve(async (req) => {
     logStep("Function started");
 
     // Validate Stripe key first
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY_LIVE");
     if (!stripeKey) {
-      logStep("ERROR: STRIPE_SECRET_KEY not configured");
+      logStep("ERROR: STRIPE_SECRET_KEY_LIVE not configured");
       return new Response(JSON.stringify({ error: "Stripe ist nicht konfiguriert. Bitte kontaktiere den Support." }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 500,
