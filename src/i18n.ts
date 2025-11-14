@@ -288,8 +288,8 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Anmelden",
-    onboarding_hero_title: "Finde die günstigste Tankstelle⛽️ in Sekunden⚡️ und spare jedes Jahr bis zu über 240€💰!",
-    onboarding_hero_subtitle: "Finde die günstigsten Tankstellen in Sekunden und spare jedes Jahr bis zu 240€💰! ",
+    onboarding_hero_title: "Finde die günstigsten Tankstellen in Sekunden und spare jedes Jahr bis zu 240€💰!",
+    onboarding_hero_subtitle: "Schnell. Einfach. Genau.",
     onboarding_cta_primary: "Jetzt loslegen",
     onboarding_cta_secondary: "Mehr erfahren",
     onboarding_features_title: "Warum Cheapfuel🧐?",
