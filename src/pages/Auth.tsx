@@ -168,20 +168,10 @@ const Auth = () => {
           session
         }
       }) => {
-        // Im Preview-Modus keine Redirects
-        if (isPreviewMode()) return;
-        
-        // Don't redirect if we're in password update mode or if we're in signup mode
-        // (user might be coming back from social links)
-        if (session?.user && !isPasswordUpdate && !isSignUp) {
-          // Only redirect if we haven't just navigated here
-          const navigationEntry = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
-          if (navigationEntry && navigationEntry.type !== 'back_forward') {
-            navigate("/aboseite", {
-              replace: true
-            });
-          }
-        }
+        // Update state but don't auto-redirect
+        // Let users access the auth page even if logged in
+        setSession(session);
+        setUser(session?.user ?? null);
       });
     }
     
