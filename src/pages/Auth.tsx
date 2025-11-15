@@ -194,17 +194,35 @@ const Auth = () => {
     setPasswordError("");
     
     try {
-      // Unified validation for both flows
-      const validated = authSchema.parse({ email, password });
-      
+      // Additional validation for signup: check password confirmation first
       if (isSignUp) {
-        // Validate password confirmation
         if (password !== signupConfirmPassword) {
           setPasswordError(t("auth_passwords_mismatch"));
+          toast({
+            title: t("auth_error_title"),
+            description: t("auth_passwords_mismatch"),
+            variant: "destructive",
+          });
           setLoading(false);
           return;
         }
         
+        if (password.length < 6) {
+          setPasswordError(t("auth_password_too_short"));
+          toast({
+            title: t("auth_error_title"),
+            description: t("auth_password_too_short"),
+            variant: "destructive",
+          });
+          setLoading(false);
+          return;
+        }
+      }
+      
+      // Unified validation for both flows
+      const validated = authSchema.parse({ email, password });
+      
+      if (isSignUp) {
         // Sign up
         const {
           error

@@ -30,15 +30,18 @@ serve(async (req) => {
       { auth: { persistSession: false } }
     );
 
+    // JWT is already verified by Supabase (verify_jwt = true)
+    // Now extract user information from the token
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("No authorization header provided");
+    if (!authHeader) throw new Error("Keine Autorisierung vorhanden");
     logStep("Authorization header found");
 
     const token = authHeader.replace("Bearer ", "");
     const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
-    if (userError) throw new Error(`Authentication error: ${userError.message}`);
+    if (userError || !userData.user?.email) {
+      throw new Error(`Benutzer konnte nicht ermittelt werden: ${userError?.message}`);
+    }
     const user = userData.user;
-    if (!user?.email) throw new Error("User not authenticated or email not available");
     logStep("User authenticated", { userId: user.id, email: user.email });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
