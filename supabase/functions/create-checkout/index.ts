@@ -26,9 +26,9 @@ serve(async (req) => {
     logStep("Function started");
 
     // Validate Stripe key first
-    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY_LIVE");
     if (!stripeKey) {
-      logStep("ERROR: STRIPE_SECRET_KEY not configured");
+      logStep("ERROR: STRIPE_SECRET_KEY_LIVE not configured");
       return new Response(
         JSON.stringify({ error: "Stripe ist nicht konfiguriert. Bitte kontaktiere den Support." }),
         { 
@@ -82,7 +82,7 @@ serve(async (req) => {
       customer_email: customerId ? undefined : user.email,
       line_items: [
         {
-          price: "price_1SQXPUFbXQEN01haLGlHqUiq",
+          price: "price_1STK1wF7yW4klaUdtYHXQIOD",
           quantity: 1,
         },
       ],
