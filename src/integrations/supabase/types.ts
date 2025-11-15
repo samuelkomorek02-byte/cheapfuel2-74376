@@ -14,16 +14,181 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      fuel_prices: {
+        Row: {
+          created_at: string | null
+          fuel_type: Database["public"]["Enums"]["fuel_type"]
+          id: string
+          price: number
+          station_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          fuel_type: Database["public"]["Enums"]["fuel_type"]
+          id?: string
+          price: number
+          station_id: string
+        }
+        Update: {
+          created_at?: string | null
+          fuel_type?: Database["public"]["Enums"]["fuel_type"]
+          id?: string
+          price?: number
+          station_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fuel_prices_station_id_fkey"
+            columns: ["station_id"]
+            isOneToOne: false
+            referencedRelation: "stations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      stations: {
+        Row: {
+          brand: string | null
+          city: string | null
+          created_at: string | null
+          house_number: string | null
+          id: string
+          is_open: boolean | null
+          lat: number
+          lng: number
+          name: string
+          post_code: string | null
+          street: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          brand?: string | null
+          city?: string | null
+          created_at?: string | null
+          house_number?: string | null
+          id: string
+          is_open?: boolean | null
+          lat: number
+          lng: number
+          name: string
+          post_code?: string | null
+          street?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          brand?: string | null
+          city?: string | null
+          created_at?: string | null
+          house_number?: string | null
+          id?: string
+          is_open?: boolean | null
+          lat?: number
+          lng?: number
+          name?: string
+          post_code?: string | null
+          street?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      sync_logs: {
+        Row: {
+          completed_at: string | null
+          error_message: string | null
+          id: string
+          started_at: string | null
+          stations_failed: number | null
+          stations_synced: number | null
+          status: string
+          sync_type: string
+        }
+        Insert: {
+          completed_at?: string | null
+          error_message?: string | null
+          id?: string
+          started_at?: string | null
+          stations_failed?: number | null
+          stations_synced?: number | null
+          status?: string
+          sync_type: string
+        }
+        Update: {
+          completed_at?: string | null
+          error_message?: string | null
+          id?: string
+          started_at?: string | null
+          stations_failed?: number | null
+          stations_synced?: number | null
+          status?: string
+          sync_type?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      latest_fuel_prices: {
+        Row: {
+          fuel_type: Database["public"]["Enums"]["fuel_type"] | null
+          price: number | null
+          price_updated_at: string | null
+          station_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fuel_prices_station_id_fkey"
+            columns: ["station_id"]
+            isOneToOne: false
+            referencedRelation: "stations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      find_nearby_stations: {
+        Args: {
+          fuel_type_filter: Database["public"]["Enums"]["fuel_type"]
+          radius_km: number
+          user_lat: number
+          user_lng: number
+        }
+        Returns: {
+          brand: string
+          dist: number
+          fuel_type: string
+          id: string
+          is_open: boolean
+          lat: number
+          lng: number
+          name: string
+          price: number
+          price_updated_at: string
+        }[]
+      }
+      find_nearby_stations_optimized: {
+        Args: {
+          fuel_type_filter: Database["public"]["Enums"]["fuel_type"]
+          radius_km: number
+          user_lat: number
+          user_lng: number
+        }
+        Returns: {
+          brand: string
+          dist: number
+          fuel_type: string
+          id: string
+          is_open: boolean
+          lat: number
+          lng: number
+          name: string
+          price: number
+          price_updated_at: string
+        }[]
+      }
+      refresh_latest_prices: { Args: never; Returns: undefined }
     }
     Enums: {
-      [_ in never]: never
+      fuel_type: "e5" | "e10" | "diesel"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +315,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      fuel_type: ["e5", "e10", "diesel"],
+    },
   },
 } as const
