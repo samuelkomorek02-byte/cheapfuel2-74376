@@ -39,6 +39,8 @@ serve(async (req) => {
     }
     logStep("Stripe key found");
 
+    // JWT is already verified by Supabase (verify_jwt = true)
+    // Now extract user information from the token
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) {
       logStep("ERROR: No authorization header");
@@ -48,17 +50,12 @@ serve(async (req) => {
     const token = authHeader.replace("Bearer ", "");
     const { data, error: authError } = await supabaseClient.auth.getUser(token);
     
-    if (authError || !data.user) {
-      logStep("ERROR: Authentication failed", { error: authError?.message });
-      throw new Error("Authentifizierung fehlgeschlagen");
+    if (authError || !data.user?.email) {
+      logStep("ERROR: Could not extract user", { error: authError?.message });
+      throw new Error("Benutzer konnte nicht ermittelt werden");
     }
     
     const user = data.user;
-    if (!user?.email) {
-      logStep("ERROR: No email found");
-      throw new Error("Benutzer-Email nicht verfügbar");
-    }
-    
     logStep("User authenticated", { userId: user.id, email: user.email });
 
     const stripe = new Stripe(stripeKey, { 

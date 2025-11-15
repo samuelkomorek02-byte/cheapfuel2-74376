@@ -28,15 +28,22 @@ serve(async (req) => {
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY_LIVE");
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY_LIVE is not set");
     
+    // JWT is already verified by Supabase (verify_jwt = true)
+    // Now extract user information from the token
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) throw new Error("No authorization header provided");
+    if (!authHeader) {
+      logStep("No authorization header - returning unsubscribed");
+      return new Response(JSON.stringify({ subscribed: false }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 200,
+      });
+    }
 
     const token = authHeader.replace("Bearer ", "");
     const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
     
-    // Handle authentication errors gracefully - return unsubscribed instead of error
-    if (userError || !userData.user) {
-      logStep("Authentication failed - returning unsubscribed", { error: userError?.message });
+    if (userError || !userData.user?.email) {
+      logStep("Could not extract user - returning unsubscribed", { error: userError?.message });
       return new Response(JSON.stringify({ subscribed: false }), {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
         status: 200,
@@ -44,14 +51,6 @@ serve(async (req) => {
     }
     
     const user = userData.user;
-    if (!user?.email) {
-      logStep("No email found - returning unsubscribed");
-      return new Response(JSON.stringify({ subscribed: false }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-        status: 200,
-      });
-    }
-    
     logStep("User authenticated", { userId: user.id, email: user.email });
 
     const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
