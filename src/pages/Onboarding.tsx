@@ -100,7 +100,7 @@ const Onboarding = () => {
                 <span className="text-base">💰</span>
                 <span>spare jährlich bis zu 240€</span>
               </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-black">
+              <h1 className="md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-black text-5xl">
                 Nie wieder zu viel beim Tanken bezahlen
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">
