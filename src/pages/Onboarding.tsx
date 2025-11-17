@@ -69,7 +69,7 @@ const Onboarding = () => {
   }];
   return <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/40 animate-fade-in">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40 animate-fade-in">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-8 w-8" />
@@ -130,8 +130,8 @@ const Onboarding = () => {
           {features.map((feature, index) => {
           const Icon = feature.icon;
           return <Card key={index} className="overflow-hidden border-2">
-                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50">
-                  <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="eager" onError={e => {
+                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 min-h-[400px]">
+                  <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="lazy" onError={e => {
                 const img = e.currentTarget;
                 // Retry loading the image once
                 if (!img.dataset.retried) {
