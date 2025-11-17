@@ -14,7 +14,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background animate-fade-in">
+    <div className="min-h-screen flex items-center justify-center bg-background animate-fade-in" style={{ animationDuration: '0.4s' }}>
       <div className="text-center opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <h1 className="text-4xl font-bold mb-4">404</h1>
         <p className="text-xl text-muted-foreground mb-4">{t('not_found_message')}</p>

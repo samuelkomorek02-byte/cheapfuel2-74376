@@ -872,7 +872,7 @@ const Index = () => {
       setLoading(false);
     }
   };
-  return <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
+  return <div className="min-h-screen bg-gradient-to-b from-secondary to-background animate-fade-in" style={{ animationDuration: '0.4s' }}>
       {/* Welcome Dialog for New Users */}
       <AlertDialog open={showWelcomeDialog} onOpenChange={setShowWelcomeDialog}>
         <AlertDialogContent>

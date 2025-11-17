@@ -7,7 +7,7 @@ const AGB = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background animate-fade-in">
+    <div className="min-h-screen bg-background animate-fade-in" style={{ animationDuration: '0.4s' }}>
       <header className="border-b opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <div className="container mx-auto px-4 py-4">
           <Button
