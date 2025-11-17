@@ -112,7 +112,7 @@ const Onboarding = () => {
               <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all hover:scale-105">
                 {t('onboarding_cta_primary')}
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6 border-2 hover:bg-muted" onClick={() => document.getElementById('features')?.scrollIntoView({
+              <Button size="lg" className="text-lg px-8 py-6 bg-black text-white hover:bg-black/90 shadow-lg hover:shadow-xl transition-all hover:scale-105" onClick={() => document.getElementById('features')?.scrollIntoView({
               behavior: 'smooth'
             })}>
                 {t('onboarding_cta_secondary')}
