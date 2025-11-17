@@ -88,12 +88,15 @@ const Onboarding = () => {
       <section className="container mx-auto px-4 py-8 md:py-16 text-center opacity-0 animate-fade-in min-h-[calc(100vh-4rem)] flex items-center justify-center" style={{
       animationDelay: '0.1s'
     }}>
-        <div className="max-w-3xl mx-auto space-y-4 md:space-y-6">
-          
-          
-          <h1 className="md:text-5xl lg:text-6xl font-bold leading-tight text-5xl">{t('onboarding_hero_title')}</h1>
-          
-          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">{t('onboarding_hero_subtitle')}</p>
+        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+          <div className="space-y-4">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight">
+              {t('onboarding_hero_title')}
+            </h1>
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">
+              {t('onboarding_hero_subtitle')}
+            </p>
+          </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90">{t('onboarding_cta_primary')}</Button>
