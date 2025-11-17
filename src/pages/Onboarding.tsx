@@ -121,7 +121,7 @@ const Onboarding = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in scroll-mt-20" style={{
+      <section id="features" className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in scroll-mt-4" style={{
       animationDelay: '0.2s'
     }}>
         <div className="text-center mb-12">
