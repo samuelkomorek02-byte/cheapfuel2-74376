@@ -392,7 +392,7 @@ const Auth = () => {
     }
   };
 
-  return <div className="min-h-screen bg-background flex flex-col animate-fade-in">
+  return <div className="min-h-screen bg-background flex flex-col animate-fade-in" style={{ animationDuration: '0.6s' }}>
       {/* Loading Overlay während Subscription-Check */}
       {redirecting && <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
