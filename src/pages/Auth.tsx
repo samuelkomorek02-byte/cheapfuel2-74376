@@ -50,6 +50,9 @@ const Auth = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordUpdateError, setPasswordUpdateError] = useState("");
+  
+  // Track explicit user authentication actions (button clicks)
+  const [isExplicitAuthAction, setIsExplicitAuthAction] = useState(false);
 
   // Check for password recovery in URL (both query params and hash fragments)
   useEffect(() => {
@@ -112,12 +115,14 @@ const Auth = () => {
         setSession(null);
         setUser(null);
         setRedirecting(false);
+        setIsExplicitAuthAction(false);
         return;
       }
 
       // Only handle SIGNED_IN event (actual login/signup action)
       // Don't redirect if we're in password update mode
-      if (event === 'SIGNED_IN' && session?.user && !isPasswordUpdate) {
+      // Only redirect if this was an explicit user action (button click)
+      if (event === 'SIGNED_IN' && session?.user && !isPasswordUpdate && isExplicitAuthAction) {
         // Prevent multiple redirects
         if (redirecting) return;
         
@@ -157,6 +162,9 @@ const Auth = () => {
             navigate("/paywall");
           }
         }
+        
+        // Reset the flag after successful redirect
+        setIsExplicitAuthAction(false);
       }
     });
 
@@ -223,6 +231,9 @@ const Auth = () => {
       const validated = authSchema.parse({ email, password });
       
       if (isSignUp) {
+        // Mark this as an explicit user action
+        setIsExplicitAuthAction(true);
+        
         // Sign up
         const {
           error
@@ -247,6 +258,9 @@ const Auth = () => {
           throw error;
         }
       } else {
+        // Mark this as an explicit user action
+        setIsExplicitAuthAction(true);
+        
         // Sign in
         const {
           error
@@ -261,6 +275,9 @@ const Auth = () => {
         }
       }
     } catch (error: any) {
+      // Reset the flag on any error
+      setIsExplicitAuthAction(false);
+      
       if (error instanceof z.ZodError) {
         const issue = error.issues[0];
         if (issue.path[0] === "email") {
