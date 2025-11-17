@@ -391,10 +391,6 @@ const Index = () => {
           // NO FALLBACK - show error and stop
           setStations([]);
           setUserLoc(null);
-          toast({
-            title: t('location_error_title'),
-            description: locationError ? t(`location_${locationError}`) : t('location_error_desc')
-          });
           return;
         }
       } else {
@@ -764,10 +760,6 @@ const Index = () => {
           setOutsideGermany(false);
         } catch (geoError) {
           setRouteDialogOpen(false);
-          toast({
-            title: t('location_error_title'),
-            description: locationError ? t(`location_${locationError}`) : t('location_error_desc')
-          });
           setLoading(false);
           return;
         }
