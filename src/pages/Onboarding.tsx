@@ -85,14 +85,13 @@ const Onboarding = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-start md:items-center justify-center opacity-0 animate-fade-in bg-gradient-to-br from-background via-muted/30 to-background pt-12 md:pt-0" style={{
-      animationDelay: '0.1s',
-      animationDuration: '0.4s'
+      <section className="relative overflow-hidden h-[calc(100vh-4rem)] flex items-start md:items-center justify-center opacity-0 animate-fade-in-hero bg-gradient-to-br from-background via-muted/30 to-background pt-12 md:pt-0" style={{
+      animationDelay: '0.1s'
     }}>
         {/* Decorative background elements */}
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl hero-blur" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl hero-blur" />
         
         <div className="container mx-auto px-4 py-6 md:py-16 text-center relative z-10">
           <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">

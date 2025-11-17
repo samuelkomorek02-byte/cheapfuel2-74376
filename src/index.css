@@ -117,4 +117,26 @@ All colors MUST be HSL.
   .animate-fade-in {
     will-change: opacity, transform;
   }
+
+  /* Hero Section Animation ohne vertikale Bewegung */
+  @keyframes fade-in-hero {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in-hero {
+    animation: fade-in-hero 0.4s ease-out forwards;
+    will-change: opacity;
+    contain: layout;
+    overflow-anchor: none;
+  }
+
+  /* Performance-Optimierung für Blur-Effekte */
+  .hero-blur {
+    will-change: filter;
+  }
 }
