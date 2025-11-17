@@ -10,13 +10,11 @@ import featureEinfach from "@/assets/feature-einfach.jpg";
 import featureGenau from "@/assets/feature-genau.jpg";
 import { Fuel, Star, Zap, Target, MapPin, Instagram } from "lucide-react";
 import Footer from "@/components/Footer";
-import { useIntersectionObserver } from "@/hooks/useIntersectionObserver";
 const Onboarding = () => {
   const navigate = useNavigate();
   const {
     t
   } = useTranslation();
-  const { ref: featuresRef, isVisible: featuresVisible } = useIntersectionObserver();
   const handleStart = () => {
     navigate("/auth", {
       state: {
@@ -123,7 +121,9 @@ const Onboarding = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" ref={featuresRef} className="container mx-auto px-4 py-12 md:py-20 scroll-mt-20">
+      <section id="features" className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in scroll-mt-20" style={{
+      animationDelay: '0.2s'
+    }}>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl mb-4 font-bold">{t('onboarding_features_title')}</h2>
         </div>
@@ -131,14 +131,7 @@ const Onboarding = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => {
           const Icon = feature.icon;
-          return <Card 
-              key={index} 
-              className="overflow-hidden border-2 opacity-0 animate-fade-in" 
-              style={{
-                animationDelay: featuresVisible ? `${index * 0.15}s` : '0s',
-                animationFillMode: 'forwards'
-              }}
-            >
+          return <Card key={index} className="overflow-hidden border-2">
                 <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50">
                   <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="eager" onError={e => {
                 const img = e.currentTarget;
