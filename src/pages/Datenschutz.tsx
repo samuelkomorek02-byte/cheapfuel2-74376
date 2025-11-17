@@ -12,7 +12,7 @@ const Datenschutz = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-secondary to-background animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-b from-secondary to-background animate-fade-in" style={{ animationDuration: '0.4s' }}>
       <div className="container max-w-4xl py-8 px-4">
         <Button variant="ghost" className="mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }} onClick={() => navigate(-1)}>
           <ArrowLeft className="mr-2 h-4 w-4" />

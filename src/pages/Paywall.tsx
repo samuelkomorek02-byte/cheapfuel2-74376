@@ -39,7 +39,7 @@ const Paywall = () => {
 
       {/* Main Content */}
       <div className="min-h-screen flex items-center justify-center p-4 pb-8">
-        <div className="w-full max-w-md space-y-8 animate-fade-in">
+        <div className="w-full max-w-md space-y-8 animate-fade-in" style={{ animationDuration: '0.4s' }}>
           {/* Logo and Title */}
           <div className="text-center space-y-4">
             <div className="flex justify-center">
