@@ -102,7 +102,7 @@ const Onboarding = () => {
               </div>
               <h1 className="md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-black text-5xl">Zahle nie wieder zu viel für deinen Kraftstoff ⛽️</h1>
               <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">
-                Finde in Sekunden die günstigsten Tankstellen ⚡️
+                Finde in Sekunden die günstigsten Tankstellen in deiner Nähe ⚡️
               </p>
             </div>
             
