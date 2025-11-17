@@ -97,7 +97,7 @@ const Onboarding = () => {
           <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
-                <Fuel className="w-4 h-4" />
+                <span className="text-base">💰</span>
                 <span>spare jährlich bis zu 240€</span>
               </div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
