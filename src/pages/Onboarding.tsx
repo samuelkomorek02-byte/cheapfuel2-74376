@@ -85,26 +85,39 @@ const Onboarding = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-8 md:py-16 text-center opacity-0 animate-fade-in min-h-[calc(100vh-4rem)] flex items-center justify-center" style={{
+      <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center opacity-0 animate-fade-in bg-gradient-to-br from-background via-muted/30 to-background" style={{
       animationDelay: '0.1s'
     }}>
-        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight">
-              {t('onboarding_hero_title')}
-            </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">
-              {t('onboarding_hero_subtitle')}
-            </p>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90">{t('onboarding_cta_primary')}</Button>
-            <Button variant="default" size="lg" className="text-lg px-8 py-6 bg-black text-white hover:bg-black/90 dark:bg-black dark:text-white" onClick={() => document.getElementById('features')?.scrollIntoView({
-            behavior: 'smooth'
-          })}>
-              {t('onboarding_cta_secondary')}
-            </Button>
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+        
+        <div className="container mx-auto px-4 py-8 md:py-16 text-center relative z-10">
+          <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+                <Fuel className="w-4 h-4" />
+                <span>Spare bis zu 240€ pro Jahr</span>
+              </div>
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
+                {t('onboarding_hero_title')}
+              </h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">
+                {t('onboarding_hero_subtitle')}
+              </p>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all hover:scale-105">
+                {t('onboarding_cta_primary')}
+              </Button>
+              <Button variant="outline" size="lg" className="text-lg px-8 py-6 border-2 hover:bg-muted" onClick={() => document.getElementById('features')?.scrollIntoView({
+              behavior: 'smooth'
+            })}>
+                {t('onboarding_cta_secondary')}
+              </Button>
+            </div>
           </div>
         </div>
       </section>
