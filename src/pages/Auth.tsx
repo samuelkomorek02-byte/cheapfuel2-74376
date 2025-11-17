@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { supabase } from "@/integrations/supabase/client";
@@ -52,7 +52,7 @@ const Auth = () => {
   const [passwordUpdateError, setPasswordUpdateError] = useState("");
   
   // Track explicit user authentication actions (button clicks)
-  const [isExplicitAuthAction, setIsExplicitAuthAction] = useState(false);
+  const isExplicitAuthActionRef = useRef(false);
 
   // Check for password recovery in URL (both query params and hash fragments)
   useEffect(() => {
@@ -115,14 +115,14 @@ const Auth = () => {
         setSession(null);
         setUser(null);
         setRedirecting(false);
-        setIsExplicitAuthAction(false);
+        isExplicitAuthActionRef.current = false;
         return;
       }
 
       // Only handle SIGNED_IN event (actual login/signup action)
       // Don't redirect if we're in password update mode
       // Only redirect if this was an explicit user action (button click)
-      if (event === 'SIGNED_IN' && session?.user && !isPasswordUpdate && isExplicitAuthAction) {
+      if (event === 'SIGNED_IN' && session?.user && !isPasswordUpdate && isExplicitAuthActionRef.current) {
         // Prevent multiple redirects
         if (redirecting) return;
         
@@ -164,7 +164,7 @@ const Auth = () => {
         }
         
         // Reset the flag after successful redirect
-        setIsExplicitAuthAction(false);
+        isExplicitAuthActionRef.current = false;
       }
     });
 
@@ -232,7 +232,7 @@ const Auth = () => {
       
       if (isSignUp) {
         // Mark this as an explicit user action
-        setIsExplicitAuthAction(true);
+        isExplicitAuthActionRef.current = true;
         
         // Sign up
         const {
@@ -253,13 +253,14 @@ const Auth = () => {
               duration: 5000
             });
             setLoading(false);
+            isExplicitAuthActionRef.current = false;
             return;
           }
           throw error;
         }
       } else {
         // Mark this as an explicit user action
-        setIsExplicitAuthAction(true);
+        isExplicitAuthActionRef.current = true;
         
         // Sign in
         const {
@@ -271,12 +272,13 @@ const Auth = () => {
         if (error) {
           setPasswordError(t("auth_error_invalid_credentials_inline"));
           setLoading(false);
+          isExplicitAuthActionRef.current = false;
           return;
         }
       }
     } catch (error: any) {
       // Reset the flag on any error
-      setIsExplicitAuthAction(false);
+      isExplicitAuthActionRef.current = false;
       
       if (error instanceof z.ZodError) {
         const issue = error.issues[0];
