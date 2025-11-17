@@ -104,7 +104,7 @@ const Onboarding = () => {
                 Nie wieder zu viel beim Tanken bezahlen
               </h1>
               <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">
-                {t('onboarding_hero_subtitle')}
+                Finde in Sekunden die günstigsten Tankstellen ⚡️
               </p>
             </div>
             
