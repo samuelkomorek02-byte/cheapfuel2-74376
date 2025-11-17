@@ -98,10 +98,10 @@ const Onboarding = () => {
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
                 <span className="text-base">💰</span>
-                <span>Spare jährlich bis zu 240€</span>
+                <span>{t('onboarding_hero_badge')}</span>
               </div>
-              <h1 className="md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-black text-5xl">Finde in Sekunden die günstigsten Tankstellen in deiner Nähe⛽️</h1>
-              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">Schnell. Einfach. Genau.    </p>
+              <h1 className="md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-black text-5xl">{t('onboarding_hero_title')}</h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">{t('onboarding_hero_subtitle')}</p>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
