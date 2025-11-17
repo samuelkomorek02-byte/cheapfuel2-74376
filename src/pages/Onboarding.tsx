@@ -85,7 +85,7 @@ const Onboarding = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-center justify-center opacity-0 animate-fade-in bg-gradient-to-br from-background via-muted/30 to-background" style={{
+      <section className="relative overflow-hidden min-h-[calc(100vh-4rem)] flex items-start md:items-center justify-center opacity-0 animate-fade-in bg-gradient-to-br from-background via-muted/30 to-background pt-12 md:pt-0" style={{
       animationDelay: '0.1s'
     }}>
         {/* Decorative background elements */}
