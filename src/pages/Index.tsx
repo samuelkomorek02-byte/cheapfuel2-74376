@@ -61,7 +61,7 @@ const Index = () => {
   } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const navigationState = location.state as { subscribed?: boolean; checkedAt?: number } | null;
+  const navigationState = location.state as { subscribed?: boolean; checkedAt?: number; fromLogout?: boolean } | null;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -178,6 +178,11 @@ const Index = () => {
   useEffect(() => {
     // Im Preview-Modus keine Redirects
     if (isPreviewMode()) return;
+    
+    // Nach Logout nicht zur Paywall weiterleiten
+    if (navigationState?.fromLogout) {
+      return;
+    }
     
     // Wenn wir von Auth.tsx mit subscribed state kommen, nicht nochmal checken
     if (navigationState?.subscribed && navigationState?.checkedAt) {
@@ -922,7 +927,7 @@ const Index = () => {
               )}
               <DropdownMenuItem onClick={async () => {
                 await supabase.auth.signOut();
-                navigate("/");
+                navigate("/", { replace: true, state: { fromLogout: true } });
               }}>
                 <LogOut className="mr-2 h-4 w-4" />
                 <span>{t('logout')}</span>
