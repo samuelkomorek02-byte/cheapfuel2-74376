@@ -98,7 +98,7 @@ const Onboarding = () => {
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
                 <Fuel className="w-4 h-4" />
-                <span>Spare jährlich bis zu 240€                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </span>
+                <span>Spare bis zu 240€ pro Jahr</span>
               </div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
                 {t('onboarding_hero_title')}
@@ -135,16 +135,22 @@ const Onboarding = () => {
           const Icon = feature.icon;
           return <Card key={index} className="overflow-hidden border-2">
                 <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50">
-                  <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="eager" onError={e => {
-                const img = e.currentTarget;
-                // Retry loading the image once
-                if (!img.dataset.retried) {
-                  img.dataset.retried = 'true';
-                  const src = img.src;
-                  img.src = '';
-                  setTimeout(() => img.src = src, 100);
-                }
-              }} />
+                  <img 
+                    src={feature.image} 
+                    alt={feature.title} 
+                    className="w-full h-full object-cover"
+                    loading="eager"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      // Retry loading the image once
+                      if (!img.dataset.retried) {
+                        img.dataset.retried = 'true';
+                        const src = img.src;
+                        img.src = '';
+                        setTimeout(() => img.src = src, 100);
+                      }
+                    }}
+                  />
                 </div>
                 <CardContent className="p-4 md:p-6 text-center space-y-3">
                   
