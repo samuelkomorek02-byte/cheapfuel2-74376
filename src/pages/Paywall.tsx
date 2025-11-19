@@ -7,11 +7,14 @@ import { useEffect } from "react";
 import { isPreviewMode } from "@/lib/utils";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
+import { useCountUp } from "@/hooks/useCountUp";
+
 const Paywall = () => {
   const navigate = useNavigate();
   const {
     t
   } = useTranslation();
+  const savings = useCountUp(240, 2000, 0);
   const {
     subscribed,
     loading,
@@ -59,7 +62,13 @@ const Paywall = () => {
               </div>
             </div>
             <h1 className="text-5xl font-bold tracking-tight drop-shadow-lg text-black">{t('paywall_title')}</h1>
-            <p className="text-lg text-white">{t('paywall_subtitle')}</p>
+            <p className="text-lg text-white">
+              Finde die günstigsten Tankstellen in Sekunden und spare dadurch jährlich über{' '}
+              <span className="font-bold text-2xl inline-block min-w-[4ch] animate-pulse">
+                {savings}€
+              </span>
+              ⚡️💰🎉
+            </p>
           </div>
 
           {/* Features List */}
