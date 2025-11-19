@@ -39,8 +39,8 @@ const Paywall = () => {
           {/* Logo and Title */}
           <div className="text-center space-y-6">
             <div className="flex items-end justify-center gap-3">
-              <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-10 w-10" />
-              <span className="text-2xl font-bold text-black">Cheapfuel</span>
+              
+              
             </div>
             <h1 className="font-bold tracking-tight drop-shadow-lg font-sans text-white text-3xl">{t('paywall_new_subtitle')}</h1>
             <div className="border-2 border-blue-400 bg-white/10 backdrop-blur-sm rounded-lg p-2 mx-auto max-w-fit shadow-[0_0_15px_rgba(96,165,250,0.6)]">
