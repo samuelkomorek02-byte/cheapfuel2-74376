@@ -45,13 +45,13 @@ const Paywall = () => {
             </div>
             <h1 className="font-bold tracking-tight drop-shadow-lg text-4xl font-sans text-slate-900">{t('paywall_title')}</h1>
             <h2 className="text-2xl font-bold text-white drop-shadow-md">{t('paywall_new_subtitle')}</h2>
-            <div className="border-2 border-blue-400 bg-white/10 backdrop-blur-sm rounded-lg p-2 mx-auto max-w-fit shadow-[0_0_15px_rgba(96,165,250,0.6)]">
+            <div className="border-2 border-blue-600 bg-white/10 backdrop-blur-sm rounded-lg p-2 mx-auto max-w-fit shadow-[0_0_15px_rgba(37,99,235,0.8)]">
               <p className="text-sm font-semibold text-white">{t('paywall_savings_text')}</p>
             </div>
           </div>
 
           {/* Features List */}
-          <div className="space-y-4 backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-400 bg-slate-900 shadow-[0_0_20px_rgba(96,165,250,0.6)]">
+          <div className="space-y-4 backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-600 bg-slate-900 shadow-[0_0_20px_rgba(37,99,235,0.8)]">
             {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-check-circle flex-shrink-0 mt-0.5" />
                 <span className="text-white leading-relaxed text-base">{feature}</span>
