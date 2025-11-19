@@ -63,11 +63,11 @@ const Paywall = () => {
             </div>
             <h1 className="text-5xl font-bold tracking-tight drop-shadow-lg text-black">{t('paywall_title')}</h1>
             <p className="text-lg text-white">
-              Finde die günstigsten Tankstellen in Sekunden und spare dadurch jährlich über{' '}
-              <span className="font-bold text-2xl inline-block min-w-[4ch] animate-pulse">
-                {savings}€
+              Finde die günstigsten Tankstellen in Sekunden und spare jährlich über{' '}
+              <span className="font-bold text-2xl inline-block">
+                240€
               </span>
-              ⚡️💰🎉
+              💰
             </p>
           </div>
 
