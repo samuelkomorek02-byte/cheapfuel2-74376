@@ -49,7 +49,7 @@ const Paywall = () => {
           </div>
 
           {/* Features List */}
-          <div className="space-y-4 backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-600 bg-slate-900 shadow-[0_0_20px_rgba(37,99,235,0.8)]">
+          <div className="space-y-4 backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-600 bg-slate-800 shadow-[0_0_20px_rgba(37,99,235,0.8)]">
             {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
                 <Check className="h-5 w-5 text-check-circle flex-shrink-0 mt-0.5" />
                 <span className="text-white leading-relaxed font-semibold text-lg">{feature}</span>
@@ -64,7 +64,7 @@ const Paywall = () => {
                 {t('paywall_cancel_anytime')}
               </p>
             </div>
-            <Button size="lg" onClick={initiateCheckout} disabled={loading || checkoutLoading} className="w-full text-lg font-semibold h-14 text-white shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105 bg-slate-900 hover:bg-slate-800">
+            <Button size="lg" onClick={initiateCheckout} disabled={loading || checkoutLoading} className="w-full text-lg font-semibold h-14 text-white shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105 bg-black hover:bg-black/90">
               {checkoutLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               {t('paywall_cta_button')}
             </Button>
