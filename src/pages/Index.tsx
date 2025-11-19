@@ -872,7 +872,7 @@ const Index = () => {
       setLoading(false);
     }
   };
-  return <div className="min-h-screen bg-gradient-to-b from-secondary to-background animate-fade-in" style={{ animationDuration: '0.4s' }}>
+  return <div className="min-h-screen bg-gradient-to-b from-secondary to-background">
       {/* Welcome Dialog for New Users */}
       <AlertDialog open={showWelcomeDialog} onOpenChange={setShowWelcomeDialog}>
         <AlertDialogContent>
@@ -887,7 +887,7 @@ const Index = () => {
         </AlertDialogContent>
       </AlertDialog>
 
-      <header className="container py-8 animate-fade-in">
+      <header className="container py-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
         <nav className="flex items-center justify-between">
           <a href="#" className="flex items-center gap-2 text-2xl font-semibold tracking-tight">
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-10 w-10" />
@@ -940,13 +940,13 @@ const Index = () => {
 
       <main>
         <section className="container py-10 md:py-16 opacity-0 animate-fade-in" style={{
-        animationDelay: '0.2s'
+        animationDelay: '0.3s'
       }}>
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
               {t('hero_title')}
             </h1>
-            <p id="hero-subtitle" className="text-lg md:text-xl text-muted-foreground mb-8">
+            <p id="hero-subtitle" className="text-lg md:text-xl text-muted-foreground mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               {t('hero_subtitle')}
             </p>
             
@@ -969,7 +969,7 @@ const Index = () => {
                 </AlertDescription>
               </Alert>}
             
-            <div id="controls" className="flex flex-col items-center justify-center gap-4">
+            <div id="controls" className="flex flex-col items-center justify-center gap-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
               <div className="flex flex-row items-center gap-4">
                 <Select value={fuelType} onValueChange={v => {
                 const newType = v as "e5" | "e10" | "diesel";
@@ -1052,13 +1052,13 @@ const Index = () => {
         </section>
 
         <section id="content" className="container pb-16 opacity-0 animate-fade-in" style={{
-        animationDelay: '0.4s'
+        animationDelay: '1s'
       }}>
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-            <div id="map" className="lg:col-span-3">
+            <div id="map" className="lg:col-span-3 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s' }}>
               <CheapfuelMap userLocation={userLoc} stations={displayStations} onNavigate={handleStationClick} cheapestPrice={cheapestPrice} routePath={routePath} destination={destination} />
             </div>
-            <aside id="results" className="lg:col-span-2">
+            <aside id="results" className="lg:col-span-2 opacity-0 animate-fade-in" style={{ animationDelay: '1.4s' }}>
               <Card>
                 <CardContent className="p-0">
                   <div className="p-4 border-b">
@@ -1111,7 +1111,9 @@ const Index = () => {
         </section>
       </main>
 
-      <Footer />
+      <div className="opacity-0 animate-fade-in" style={{ animationDelay: '1.6s' }}>
+        <Footer />
+      </div>
 
       {/* Navigation Dialog */}
       <NavigationDialog station={navigationStation} onClose={() => setNavigationStation(null)} routeMode={routeMode} origin={routeMode ? userLoc || undefined : undefined} destination={routeMode ? destination || undefined : undefined} />
