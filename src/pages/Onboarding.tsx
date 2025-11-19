@@ -100,7 +100,7 @@ const Onboarding = () => {
                 <span className="text-base">💰</span>
                 <span>{t('onboarding_hero_badge')}</span>
               </div>
-              <h1 className="md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-black text-5xl">{t('onboarding_hero_title')}</h1>
+              <h1 className="md:text-6xl lg:text-7xl font-extrabold leading-[1.1] tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-black text-5xl whitespace-pre-line">{t('onboarding_hero_title')}</h1>
               <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground/90 max-w-3xl mx-auto leading-relaxed font-medium">{t('onboarding_hero_subtitle')}</p>
             </div>
             
