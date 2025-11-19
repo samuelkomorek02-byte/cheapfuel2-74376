@@ -84,7 +84,7 @@ serve(async (req) => {
         },
       ],
       mode: "subscription",
-      success_url: `${origin}/?payment=success`,
+      success_url: `${origin}/aboseite?payment=success`,
       cancel_url: `${origin}/paywall?payment=canceled`,
     });
 
