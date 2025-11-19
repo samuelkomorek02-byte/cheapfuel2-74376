@@ -38,7 +38,7 @@ const Paywall = () => {
       }}>
           {/* Logo and Title */}
           <div className="text-center space-y-4">
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex items-center justify-center gap-3">
               <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-16 w-16" />
               <span className="text-2xl font-bold text-black">Cheapfuel</span>
             </div>
