@@ -392,7 +392,7 @@ const Auth = () => {
     }
   };
 
-  return <div className="min-h-screen bg-background flex flex-col animate-fade-in" style={{ animationDuration: '0.4s' }}>
+  return <div className="min-h-screen bg-background flex flex-col animate-fade-in" style={{ animationDuration: '0.2s' }}>
       {/* Loading Overlay während Subscription-Check */}
       {redirecting && <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
           <div className="flex flex-col items-center gap-4">
@@ -428,7 +428,7 @@ const Auth = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center px-6 py-12 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+      <main className="flex-1 flex items-center justify-center px-6 py-12 opacity-0 animate-fade-in">
         <Card className="w-full max-w-md">
           <CardHeader className="space-y-1">
             <CardTitle className="text-2xl font-bold text-center">
@@ -592,7 +592,7 @@ const Auth = () => {
           </CardContent>
         </Card>
       </main>
-      <div className="opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+      <div className="opacity-0 animate-fade-in">
         <Footer />
       </div>
     </div>;
