@@ -25,11 +25,11 @@ const Paywall = () => {
     }
   }, [subscribed, navigate]);
   const features = [
-    t('paywall_feature_1'),
-    t('paywall_feature_2'),
-    t('paywall_feature_3'),
-    t('paywall_feature_4'),
-    t('paywall_feature_5')
+    { emoji: '🔍', text: t('paywall_feature_1') },
+    { emoji: '💰', text: t('paywall_feature_2') },
+    { emoji: '🗺️', text: t('paywall_feature_3') },
+    { emoji: '⛽', text: t('paywall_feature_4') },
+    { emoji: '🧭', text: t('paywall_feature_5') }
   ];
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
@@ -54,8 +54,8 @@ const Paywall = () => {
           {/* Features List */}
           <div className="space-y-4 backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
             {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
-                <span className="text-base text-white leading-relaxed font-medium">-</span>
-                <span className="text-base text-white leading-relaxed">{feature}</span>
+                <span className="text-base text-white leading-relaxed font-medium">{feature.emoji}</span>
+                <span className="text-base text-white leading-relaxed">{feature.text}</span>
               </div>)}
           </div>
 
