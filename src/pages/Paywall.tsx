@@ -24,13 +24,7 @@ const Paywall = () => {
       navigate("/aboseite");
     }
   }, [subscribed, navigate]);
-  const features = [
-    t('paywall_feature_1'),
-    t('paywall_feature_2'),
-    t('paywall_feature_3'),
-    t('paywall_feature_4'),
-    t('paywall_feature_5')
-  ];
+  const features = [t('paywall_feature_1'), t('paywall_feature_2'), t('paywall_feature_3'), t('paywall_feature_4'), t('paywall_feature_5')];
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
       <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/")}>
@@ -39,7 +33,9 @@ const Paywall = () => {
 
       {/* Main Content */}
       <div className="min-h-screen flex items-center justify-center p-4 pb-8">
-        <div className="w-full max-w-md space-y-8 animate-fade-in" style={{ animationDuration: '0.4s' }}>
+        <div className="w-full max-w-md space-y-8 animate-fade-in" style={{
+        animationDuration: '0.4s'
+      }}>
           {/* Logo and Title */}
           <div className="text-center space-y-4">
             <div className="flex justify-center">
@@ -57,7 +53,7 @@ const Paywall = () => {
                 <div className="bg-white/20 rounded-full p-1.5 flex-shrink-0">
                   <Check className="h-4 w-4 text-white" />
                 </div>
-                <span className="text-base text-white leading-relaxed">{feature}</span>
+                <span className="text-white leading-relaxed text-lg">{feature}</span>
               </div>)}
           </div>
 
