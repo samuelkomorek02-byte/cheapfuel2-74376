@@ -67,7 +67,6 @@ const Paywall = () => {
               <span className="font-bold text-2xl inline-block">
                 240€
               </span>
-              💰
             </p>
           </div>
 
