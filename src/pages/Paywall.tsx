@@ -39,12 +39,15 @@ const Paywall = () => {
           {/* Logo and Title */}
           <div className="text-center space-y-4">
             <div className="flex justify-center">
-              <div className="bg-white rounded-full p-4 shadow-2xl">
-                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-16 w-16" />
+              <div className="bg-white rounded-full p-3 shadow-2xl">
+                <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-12 w-12" />
               </div>
             </div>
-            <h1 className="font-bold tracking-tight drop-shadow-lg text-5xl font-sans text-slate-900">{t('paywall_title')}</h1>
-            <p className="text-lg font-bold text-slate-50">{t('paywall_subtitle')}</p>
+            <h1 className="font-bold tracking-tight drop-shadow-lg text-4xl font-sans text-slate-900">{t('paywall_title')}</h1>
+            <h2 className="text-2xl font-bold text-white drop-shadow-md">{t('paywall_new_subtitle')}</h2>
+            <div className="border-2 border-white/30 bg-white/10 backdrop-blur-sm rounded-xl p-4 mx-auto max-w-xs">
+              <p className="text-xl font-bold text-white">{t('paywall_savings_text')}</p>
+            </div>
           </div>
 
           {/* Features List */}
