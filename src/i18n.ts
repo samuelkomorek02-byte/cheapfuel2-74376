@@ -160,7 +160,7 @@ const translations = {
     // Paywall page
     paywall_title: "Cheapfuel",
     paywall_subtitle: "Find the cheapest gas stations in seconds and save on every fill-up!",
-    paywall_new_subtitle: "Lower your fuel costs in seconds",
+    paywall_new_subtitle: "Find the cheapest gas stations in seconds!",
     paywall_savings_text: "save over €240 annually",
     paywall_feature_1: "Unlimited gas station search",
     paywall_feature_2: "Real-time price comparisons",
@@ -498,7 +498,7 @@ const translations = {
     // Paywall page
     paywall_title: "Cheapfuel",
     paywall_subtitle: "Encuentra las gasolineras más baratas en segundos y ahorra en cada carga!",
-    paywall_new_subtitle: "Reduce tus costos de combustible en segundos",
+    paywall_new_subtitle: "¡Encuentra las gasolineras más baratas en segundos!",
     paywall_savings_text: "ahorra más de 240€ al año",
     paywall_feature_1: "Búsqueda ilimitada de gasolineras",
     paywall_feature_2: "Comparaciones de precios en tiempo real",
@@ -667,7 +667,7 @@ const translations = {
     // Paywall page
     paywall_title: "Cheapfuel",
     paywall_subtitle: "Trova le stazioni di servizio più economiche in pochi secondi e risparmia su ogni rifornimento!",
-    paywall_new_subtitle: "Riduci i costi del carburante in pochi secondi",
+    paywall_new_subtitle: "Trova le stazioni di servizio più economiche in pochi secondi!",
     paywall_savings_text: "risparmia oltre 240€ all'anno",
     paywall_feature_1: "Ricerca illimitata di stazioni di servizio",
     paywall_feature_2: "Confronti di prezzi in tempo reale",
@@ -836,7 +836,7 @@ const translations = {
     // Paywall page
     paywall_title: "Cheapfuel",
     paywall_subtitle: "Znajdź najtańsze stacje paliw w kilka sekund i oszczędzaj przy każdym tankowaniu!",
-    paywall_new_subtitle: "Obniż koszty paliwa w kilka sekund",
+    paywall_new_subtitle: "Znajdź najtańsze stacje paliw w kilka sekund!",
     paywall_savings_text: "oszczędzaj ponad 240€ rocznie",
     paywall_feature_1: "Nieograniczone wyszukiwanie stacji paliw",
     paywall_feature_2: "Porównania cen w czasie rzeczywistym",
@@ -1005,7 +1005,7 @@ const translations = {
     // Paywall page
     paywall_title: "Cheapfuel",
     paywall_subtitle: "Найдите самые дешёвые заправки за секунды и экономьте при каждой заправке!",
-    paywall_new_subtitle: "Снизьте расходы на топливо за секунды",
+    paywall_new_subtitle: "Найдите самые дешёвые заправки за секунды!",
     paywall_savings_text: "экономьте более 240€ в год",
     paywall_feature_1: "Неограниченный поиск заправок",
     paywall_feature_2: "Сравнение цен в реальном времени",
@@ -1174,7 +1174,7 @@ const translations = {
     // Paywall page
     paywall_title: "Cheapfuel",
     paywall_subtitle: "Trouvez les stations-service les moins chères en quelques secondes et économisez à chaque plein!",
-    paywall_new_subtitle: "Réduis tes coûts de carburant en quelques secondes",
+    paywall_new_subtitle: "Trouve les stations-service les moins chères en quelques secondes !",
     paywall_savings_text: "économise plus de 240€ par an",
     paywall_feature_1: "Recherche illimitée de stations-service",
     paywall_feature_2: "Comparaisons de prix en temps réel",
