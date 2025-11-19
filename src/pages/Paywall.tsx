@@ -39,22 +39,20 @@ const Paywall = () => {
           {/* Logo and Title */}
           <div className="text-center space-y-6">
             <div className="flex items-end justify-center gap-3">
-              
-              
+              <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-10 w-10" />
+              <span className="text-2xl font-bold text-black">Cheapfuel</span>
             </div>
-            <h1 className="font-bold tracking-tight drop-shadow-lg font-sans text-white text-4xl">{t('paywall_new_subtitle')}</h1>
+            <h1 className="font-bold tracking-tight drop-shadow-lg font-sans text-white text-3xl">{t('paywall_new_subtitle')}</h1>
             <div className="border-2 border-blue-400 bg-white/10 backdrop-blur-sm rounded-lg p-2 mx-auto max-w-fit shadow-[0_0_15px_rgba(96,165,250,0.6)]">
               <p className="text-sm font-semibold text-white">{t('paywall_savings_text')}</p>
             </div>
           </div>
 
           {/* Features List */}
-          <div className="space-y-4 rounded-2xl p-6 bg-[#1a2332]">
-            {features.map((feature, index) => <div key={index} className="flex items-start gap-4">
-                <div className="flex-shrink-0 rounded-lg bg-cyan-400 p-1.5">
-                  <Check className="h-3 w-3 text-[#1a2332]" strokeWidth={3.5} />
-                </div>
-                <span className="text-white leading-relaxed text-lg font-bold tracking-tight">{feature}</span>
+          <div className="space-y-4 backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-600 bg-slate-900 shadow-[0_0_20px_rgba(37,99,235,0.8)]">
+            {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
+                <Check className="h-5 w-5 text-check-circle flex-shrink-0 mt-0.5" />
+                <span className="text-white leading-relaxed text-base">{feature}</span>
               </div>)}
           </div>
 
@@ -66,7 +64,7 @@ const Paywall = () => {
                 {t('paywall_cancel_anytime')}
               </p>
             </div>
-            <Button size="lg" onClick={initiateCheckout} disabled={loading || checkoutLoading} className="w-full text-lg font-semibold h-14 text-white shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105 bg-black hover:bg-gray-900">
+            <Button size="lg" onClick={initiateCheckout} disabled={loading || checkoutLoading} className="w-full text-lg font-semibold h-14 text-white shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105 bg-slate-900 hover:bg-slate-800">
               {checkoutLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               {t('paywall_cta_button')}
             </Button>
