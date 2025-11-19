@@ -25,11 +25,11 @@ const Paywall = () => {
     }
   }, [subscribed, navigate]);
   const features = [
-    { emoji: '🔍', text: t('paywall_feature_1') },
-    { emoji: '💰', text: t('paywall_feature_2') },
-    { emoji: '🗺️', text: t('paywall_feature_3') },
-    { emoji: '⛽', text: t('paywall_feature_4') },
-    { emoji: '🧭', text: t('paywall_feature_5') }
+    { emoji: '✅', text: t('paywall_feature_1') },
+    { emoji: '✅', text: t('paywall_feature_2') },
+    { emoji: '✅', text: t('paywall_feature_3') },
+    { emoji: '✅', text: t('paywall_feature_4') },
+    { emoji: '✅', text: t('paywall_feature_5') }
   ];
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
