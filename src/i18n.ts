@@ -329,7 +329,7 @@ const translations = {
     // Paywall page
     paywall_title: "Cheapfuel",
     paywall_subtitle: "Finde die günstigsten Tankstellen in Sekunden und spare bei jeder Tankfüllung!",
-    paywall_new_subtitle: "Senke deine Tankkosten in Sekunden",
+    paywall_new_subtitle: "Finde die günstigsten Tankstellen in Sekunden",
     paywall_savings_text: "spare jährlich über 240€",
     paywall_feature_1: "Unbegrenzte Tankstellensuche",
     paywall_feature_2: "Echtzeit-Preisvergleiche",
