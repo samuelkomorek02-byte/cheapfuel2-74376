@@ -54,7 +54,7 @@ const Paywall = () => {
                 <div className="flex-shrink-0 rounded-lg bg-gradient-to-br from-blue-500 to-blue-700 p-1.5 shadow-[0_4px_12px_rgba(37,99,235,0.4)]">
                   <Check className="h-3 w-3 text-white" strokeWidth={3.5} />
                 </div>
-                <span className="text-gray-900 leading-relaxed text-lg font-bold tracking-tight">{feature}</span>
+                <span className="text-white leading-relaxed text-lg font-bold tracking-tight">{feature}</span>
               </div>)}
           </div>
 
