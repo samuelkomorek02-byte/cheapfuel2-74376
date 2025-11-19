@@ -44,7 +44,7 @@ const Paywall = () => {
               </div>
             </div>
             <h1 className="font-bold tracking-tight drop-shadow-lg text-5xl font-sans text-slate-900">{t('paywall_title')}</h1>
-            <p className="text-lg font-bold text-slate-900">{t('paywall_subtitle')}</p>
+            <p className="text-2xl font-semibold text-slate-800 drop-shadow-md leading-relaxed tracking-wide">{t('paywall_subtitle')}</p>
           </div>
 
           {/* Features List */}
