@@ -37,7 +37,7 @@ const Paywall = () => {
         animationDuration: '0.4s'
       }}>
           {/* Logo and Title */}
-          <div className="text-center space-y-4">
+          <div className="text-center space-y-2">
             <div className="flex items-end justify-center gap-3">
               <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-10 w-10" />
               <span className="text-2xl font-bold text-black">Cheapfuel</span>
