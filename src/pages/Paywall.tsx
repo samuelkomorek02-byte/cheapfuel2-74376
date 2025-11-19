@@ -8,6 +8,7 @@ import { isPreviewMode } from "@/lib/utils";
 import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 import { useCountUp } from "@/hooks/useCountUp";
+import Confetti from "@/components/Confetti";
 
 const Paywall = () => {
   const navigate = useNavigate();
@@ -43,7 +44,10 @@ const Paywall = () => {
     emoji: '✅',
     text: t('paywall_feature_5')
   }];
-  return <div className="min-h-screen bg-primary">
+  return <div className="min-h-screen bg-primary relative">
+      {/* Confetti Background */}
+      <Confetti />
+      
       {/* Back Button */}
       <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/")}>
         <ArrowLeft className="h-5 w-5" />
