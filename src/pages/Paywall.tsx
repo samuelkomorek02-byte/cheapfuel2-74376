@@ -49,10 +49,12 @@ const Paywall = () => {
           </div>
 
           {/* Features List */}
-          <div className="space-y-4 backdrop-blur-md rounded-2xl p-6 border border-blue-400/50 bg-white/20 shadow-[0_8px_32px_0_rgba(37,99,235,0.2)] hover:shadow-[0_8px_32px_0_rgba(37,99,235,0.35)] transition-all duration-300">
-            {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
-                <Check className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5" strokeWidth={3} />
-                <span className="text-black leading-relaxed text-lg font-semibold">{feature}</span>
+          <div className="space-y-4 backdrop-blur-md rounded-2xl p-6 border-2 border-blue-600 bg-white/20 shadow-[0_8px_32px_0_rgba(37,99,235,0.2)] hover:shadow-[0_8px_32px_0_rgba(37,99,235,0.35)] transition-all duration-300">
+            {features.map((feature, index) => <div key={index} className="flex items-start gap-4 group">
+                <div className="flex-shrink-0 rounded-full bg-blue-600 p-1.5 shadow-lg group-hover:scale-110 transition-transform duration-200">
+                  <Check className="h-5 w-5 text-white" strokeWidth={3} />
+                </div>
+                <span className="text-gray-900 leading-relaxed text-lg font-bold tracking-tight">{feature}</span>
               </div>)}
           </div>
 
