@@ -69,7 +69,7 @@ const Onboarding = () => {
   }];
   return <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40 animate-fade-in">
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40 opacity-0 animate-fade-in" style={{ animationDelay: '0s' }}>
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-8 w-8" />
@@ -85,8 +85,8 @@ const Onboarding = () => {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden h-[calc(100vh-4rem)] flex items-start md:items-center justify-center opacity-0 animate-fade-in-hero bg-gradient-to-br from-background via-muted/30 to-background pt-12 md:pt-0" style={{
-      animationDelay: '0.1s'
+      <section className="relative overflow-hidden h-[calc(100vh-4rem)] flex items-start md:items-center justify-center opacity-0 animate-fade-in bg-gradient-to-br from-background via-muted/30 to-background pt-12 md:pt-0" style={{
+      animationDelay: '0.2s'
     }}>
         {/* Decorative background elements */}
         <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:50px_50px]" />
@@ -129,7 +129,7 @@ const Onboarding = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => {
           const Icon = feature.icon;
-          return <Card key={index} className="overflow-hidden border-2">
+          return <Card key={index} className="overflow-hidden border-2 opacity-0 animate-fade-in" style={{ animationDelay: `${0.4 + index * 0.15}s` }}>
                 <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 min-h-[300px]">
                   <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="lazy" onError={e => {
                 const img = e.currentTarget;
@@ -153,7 +153,7 @@ const Onboarding = () => {
 
       {/* Testimonials Section */}
       <section className="bg-muted/50 py-12 md:py-20 opacity-0 animate-fade-in" style={{
-      animationDelay: '0.3s'
+      animationDelay: '0.9s'
     }}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -162,7 +162,7 @@ const Onboarding = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => <Card key={index} className="bg-background">
+            {testimonials.map((testimonial, index) => <Card key={index} className="bg-background opacity-0 animate-fade-in" style={{ animationDelay: `${1.05 + index * 0.15}s` }}>
                 <CardContent className="p-6">
                   <div className="flex gap-1 mb-3">
                     {[...Array(testimonial.rating)].map((_, i) => <Star key={i} className="h-5 w-5 fill-primary text-primary" />)}
@@ -177,7 +177,7 @@ const Onboarding = () => {
 
       {/* FAQ Section */}
       <section className="container mx-auto px-4 py-12 md:py-20 opacity-0 animate-fade-in" style={{
-      animationDelay: '0.4s'
+      animationDelay: '1.5s'
     }}>
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
@@ -186,7 +186,7 @@ const Onboarding = () => {
           </div>
 
           <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`}>
+            {faqs.map((faq, index) => <AccordionItem key={index} value={`item-${index}`} className="opacity-0 animate-fade-in" style={{ animationDelay: `${1.65 + index * 0.1}s` }}>
                 <AccordionTrigger className="text-left text-lg font-semibold">
                   {faq.question}
                 </AccordionTrigger>
@@ -200,7 +200,7 @@ const Onboarding = () => {
 
       {/* Final CTA Section */}
       <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary via-accent to-primary/90 overflow-hidden opacity-0 animate-fade-in" style={{
-      animationDelay: '0.5s'
+      animationDelay: '2.2s'
     }}>
         {/* Decorative background elements */}
         <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
