@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Loader2, ArrowLeft, Check } from "lucide-react";
+import { Check, Loader2, ArrowLeft } from "lucide-react";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useEffect } from "react";
@@ -51,7 +51,7 @@ const Paywall = () => {
           {/* Features List */}
           <div className="space-y-4 backdrop-blur-sm rounded-2xl p-6 border-2 border-blue-600 bg-white shadow-[0_0_20px_rgba(37,99,235,0.8)]">
             {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
-                <CheckCircle2 className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5 fill-blue-600" />
+                <Check className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5" />
                 <span className="text-black leading-relaxed text-lg">{feature}</span>
               </div>)}
           </div>
