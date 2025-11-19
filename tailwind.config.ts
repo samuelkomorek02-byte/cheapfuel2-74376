@@ -62,7 +62,8 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				'check-circle': 'hsl(var(--check-circle))'
+				'check-circle': 'hsl(var(--check-circle))',
+				'feature-border': 'hsl(var(--feature-border))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
