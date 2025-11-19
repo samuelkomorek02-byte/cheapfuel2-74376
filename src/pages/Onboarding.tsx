@@ -130,7 +130,7 @@ const Onboarding = () => {
           {features.map((feature, index) => {
           const Icon = feature.icon;
           return <Card key={index} className="overflow-hidden border-2">
-                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 min-h-[400px]">
+                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 min-h-[300px]">
                   <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="lazy" onError={e => {
                 const img = e.currentTarget;
                 // Retry loading the image once
