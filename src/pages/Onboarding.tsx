@@ -15,11 +15,14 @@ const Onboarding = () => {
   const {
     t
   } = useTranslation();
-  const handleStart = () => {
+  const handleStart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     navigate("/auth", {
       state: {
         mode: 'signup'
-      }
+      },
+      replace: false
     });
   };
   const features = [{
@@ -105,7 +108,7 @@ const Onboarding = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button type="button" onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
+              <Button onClick={handleStart} size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-100">
                 {t('onboarding_cta_primary')}
               </Button>
               <Button size="lg" className="text-lg px-8 py-6 bg-black text-white hover:bg-black/90 shadow-lg hover:shadow-xl transition-all hover:scale-105" onClick={() => document.getElementById('features')?.scrollIntoView({
@@ -218,7 +221,7 @@ const Onboarding = () => {
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button type="button" onClick={handleStart} size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all bg-primary text-primary-foreground hover:bg-primary/90">{t('onboarding_final_cta_button')}</Button>
+              <Button onClick={handleStart} size="lg" className="text-lg px-10 py-6 shadow-xl hover:shadow-2xl transition-all hover:scale-105 active:scale-100 bg-primary text-primary-foreground hover:bg-primary/90">{t('onboarding_final_cta_button')}</Button>
             </div>
             
             <p className="text-sm text-white/70 pt-2">
