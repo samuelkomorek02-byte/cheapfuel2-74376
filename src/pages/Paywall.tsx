@@ -43,8 +43,8 @@ const Paywall = () => {
                 <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-16 w-16" />
               </div>
             </div>
-            <h1 className="font-bold tracking-tight drop-shadow-lg text-5xl font-sans text-slate-950">{t('paywall_title')}</h1>
-            <p className="text-lg text-stone-200">{t('paywall_subtitle')}</p>
+            <h1 className="font-bold tracking-tight drop-shadow-lg text-5xl font-sans text-slate-900">{t('paywall_title')}</h1>
+            <p className="text-lg text-slate-900">{t('paywall_subtitle')}</p>
           </div>
 
           {/* Features List */}
