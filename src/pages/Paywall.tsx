@@ -45,7 +45,7 @@ const Paywall = () => {
             </div>
             <h1 className="font-bold tracking-tight drop-shadow-lg text-4xl font-sans text-slate-900">{t('paywall_title')}</h1>
             <h2 className="text-2xl font-bold text-white drop-shadow-md">{t('paywall_new_subtitle')}</h2>
-            <div className="border border-white/30 bg-white/10 backdrop-blur-sm rounded-lg p-2 mx-auto max-w-fit">
+            <div className="border-2 border-blue-400 bg-white/10 backdrop-blur-sm rounded-lg p-2 mx-auto max-w-fit shadow-[0_0_15px_rgba(96,165,250,0.6)]">
               <p className="text-sm font-semibold text-white">{t('paywall_savings_text')}</p>
             </div>
           </div>
