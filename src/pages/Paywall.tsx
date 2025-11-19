@@ -43,12 +43,12 @@ const Paywall = () => {
                 <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-16 w-16" />
               </div>
             </div>
-            <h1 className="text-5xl font-bold tracking-tight text-white drop-shadow-lg">{t('paywall_title')}</h1>
+            <h1 className="text-5xl font-bold tracking-tight drop-shadow-lg text-black">{t('paywall_title')}</h1>
             <p className="text-white/90 text-lg">{t('paywall_subtitle')}</p>
           </div>
 
           {/* Features List */}
-          <div className="space-y-4 backdrop-blur-sm bg-white/10 rounded-2xl p-6 border border-white/20">
+          <div className="space-y-4 backdrop-blur-sm rounded-2xl p-6 border border-white/20 bg-slate-900">
             {features.map((feature, index) => <div key={index} className="flex items-start gap-3">
                 <div className="bg-white/20 rounded-full p-1.5 flex-shrink-0">
                   <Check className="h-4 w-4 text-white" />
