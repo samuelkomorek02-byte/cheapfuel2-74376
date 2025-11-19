@@ -64,7 +64,7 @@ const Paywall = () => {
                 {t('paywall_cancel_anytime')}
               </p>
             </div>
-            <Button size="lg" className="w-full text-lg font-semibold h-14 bg-black text-white hover:bg-black/90 shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105" onClick={initiateCheckout} disabled={loading || checkoutLoading}>
+            <Button size="lg" onClick={initiateCheckout} disabled={loading || checkoutLoading} className="w-full text-lg font-semibold h-14 text-white shadow-2xl hover:shadow-black/50 transition-all rounded-xl hover:scale-105 bg-slate-900 hover:bg-slate-800">
               {checkoutLoading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               {t('paywall_cta_button')}
             </Button>
