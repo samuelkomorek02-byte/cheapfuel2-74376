@@ -193,12 +193,8 @@ const Index = () => {
       }
     }
     
-    // Normale Subscription-Prüfung
-    if (isAuthenticated && !checkingAuth && !subLoading) {
-      if (!subscribed) {
-        navigate("/paywall");
-      }
-    }
+    // No automatic redirect to /paywall - user already has access to /aboseite
+    // If user reaches this page, they should stay here
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
 
   // Welcome dialog with SessionStorage (more reliable)
