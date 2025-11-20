@@ -193,8 +193,11 @@ const Index = () => {
       }
     }
     
+    // Nur zur Paywall weiterleiten wenn definitiv authentifiziert
+    if (!isAuthenticated) return;
+    
     // Normale Subscription-Prüfung
-    if (isAuthenticated && !checkingAuth && !subLoading) {
+    if (!checkingAuth && !subLoading) {
       if (!subscribed) {
         navigate("/paywall");
       }
