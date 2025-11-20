@@ -196,7 +196,9 @@ const Index = () => {
     // Normale Subscription-Prüfung
     if (isAuthenticated && !checkingAuth && !subLoading) {
       if (!subscribed) {
-        navigate("/paywall");
+        // Save current URL for return after checkout
+        const returnTo = `${location.pathname}${location.search}${location.hash}`;
+        navigate(`/paywall?returnTo=${encodeURIComponent(returnTo)}`);
       }
     }
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
