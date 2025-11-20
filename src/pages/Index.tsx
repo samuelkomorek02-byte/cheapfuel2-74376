@@ -99,6 +99,8 @@ const Index = () => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
   const [showWelcomeDialog, setShowWelcomeDialog] = useState(false);
+  const [sessionGracePeriod, setSessionGracePeriod] = useState(true);
+  const [gracePeriodTimer, setGracePeriodTimer] = useState<NodeJS.Timeout | null>(null);
   
   // Scroll to top on mount
   useEffect(() => {
@@ -174,12 +176,12 @@ const Index = () => {
     }
   }, [navigationState]);
 
-  // Check subscription status after authentication
+  // Check subscription status with grace period for session restoration
   useEffect(() => {
     // Im Preview-Modus keine Redirects
     if (isPreviewMode()) return;
     
-    // Nach Logout nicht zur Paywall weiterleiten
+    // Nach Logout nicht zur Auth weiterleiten
     if (navigationState?.fromLogout) {
       return;
     }
@@ -187,19 +189,39 @@ const Index = () => {
     // Wenn wir von Auth.tsx mit subscribed state kommen, nicht nochmal checken
     if (navigationState?.subscribed && navigationState?.checkedAt) {
       const timeSinceCheck = Date.now() - navigationState.checkedAt;
-      // Wenn der Check weniger als 10 Sekunden alt ist, vertraue ihm
       if (timeSinceCheck < 10000) {
-        return; // Kein Redirect nötig
+        return;
       }
     }
     
-    // Normale Subscription-Prüfung
+    // Grace Period: Warte 5 Sekunden auf Session-Wiederherstellung
     if (isAuthenticated && !checkingAuth && !subLoading) {
-      if (!subscribed) {
-        navigate("/paywall");
+      if (!subscribed && sessionGracePeriod) {
+        // Starte Timer nur einmal
+        if (!gracePeriodTimer) {
+          const timer = setTimeout(() => {
+            setSessionGracePeriod(false);
+          }, 5000); // 5 Sekunden warten
+          setGracePeriodTimer(timer);
+        }
+      } else if (!subscribed && !sessionGracePeriod) {
+        // Nach Grace Period: Fallback auf /auth statt /paywall
+        navigate("/auth");
+      } else if (subscribed && gracePeriodTimer) {
+        // Session erfolgreich wiederhergestellt - Timer clearen
+        clearTimeout(gracePeriodTimer);
+        setGracePeriodTimer(null);
+        setSessionGracePeriod(true);
       }
     }
-  }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
+    
+    // Cleanup
+    return () => {
+      if (gracePeriodTimer) {
+        clearTimeout(gracePeriodTimer);
+      }
+    };
+  }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState, sessionGracePeriod, gracePeriodTimer]);
 
   // Welcome dialog with SessionStorage (more reliable)
   useEffect(() => {
@@ -872,6 +894,19 @@ const Index = () => {
       setLoading(false);
     }
   };
+  
+  // Loading während Grace Period
+  if (sessionGracePeriod && isAuthenticated && !subscribed && !subLoading && !checkingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary to-background">
+        <div className="text-center">
+          <Loader2 className="animate-spin h-12 w-12 text-primary mx-auto mb-4" />
+          <p className="text-foreground text-lg font-medium">{t('loading_session') || 'Lade deine Sitzung...'}</p>
+        </div>
+      </div>
+    );
+  }
+  
   return <div className="min-h-screen bg-gradient-to-b from-secondary to-background animate-fade-in" style={{ animationDuration: '0.4s' }}>
       {/* Welcome Dialog for New Users */}
       <AlertDialog open={showWelcomeDialog} onOpenChange={setShowWelcomeDialog}>
