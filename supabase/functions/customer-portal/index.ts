@@ -66,9 +66,25 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR in customer-portal", { message: errorMessage });
-    return new Response(JSON.stringify({ error: errorMessage }), {
+    
+    // Determine appropriate error code and message
+    let status = 500;
+    let errorCode = "INTERNAL_ERROR";
+    
+    if (errorMessage.includes("Keine Autorisierung") || errorMessage.includes("not set")) {
+      status = 401;
+      errorCode = "UNAUTHORIZED";
+    } else if (errorMessage.includes("No Stripe customer")) {
+      status = 404;
+      errorCode = "CUSTOMER_NOT_FOUND";
+    }
+    
+    return new Response(JSON.stringify({ 
+      error: errorMessage,
+      errorCode,
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+      status,
     });
   }
 });

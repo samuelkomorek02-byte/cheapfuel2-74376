@@ -16,6 +16,9 @@ import { useSubscription } from "@/hooks/useSubscription";
 import Footer from "@/components/Footer";
 import { isPreviewMode } from "@/lib/utils";
 
+// Email validation schema
+const emailSchema = z.string().trim().email("Invalid email format").max(255);
+
 const Auth = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,6 +44,7 @@ const Auth = () => {
   const [signupConfirmPassword, setSignupConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [redirecting, setRedirecting] = useState(false);
@@ -200,8 +204,22 @@ const Auth = () => {
     e.preventDefault();
     setLoading(true);
     setPasswordError("");
+    setEmailError("");
     
     try {
+      // Validate email format first
+      const emailValidation = emailSchema.safeParse(email);
+      if (!emailValidation.success) {
+        setEmailError(t("auth_email_invalid") || "Please enter a valid email address");
+        toast({
+          title: t("auth_error"),
+          description: t("auth_email_invalid") || "Please enter a valid email address",
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+      
       // Additional validation for signup: check password confirmation first
       if (isSignUp) {
         if (password !== signupConfirmPassword) {
@@ -306,6 +324,19 @@ const Auth = () => {
   };
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate email format
+    const emailValidation = emailSchema.safeParse(email);
+    if (!emailValidation.success) {
+      setEmailError(t("auth_email_invalid") || "Please enter a valid email address");
+      toast({
+        title: t("auth_error"),
+        description: t("auth_email_invalid") || "Please enter a valid email address",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setLoading(true);
     try {
       const validatedEmail = z.string().trim().email().parse(email);
@@ -496,7 +527,8 @@ const Auth = () => {
           <form onSubmit={handlePasswordReset} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="reset-email">{t("auth_email_placeholder")}</Label>
-                  <Input id="reset-email" type="email" placeholder={t("auth_email_placeholder")} value={email} onChange={e => setEmail(e.target.value)} required disabled={loading} />
+                  <Input id="reset-email" type="email" placeholder={t("auth_email_placeholder")} value={email} onChange={e => setEmail(e.target.value)} required disabled={loading} className={emailError ? "border-destructive" : ""} />
+                  {emailError && <p className="text-sm text-destructive mt-1">{emailError}</p>}
                 </div>
                 <Button type="submit" className="w-full" disabled={loading}>
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -512,7 +544,8 @@ const Auth = () => {
           <form onSubmit={handleEmailAuth} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">{t("auth_email_placeholder")}</Label>
-                <Input id="email" type="email" placeholder={t("auth_email_placeholder")} value={email} onChange={e => setEmail(e.target.value)} required disabled={loading} />
+                <Input id="email" type="email" placeholder={t("auth_email_placeholder")} value={email} onChange={e => setEmail(e.target.value)} required disabled={loading} className={emailError ? "border-destructive" : ""} />
+                {emailError && <p className="text-sm text-destructive mt-1">{emailError}</p>}
               </div>
               <div className="space-y-2">
                 <Label htmlFor="password">{t("auth_password_placeholder")}</Label>
