@@ -65,6 +65,7 @@ const Index = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   
   // Skip initial subscription check wenn von Auth navigiert mit frischem Status
   const skipCheck = navigationState?.subscribed && 
@@ -174,6 +175,13 @@ const Index = () => {
     }
   }, [navigationState]);
 
+  // Track when initial subscription check completes
+  useEffect(() => {
+    if (!subLoading && isAuthenticated) {
+      setInitialLoadComplete(true);
+    }
+  }, [subLoading, isAuthenticated]);
+
   // Check subscription status after authentication
   useEffect(() => {
     // Im Preview-Modus keine Redirects
@@ -193,13 +201,13 @@ const Index = () => {
       }
     }
     
-    // Normale Subscription-Prüfung
-    if (isAuthenticated && !checkingAuth && !subLoading) {
+    // Nur zur Paywall weiterleiten wenn initial check komplett ist
+    if (isAuthenticated && !checkingAuth && !subLoading && initialLoadComplete) {
       if (!subscribed) {
         navigate("/paywall");
       }
     }
-  }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
+  }, [isAuthenticated, checkingAuth, subscribed, subLoading, initialLoadComplete, navigate, navigationState]);
 
   // Welcome dialog with SessionStorage (more reliable)
   useEffect(() => {
