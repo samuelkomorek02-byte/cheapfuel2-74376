@@ -122,7 +122,7 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Sign In",
-    onboarding_hero_badge: "Save up to €240 annually",
+    onboarding_hero_badge: "Save over €240 annually",
     onboarding_hero_title: "Find the cheapest gas stations in seconds\n⚡️⛽️",
     onboarding_hero_subtitle: "Fast. Simple. Accurate.",
     onboarding_cta_primary: "Get Started",
@@ -291,7 +291,7 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Anmelden",
-    onboarding_hero_badge: "Spare jährlich bis zu 240€",
+    onboarding_hero_badge: "Spare jährlich über 240€",
     onboarding_hero_title: "Finde die günstigsten Tankstellen in Sekunden\n⚡️⛽️",
     onboarding_hero_subtitle: "Schnell. Einfach. Genau.",
     onboarding_cta_primary: "Jetzt loslegen",
@@ -460,7 +460,7 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Iniciar sesión",
-    onboarding_hero_badge: "Ahorra hasta €240 anuales",
+    onboarding_hero_badge: "Ahorra más de €240 anuales",
     onboarding_hero_title: "Encuentra las gasolineras más baratas en segundos\n⚡️⛽️",
     onboarding_hero_subtitle: "Rápido. Simple. Preciso.",
     onboarding_cta_primary: "Empezar",
@@ -629,7 +629,7 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Accedi",
-    onboarding_hero_badge: "Risparmia fino a €240 all'anno",
+    onboarding_hero_badge: "Risparmia oltre €240 all'anno",
     onboarding_hero_title: "Trova le stazioni di servizio più economiche in pochi secondi\n⚡️⛽️",
     onboarding_hero_subtitle: "Veloce. Semplice. Preciso.",
     onboarding_cta_primary: "Inizia",
@@ -798,7 +798,7 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Zaloguj się",
-    onboarding_hero_badge: "Oszczędzaj do €240 rocznie",
+    onboarding_hero_badge: "Oszczędzaj ponad €240 rocznie",
     onboarding_hero_title: "Znajdź najtańsze stacje paliw w kilka sekund\n⚡️⛽️",
     onboarding_hero_subtitle: "Szybko. Prosto. Dokładnie.",
     onboarding_cta_primary: "Rozpocznij",
@@ -967,7 +967,7 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Войти",
-    onboarding_hero_badge: "Экономьте до €240 в год",
+    onboarding_hero_badge: "Экономьте свыше €240 в год",
     onboarding_hero_title: "Найдите самые дешёвые заправки за секунды\n⚡️⛽️",
     onboarding_hero_subtitle: "Быстро. Просто. Точно.",
     onboarding_cta_primary: "Начать",
@@ -1136,7 +1136,7 @@ const translations = {
     // Onboarding page
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Se connecter",
-    onboarding_hero_badge: "Économisez jusqu'à €240 par an",
+    onboarding_hero_badge: "Économisez plus de €240 par an",
     onboarding_hero_title: "Trouvez les stations-service les moins chères en quelques secondes\n⚡️⛽️",
     onboarding_hero_subtitle: "Rapide. Simple. Précis.",
     onboarding_cta_primary: "Commencer",
