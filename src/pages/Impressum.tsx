@@ -42,7 +42,7 @@ const Impressum = () => {
                 <section>
                   <h2 className="text-xl font-semibold mb-4 text-primary">Kontakt</h2>
                   <div className="space-y-2 bg-muted/50 p-4 rounded-lg">
-                    <p>E-Mail: samuel.komorek@icloud.com</p>
+                    <p>E-Mail: cheapfuel@web.de</p>
                   </div>
                 </section>
 
@@ -133,7 +133,7 @@ const Impressum = () => {
                 <section>
                   <h2 className="text-xl font-semibold mb-4 text-primary">Contact</h2>
                   <div className="space-y-2 bg-muted/50 p-4 rounded-lg">
-                    <p>Email: samuel.komorek@icloud.com</p>
+                    <p>Email: cheapfuel@web.de</p>
                   </div>
                 </section>
 
