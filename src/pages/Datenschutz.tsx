@@ -47,7 +47,7 @@ const Datenschutz = () => {
                     <p>Samuel Komorek</p>
                     <p>Schlierbachweg 12</p>
                     <p>83246 Unterwössen</p>
-                    <p>E-Mail: samuel.komorek@icloud.com</p>
+                    <p>E-Mail: cheapfuel@web.de</p>
                     <p className="text-sm text-muted-foreground mt-2">(Siehe auch Impressum)</p>
                   </div>
 
@@ -360,7 +360,7 @@ const Datenschutz = () => {
                   <div className="space-y-2 bg-muted/50 p-4 rounded-lg">
                     <p>Für Fragen zum Datenschutz wenden Sie sich bitte an:</p>
                     <p className="font-medium">Samuel Komorek</p>
-                    <p>E-Mail: samuel.komorek@icloud.com</p>
+                    <p>E-Mail: cheapfuel@web.de</p>
                   </div>
                 </section>
 
@@ -393,7 +393,7 @@ const Datenschutz = () => {
                     <p>Schlierbachweg 12</p>
                     <p>83246 Unterwössen</p>
                     <p>Germany</p>
-                    <p>Email: samuel.komorek@icloud.com</p>
+                    <p>Email: cheapfuel@web.de</p>
                     <p className="text-sm text-muted-foreground mt-2">(See also Legal Notice)</p>
                   </div>
 
@@ -699,7 +699,7 @@ const Datenschutz = () => {
                   <div className="space-y-2 bg-muted/50 p-4 rounded-lg">
                     <p>For privacy-related questions, please contact:</p>
                     <p className="font-medium">Samuel Komorek</p>
-                    <p>Email: samuel.komorek@icloud.com</p>
+                    <p>Email: cheapfuel@web.de</p>
                   </div>
                 </section>
 
