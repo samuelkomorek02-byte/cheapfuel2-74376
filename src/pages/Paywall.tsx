@@ -27,7 +27,7 @@ const Paywall = () => {
   const features = [t('paywall_feature_1'), t('paywall_feature_2'), t('paywall_feature_3'), t('paywall_feature_4'), t('paywall_feature_5')];
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
-      <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/")}>
+      <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/auth")}>
         <ArrowLeft className="h-5 w-5" />
       </Button>
 
