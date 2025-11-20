@@ -196,11 +196,7 @@ const Index = () => {
     // Normale Subscription-Prüfung
     if (isAuthenticated && !checkingAuth && !subLoading) {
       if (!subscribed) {
-        if (isInstagramBrowser()) {
-          navigate("/auth");
-        } else {
-          navigate("/paywall");
-        }
+        navigate("/paywall");
       }
     }
   }, [isAuthenticated, checkingAuth, subscribed, subLoading, navigate, navigationState]);
