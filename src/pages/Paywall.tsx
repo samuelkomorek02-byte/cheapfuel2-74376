@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Check, Loader2, ArrowLeft } from "lucide-react";
 import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
@@ -9,7 +9,6 @@ import Footer from "@/components/Footer";
 import { useTranslation } from "react-i18next";
 const Paywall = () => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const {
     t
   } = useTranslation();
@@ -22,21 +21,13 @@ const Paywall = () => {
   useEffect(() => {
     if (isPreviewMode()) return;
     if (subscribed) {
-      // Redirect to the page user was trying to access, or default to /aboseite
-      const returnTo = searchParams.get('returnTo') || '/aboseite';
-      navigate(returnTo);
+      navigate("/aboseite");
     }
-  }, [subscribed, navigate, searchParams]);
+  }, [subscribed, navigate]);
   const features = [t('paywall_feature_1'), t('paywall_feature_2'), t('paywall_feature_3'), t('paywall_feature_4'), t('paywall_feature_5')];
-  
-  const handleBack = () => {
-    const returnTo = searchParams.get('returnTo') || '/';
-    navigate(returnTo);
-  };
-  
   return <div className="min-h-screen bg-primary">
       {/* Back Button */}
-      <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={handleBack}>
+      <Button variant="ghost" size="icon" className="absolute top-4 left-4 z-10 text-white hover:bg-white/20" onClick={() => navigate("/")}>
         <ArrowLeft className="h-5 w-5" />
       </Button>
 
