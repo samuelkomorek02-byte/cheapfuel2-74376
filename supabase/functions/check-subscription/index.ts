@@ -115,9 +115,26 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: errorMessage });
-    return new Response(JSON.stringify({ error: errorMessage }), {
+    
+    // Determine appropriate error code and message
+    let status = 500;
+    let errorCode = "INTERNAL_ERROR";
+    
+    if (errorMessage.includes("not set")) {
+      status = 503;
+      errorCode = "SERVICE_UNAVAILABLE";
+    } else if (errorMessage.includes("Could not extract user")) {
+      status = 401;
+      errorCode = "UNAUTHORIZED";
+    }
+    
+    return new Response(JSON.stringify({ 
+      error: errorMessage,
+      errorCode,
+      subscribed: false 
+    }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+      status,
     });
   }
 });
