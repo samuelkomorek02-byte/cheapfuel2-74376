@@ -8,7 +8,8 @@ import cheapfuelLogo from "@/assets/cheapfuel-logo.svg";
 import featureSchnell from "@/assets/feature-schnell.jpg";
 import featureEinfach from "@/assets/feature-einfach.jpg";
 import featureGenau from "@/assets/feature-genau.jpg";
-import { Fuel, Star, Zap, Target, MapPin, Instagram } from "lucide-react";
+import featureNavigation from "@/assets/feature-navigation.jpg";
+import { Fuel, Star, Zap, Target, MapPin, Instagram, Navigation } from "lucide-react";
 import Footer from "@/components/Footer";
 const Onboarding = () => {
   const navigate = useNavigate();
@@ -40,6 +41,11 @@ const Onboarding = () => {
     description: t('onboarding_feature_genau_desc'),
     image: featureGenau,
     icon: Target
+  }, {
+    title: t('onboarding_feature_navigation'),
+    description: t('onboarding_feature_navigation_desc'),
+    image: featureNavigation,
+    icon: Navigation
   }];
   const testimonials = [{
     name: t('onboarding_testimonial_1_name'),
