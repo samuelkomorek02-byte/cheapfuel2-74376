@@ -135,11 +135,11 @@ const Onboarding = () => {
           <h2 className="text-3xl md:text-4xl mb-4 font-bold">{t('onboarding_features_title')}</h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
           {features.map((feature, index) => {
           const Icon = feature.icon;
           return <Card key={index} className="overflow-hidden border-2 opacity-0 animate-fade-in" style={{ animationDelay: `${0.4 + index * 0.15}s` }}>
-                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 min-h-[300px]">
+                <div className="aspect-[3/4] sm:aspect-[4/5] md:aspect-[3/4] relative bg-gradient-to-br from-muted to-muted/50 min-h-[240px]">
                   <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" loading="lazy" onError={e => {
                 const img = e.currentTarget;
                 // Retry loading the image once
@@ -151,7 +151,7 @@ const Onboarding = () => {
                 }
               }} />
                 </div>
-                <CardContent className="p-4 md:p-6 text-center space-y-3">
+                <CardContent className="p-3 md:p-4 text-center space-y-2">
                   
                   <p className="md:text-base text-muted-foreground leading-relaxed text-base font-thin">{feature.description}</p>
                 </CardContent>
