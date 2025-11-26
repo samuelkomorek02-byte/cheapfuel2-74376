@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -9,9 +10,10 @@ import featureSchnell from "@/assets/feature-schnell.jpg";
 import featureEinfach from "@/assets/feature-einfach.jpg";
 import featureGenau from "@/assets/feature-genau.jpg";
 import featureNavigation from "@/assets/feature-navigation.jpg";
-import { Fuel, Star, Zap, Target, MapPin, Instagram, Navigation } from "lucide-react";
+import { Fuel, Star, Zap, Target, MapPin, Instagram, Navigation, X } from "lucide-react";
 import Footer from "@/components/Footer";
 const Onboarding = () => {
+  const [showBanner, setShowBanner] = useState(true);
   const navigate = useNavigate();
   const {
     t
@@ -77,6 +79,19 @@ const Onboarding = () => {
     answer: t('onboarding_faq_5_a')
   }];
   return <div className="min-h-screen bg-background">
+      {/* Coming Soon Banner */}
+      {showBanner && (
+        <div className="bg-blue-500 text-white py-2 px-4 text-center relative">
+          <span className="text-sm font-medium">{t('banner_coming_soon')}</span>
+          <button 
+            onClick={() => setShowBanner(false)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition-opacity"
+            aria-label="Close banner"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+      )}
       {/* Header */}
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40 opacity-0 animate-fade-in" style={{ animationDelay: '0s' }}>
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">

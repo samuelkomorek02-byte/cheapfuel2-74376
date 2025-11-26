@@ -120,6 +120,7 @@ const translations = {
     welcome_new_user_message: "Find the cheapest fuel stations near you in seconds. Let's get started!",
     
     // Onboarding page
+    banner_coming_soon: "App coming soon...",
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Sign In",
     onboarding_hero_badge: "Save over €250 annually",
@@ -291,6 +292,7 @@ const translations = {
     welcome_new_user_message: "Finde die günstigsten Tankstellen in deiner Nähe in Sekunden. Lass uns starten!",
     
     // Onboarding page
+    banner_coming_soon: "App bald verfügbar...",
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Anmelden",
     onboarding_hero_badge: "Spare jährlich über 250€",
@@ -462,6 +464,7 @@ const translations = {
     welcome_new_user_message: "Encuentra las gasolineras más baratas cerca de ti en segundos. ¡Empecemos!",
     
     // Onboarding page
+    banner_coming_soon: "App próximamente disponible...",
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Iniciar sesión",
     onboarding_hero_badge: "Ahorra más de €250 anuales",
@@ -633,6 +636,7 @@ const translations = {
     welcome_new_user_message: "Trova le stazioni di servizio più economiche vicino a te in pochi secondi. Iniziamo!",
     
     // Onboarding page
+    banner_coming_soon: "App disponibile a breve...",
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Accedi",
     onboarding_hero_badge: "Risparmia oltre €250 all'anno",
@@ -804,6 +808,7 @@ const translations = {
     welcome_new_user_message: "Znajdź najtańsze stacje paliw w pobliżu w kilka sekund. Zaczynajmy!",
     
     // Onboarding page
+    banner_coming_soon: "Aplikacja wkrótce dostępna...",
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Zaloguj się",
     onboarding_hero_badge: "Oszczędzaj ponad €250 rocznie",
@@ -975,6 +980,7 @@ const translations = {
     welcome_new_user_message: "Найдите самые дешёвые заправки рядом с вами за секунды. Начнём!",
     
     // Onboarding page
+    banner_coming_soon: "Приложение скоро будет доступно...",
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Войти",
     onboarding_hero_badge: "Экономьте свыше €250 в год",
@@ -1146,6 +1152,7 @@ const translations = {
     welcome_new_user_message: "Trouvez les stations-service les moins chères près de chez vous en quelques secondes. Commençons!",
     
     // Onboarding page
+    banner_coming_soon: "Application bientôt disponible...",
     onboarding_header_title: "Cheapfuel",
     onboarding_header_login: "Se connecter",
     onboarding_hero_badge: "Économisez plus de €250 par an",
