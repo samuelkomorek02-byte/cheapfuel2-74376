@@ -77,12 +77,8 @@ const Onboarding = () => {
     answer: t('onboarding_faq_5_a')
   }];
   return <div className="min-h-screen bg-background">
-      {/* Coming Soon Banner */}
-      <div className="bg-primary text-primary-foreground py-2 px-4 text-center opacity-0 animate-fade-in" style={{ animationDelay: '0s' }}>
-        <span className="text-sm font-medium">{t('banner_coming_soon')}</span>
-      </div>
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40 opacity-0 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/40 opacity-0 animate-fade-in" style={{ animationDelay: '0s' }}>
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <img src={cheapfuelLogo} alt="Cheapfuel Logo" className="h-8 w-8" />
